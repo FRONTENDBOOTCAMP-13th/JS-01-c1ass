@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/weather-widget.ts"></script>
+    <title>weather-widget-component</title>
+  </head>
+  <body class="flex items-center justify-center h-screen gap-20">
+    <div class="overflow-hidden text-white weather-widget w-55 h-25 py-4 pl-[10px] pr-[17px] bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center">
+      <img class="object-contain h-full" src="/public/asserts/weather-widget/clear.svg" alt="" />
+      <div class="flex flex-col items-end gap-1">
+        <div class="leading-[32px] temperature text-[32px] after:content-['°C']">26</div>
+        <div class="leading-[12px] weather-status text-[12px]">맑음</div>
+        <div class="weather-location-en leading-[16px] text-[16px]">Gumi-si</div>
+      </div>
+    </div>
+    <div class="overflow-hidden text-white weather-widget w-55 h-25 py-5 pl-4 pr-3 bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center">
+      <div class="flex flex-col items-start gap-1">
+        <div class="weather-location-kr leading-[16px] text-[16px] after:content-[''] after:inline-block after:w-[10px] after:h-[10px] after:bg-[url(/public/asserts/weather-widget/location-arrow.svg)]">구미시</div>
+        <div class="leading-[45px] temperature text-[45px] after:content-['°']">26</div>
+      </div>
+      <div class="flex flex-col items-end gap-1">
+        <img class="object-contain h-[30px]" src="/public/asserts/weather-widget/clear.svg" alt="" />
+        <div class="leading-[10px] weather-status text-[10px]">맑음</div>
+        <div class="flex gap-1">
+          <p class="leading-[10px] max_temperature text-[10px] before:content-['최고:_'] after:content-['°']">26</p>
+          <p class="leading-[10px] min_temperature text-[10px] before:content-['최저:_'] after:content-['°']">19</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
