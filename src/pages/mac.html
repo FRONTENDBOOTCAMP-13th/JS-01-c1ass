@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <!-- scroll 막는 ts -->
+    <script type="module" src="/src/ts/mac-no-scroll.ts"></script>
+    <!-- dev할 때만 쓰일 여러 가지 기능을 넣은 ts -->
+    <script type="module" src="/src/ts/mac-setting.ts"></script>
+    <title>Mac</title>
+  </head>
+  <body class="overflow-hidden no-scroll flex justify-center items-center pt-10">
+    <div class="mac">
+      <div class="shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
+        <div class="mac-screen w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] bg-cover rounded-[15px]"></div>
+      </div>
+      <div class="mac-bottom h-25 object-contain bg-linear-[45deg,_#959595_0%,_#ffffff_100%] rounded-b-[35px] flex justify-center items-center shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)]">
+        <img class="h-10" src="/public/asserts/mac/apple-logo.webp" alt="" />
+      </div>
+    </div>
+  </body>
+</html>
