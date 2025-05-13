@@ -13,7 +13,21 @@
   <body class="overflow-hidden no-scroll flex justify-center items-center pt-10">
     <div class="mac">
       <div class="shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
-        <div class="mac-screen w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] bg-cover rounded-[15px]"></div>
+        <div class="mac-screen relative overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] bg-cover rounded-[15px]">
+          <!-- top-bar -->
+          <div class="absolute top-0 w-full flex justify-between items-center bg-[rgba(109,109,109,0.70)] shadow-2xl">
+            <div class="ml-3">
+              <img src="../../public/asserts/top-bar/apple-logo-white.svg" alt="애플로고" />
+            </div>
+            <div class="inline-flex mr-3">
+              <img class="mr-3" src="../../public/asserts/top-bar/battery-white.svg" alt="배터리" />
+              <img class="mr-3" src="../../public/asserts/top-bar/wifi-white.svg" alt="와이파이" />
+              <img class="mr-3" src="../../public/asserts/top-bar/search-white.svg" alt="검색" />
+              <img class="mr-3" src="../../public/asserts/top-bar/toggle-white.svg" alt="토글" />
+              <span class="current-date text-xs text-white"></span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="mac-bottom h-25 object-contain bg-linear-[45deg,_#959595_0%,_#ffffff_100%] rounded-b-[35px] flex justify-center items-center shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)]">
         <img class="h-10" src="/public/asserts/mac/apple-logo.webp" alt="" />
