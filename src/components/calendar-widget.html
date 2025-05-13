@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/calendar-widget.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
     <title>Calendar-widget</title>
   </head>
   <body class="m-10">
@@ -22,21 +25,5 @@
       <div class="day-name dark:text-white text-[1rem] font-semibold h-[1.25rem]"></div>
       <div class="day-number mt-0 p-0 dark:text-white text-6xl font-extrabold h-[3.4375rem]"></div>
     </div>
-
-    <script>
-      // new Date() - 날짜, 요일명 가져옴
-      const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-      const today = new Date();
-      const dayName = days[today.getDay()];
-      const dayNumber = today.getDate();
-
-      // 가져온 날짜, 요일명으로 텍스트 초기화
-      document.querySelectorAll('.day-name').forEach(element => {
-        element.textContent = dayName;
-      });
-      document.querySelectorAll('.day-number').forEach(element => {
-        element.textContent = `${dayNumber}`;
-      });
-    </script>
   </body>
 </html>
