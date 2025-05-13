@@ -9,13 +9,11 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
     <title>Calendar-widget</title>
   </head>
-  <body class="m-10">
-    <h1 class="bg-black inline-block text-white px-4 py-2 mb-5 rounded-2xl">Calendar-widget</h1>
-
+  <body class="flex items-center justify-center h-screen gap-5">
     <!-- 캘린더 위젯 (라이트모드) -->
     <div class="w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col">
       <div class="day-name text-[1rem] font-semibold h-[1.25rem]"></div>
-      <div class="day-number mt-0 p-0 text-6xl font-extrabold h-[3.4375rem]"></div>
+      <div class="day-number mt-0 p-0 text-6xl font-bold h-[3.4375rem]"></div>
     </div>
 
     <br />
@@ -23,7 +21,7 @@
     <!-- 캘린더 위젯 (라이트/다크 구현) -->
     <div class="w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col">
       <div class="day-name dark:text-white text-[1rem] font-semibold h-[1.25rem]"></div>
-      <div class="day-number mt-0 p-0 dark:text-white text-6xl font-extrabold h-[3.4375rem]"></div>
+      <div class="day-number mt-0 p-0 dark:text-white text-6xl font-bold h-[3.4375rem]"></div>
     </div>
   </body>
 </html>
