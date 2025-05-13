@@ -3,6 +3,15 @@ const body = document.querySelector('body');
 const mac = document.querySelector('.mac') as HTMLDivElement;
 const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
 const mac_bottom = document.querySelector('.mac-bottom') as HTMLDivElement;
+
+addSelect();
+addBlankWidgetToggle();
+
+const blank_widget_arr = document.querySelectorAll('.blank-widget');
+Array.from(blank_widget_arr).forEach(e => {
+  (e as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.3)';
+});
+
 function addSelect() {
   const select = document.createElement('select');
   select.classList.add('mac-screen-size');
@@ -32,4 +41,25 @@ function addSelect() {
     mac_bottom.style.height = (Math.sqrt(size_arr[index][0]) * 3).toString() + 'px';
   });
 }
-addSelect();
+
+function addBlankWidgetToggle() {
+  const btn = document.createElement('button');
+  btn.style.position = 'absolute';
+  btn.style.top = '50px';
+  btn.style.left = '10px';
+  btn.style.border = '1px solid black';
+  btn.style.paddingInline = '4px';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#d9d9d9';
+  btn.setAttribute('type', 'button');
+  btn.textContent = '그리드 격자 제거';
+
+  body?.insertBefore(btn, body.firstChild);
+  btn.addEventListener('click', () => {
+    console.log('click');
+    Array.from(blank_widget_arr).forEach(e => {
+      if ((e as HTMLDivElement).style.backgroundColor) (e as HTMLDivElement).style.backgroundColor = '';
+      else (e as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.3)';
+    });
+  });
+}
