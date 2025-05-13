@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/top-bar.ts"></script>
+    <title>top-bar-component</title>
+  </head>
+  <body>
+    <!-- top-bar 라이트 모드 -->
+    <div class="flex justify-between items-center bg-[rgba(255,255,255,0.55)] shadow-2xl">
+      <div class="ml-3">
+        <img src="../../public/asserts/top-bar/apple-logo-black.svg" alt="애플로고" />
+      </div>
+      <div class="inline-flex mr-3">
+        <img class="mr-3" src="../../public/asserts/top-bar/battery-black.svg" alt="배터리" />
+        <img class="mr-3" src="../../public/asserts/top-bar/wifi-black.svg" alt="와이파이" />
+        <img class="mr-3" src="../../public/asserts/top-bar/search-black.svg" alt="검색" />
+        <img class="mr-3" src="../../public/asserts/top-bar/toggle-black.svg" alt="토글" />
+        <span class="current-date text-xs"></span>
+      </div>
+    </div>
+
+    <!-- top-bar 다크 모드 -->
+    <div class="flex justify-between items-center bg-[rgba(109,109,109,0.35)] shadow-2xl">
+      <div class="ml-3">
+        <img src="../../public/asserts/top-bar/apple-logo-white.svg" alt="애플로고" />
+      </div>
+      <div class="inline-flex mr-3">
+        <img class="mr-3" src="../../public/asserts/top-bar/battery-white.svg" alt="배터리" />
+        <img class="mr-3" src="../../public/asserts/top-bar/wifi-white.svg" alt="와이파이" />
+        <img class="mr-3" src="../../public/asserts/top-bar/search-white.svg" alt="검색" />
+        <img class="mr-3" src="../../public/asserts/top-bar/toggle-white.svg" alt="토글" />
+        <span class="current-date text-xs text-white"></span>
+      </div>
+    </div>
+  </body>
+</html>
