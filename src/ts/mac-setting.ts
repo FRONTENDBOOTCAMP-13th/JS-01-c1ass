@@ -25,8 +25,6 @@ function addSelect() {
   select.addEventListener('change', (e: Event) => {
     const target = e.target as HTMLSelectElement;
     const selectedIndex = target.value;
-
-    // 문자열 index를 숫자로 변환해야 하는 경우:
     const index = parseInt(selectedIndex);
 
     mac_screen.style.width = size_arr[index][0].toString() + 'px';
