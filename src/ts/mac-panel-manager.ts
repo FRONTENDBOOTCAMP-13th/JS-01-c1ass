@@ -1,3 +1,4 @@
+// import { Icon, type Iconbar, type iconList, iconBar } from './icon.ts';
 const container = document.querySelector('#mac-panel-container');
 const icon_bar = document.querySelector('#icon-bar');
 const icon_arr = icon_bar!.querySelectorAll('.icon');
@@ -9,13 +10,13 @@ Array.from(icon_arr).forEach((e, i) => {
 });
 
 function openPanel(idx: number) {
-  const mac_panel_overlay = createMacPanel();
-  mac_panel_overlay.dataset.id = idx.toString();
+  const mac_panel_overlay = createMacPanel(idx);
   container?.appendChild(mac_panel_overlay);
 }
 
-function createMacPanel() {
+function createMacPanel(idx: number) {
   const mac_panel_overlay = document.createElement('li');
+  mac_panel_overlay.classList.add('mac-panel');
   mac_panel_overlay.classList.add('mac-panel-overlay');
   const mac_panel_content = document.createElement('div');
   mac_panel_content.classList.add('mac-panel-content');
@@ -44,12 +45,14 @@ function createMacPanel() {
   mac_panel_header_left.appendChild(close_mac_panel);
   mac_panel_header_left.appendChild(minimize_mac_panel);
   mac_panel_header_left.appendChild(full_mac_panel);
+  mac_panel_overlay.dataset.id = idx.toString();
+  close_mac_panel.addEventListener('click', () => {
+    killMacPanel(idx);
+  });
   makeDraggable(mac_panel_content, mac_panel_header);
   return mac_panel_overlay;
 }
 function makeDraggable(modal: HTMLElement, handle: HTMLElement): void {
-  console.log(modal);
-  console.log(handle);
   let isDragging = false;
   const containerRec = container?.getBoundingClientRect();
   let offsetX = 0;
@@ -76,4 +79,10 @@ function makeDraggable(modal: HTMLElement, handle: HTMLElement): void {
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   }
+}
+
+function killMacPanel(idx: number) {
+  const mac_panel_arr = container!.querySelectorAll('.mac-panel');
+  const targetMacPanel = Array.from(mac_panel_arr).find(e => (e as HTMLLIElement).dataset.id === idx.toString());
+  targetMacPanel?.remove();
 }
