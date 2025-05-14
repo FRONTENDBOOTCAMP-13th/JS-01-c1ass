@@ -1,5 +1,4 @@
 const icon_bar = document.querySelector('#icon-bar');
-const icon_arr = icon_bar!.querySelectorAll('.icon');
 // interface Icon {
 //   index: number;
 //   isRunning: boolean;
@@ -33,6 +32,7 @@ type iconList = {
   [key: number]: Icon | undefined;
 };
 const icon_list: iconList = {};
+let icon_cnt: number = 0;
 
 function createIcon(idx: number, status: number, id?: string) {
   const tmpIcon: Icon = new Icon(idx, status);
@@ -48,19 +48,57 @@ function createIcon(idx: number, status: number, id?: string) {
 }
 
 function removeIcon(icon: Icon) {
+  const icon_arr = icon_bar!.querySelectorAll('.icon');
+  console.log(icon);
   const idx = icon.getIndex();
-  Array.from(icon_arr).find(e => {
-    if ((e as HTMLLIElement).dataset.idx === idx.toString()) {
-      e.remove();
-      icon_list[idx] = undefined;
-    }
+  Array.from(icon_arr).forEach(e => {
+    console.log((e as HTMLLIElement).dataset.idx);
   });
+  const targetIcon = Array.from(icon_arr).find(e => (e as HTMLLIElement).dataset.idx === idx.toString());
+  console.log(targetIcon);
+  icon_list[idx] = undefined;
+  icon_arr[idx].remove();
+  targetIcon?.remove();
 }
 
-createIcon(0, 0, '0');
-// dummycode
-Array.from(icon_arr).forEach((e, i) => {
-  e.addEventListener('click', () => {
-    e.textContent = i.toString();
+// ----------------임시 버튼 테스트 코드---------------------------
+addCreateIconBtn();
+addRemoveIconBtn();
+function addCreateIconBtn() {
+  const body = document.querySelector('body');
+  const btn = document.createElement('button');
+  btn.style.position = 'absolute';
+  btn.style.top = '130px';
+  btn.style.left = '10px';
+  btn.style.border = '1px solid black';
+  btn.style.paddingInline = '4px';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#d9d9d9';
+  btn.setAttribute('type', 'button');
+  btn.textContent = '아이콘 추가';
+
+  body?.insertBefore(btn, body.firstChild);
+  btn.addEventListener('click', () => {
+    createIcon(icon_cnt, 0, icon_cnt.toString());
+    icon_cnt++;
   });
-});
+}
+function addRemoveIconBtn() {
+  const body = document.querySelector('body');
+  const btn = document.createElement('button');
+  btn.style.position = 'absolute';
+  btn.style.top = '170px';
+  btn.style.left = '10px';
+  btn.style.border = '1px solid black';
+  btn.style.paddingInline = '4px';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#d9d9d9';
+  btn.setAttribute('type', 'button');
+  btn.textContent = '아이콘 삭제';
+
+  body?.insertBefore(btn, body.firstChild);
+  btn.addEventListener('click', () => {
+    removeIcon(icon_list[icon_cnt - 1] as Icon);
+    icon_cnt--;
+  });
+}
