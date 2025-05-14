@@ -1,4 +1,6 @@
 import { default as size_arr } from './mac-screen-size.ts';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Icon, type Iconbar, type iconList, iconBar } from './icon.ts';
 const body = document.querySelector('body');
 const mac = document.querySelector('.mac') as HTMLDivElement;
 const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
@@ -13,6 +15,8 @@ paintBlankWidgets();
 addBlankWidgetToggle();
 paintIconColorful();
 addBodyDragToggle();
+addCreateIconBtn();
+addRemoveIconBtn();
 
 function addSelect() {
   const select = document.createElement('select');
@@ -103,5 +107,43 @@ function addBodyDragToggle() {
       body!.classList.add('select-none');
       btn.textContent = '드래그 기능 추가';
     }
+  });
+}
+
+function addCreateIconBtn() {
+  const btn = document.createElement('button');
+  btn.style.position = 'absolute';
+  btn.style.top = '130px';
+  btn.style.left = '10px';
+  btn.style.border = '1px solid black';
+  btn.style.paddingInline = '4px';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#d9d9d9';
+  btn.setAttribute('type', 'button');
+  btn.textContent = '아이콘 추가';
+
+  body?.insertBefore(btn, body.firstChild);
+  btn.addEventListener('click', () => {
+    iconBar.insertIcon(iconBar.createIcon(iconBar.icon_cnt, 0, iconBar.icon_cnt.toString()));
+    iconBar.icon_cnt++;
+  });
+}
+function addRemoveIconBtn() {
+  const body = document.querySelector('body');
+  const btn = document.createElement('button');
+  btn.style.position = 'absolute';
+  btn.style.top = '170px';
+  btn.style.left = '10px';
+  btn.style.border = '1px solid black';
+  btn.style.paddingInline = '4px';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#d9d9d9';
+  btn.setAttribute('type', 'button');
+  btn.textContent = '아이콘 삭제';
+
+  body?.insertBefore(btn, body.firstChild);
+  btn.addEventListener('click', () => {
+    iconBar.removeIcon(iconBar.icon_list[iconBar.icon_cnt - 1] as Icon);
+    iconBar.icon_cnt--;
   });
 }
