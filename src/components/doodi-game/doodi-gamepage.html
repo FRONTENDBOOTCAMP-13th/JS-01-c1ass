@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/doodi-game/doodi-screen.ts"></script>
+    <script type="module" src="/src/ts/doodi-game/doodi-mole.ts"></script>
+    <script type="module" src="/src/ts/doodi-game/doodi-timer.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <title>Doodi-game</title>
+  </head>
+  <body class="h-screen relative">
+    <div id="game" class="screen hidden w-[43.75rem] h-[31.25rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center">
+      <!-- 포인트 바 / 타이머 바 -->
+      <div class="flex justify-center space-x-2">
+        <div class="w-[6.25rem] grid grid-cols-2 bg-white rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]"><span>Point</span><span id="point">0</span></div>
+        <div class="w-[6.25rem] grid grid-cols-2 bg-white rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]"><span>Timer</span><span id="timer">60</span></div>
+      </div>
+      <!-- 밭 모양의 그리드 (게임 존) -->
+
+      <div class="w-[50%] h-[70%] grid grid-cols-4 grid-rows-4 mx-auto my-auto mt-10 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+        <!-- 셀 9개 -->
+        <div class="hole bg-green-200 relative">1</div>
+        <div class="hole bg-green-200 relative">2</div>
+        <div class="hole bg-green-200 relative">3</div>
+        <div class="hole bg-green-200 relative">4</div>
+        <div class="hole bg-green-200 relative">5</div>
+        <div class="hole bg-green-200 relative">6</div>
+        <div class="hole bg-green-200 relative">7</div>
+        <div class="hole bg-green-200 relative">8</div>
+        <div class="hole bg-green-200 relative">9</div>
+        <div class="hole bg-green-200 relative">10</div>
+        <div class="hole bg-green-200 relative">11</div>
+        <div class="hole bg-green-200 relative">12</div>
+        <div class="hole bg-green-200 relative">13</div>
+        <div class="hole bg-green-200 relative">14</div>
+        <div class="hole bg-green-200 relative">15</div>
+        <div class="hole bg-green-200 relative">16</div>
+      </div>
+    </div>
+  </body>
+</html>
