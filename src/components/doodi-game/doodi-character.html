@@ -8,10 +8,41 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
     <title>Doodi-character</title>
   </head>
-  <body class="flex items-center justify-center h-screen">
-    <div class="w-[50%] h-[70%] bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col">
-      <ul>
-        <li><a href="/"></a></li>
-      </ul>
+  <body class="flex flex-col items-center justify-center m-30">
+    <!-- 로고(두디) -->
+    <h1 class="bg-black text-white px-3 rounded-sm">로고(두디)</h1>
+    <div class="mt-10 mb-20">
+      <img src="../../../public/asserts/doodi-game/doodi_logo.svg" width="300" alt="로고(DOODI)" />
     </div>
+
+    <!-- 캐릭터 기본형 -->
+    <h1 class="bg-black text-white px-3 rounded-sm">캐릭터 기본형</h1>
+    <div class="grid grid-cols-2">
+      <img src="../../../public/asserts/doodi-game/doodi/doodi_norm.webp" width="300" alt="착한 두더지 두디" />
+      <img src="../../../public/asserts/doodi-game/dooka/dooka_norm.webp" width="300" alt="나쁜 두더지 두카" />
+    </div>
+
+    <!-- 캐릭터 응용(땅구멍 기본형) -->
+    <h1 class="bg-black text-white px-3 rounded-sm">캐릭터 응용(땅구멍 기본형)</h1>
+    <div class="grid grid-cols-2">
+      <img src="../../../public/asserts/doodi-game/doodi/doodi_fold.webp" width="300" alt="착한 두더지 두디 (팔을 접은 모습)" />
+      <img src="../../../public/asserts/doodi-game/dooka/dooka_fold.webp" width="300" alt="나쁜 두더지 두카  (팔을 접은 모습)" />
+    </div>
+
+    <!-- 캐릭터 응용(땅구멍 다친 상태) -->
+    <h1 class="bg-black text-white px-3 rounded-sm">캐릭터 응용(땅구멍 다친 상태)</h1>
+    <div class="grid grid-cols-2">
+      <img src="../../../public/asserts/doodi-game/doodi/doodi_hurt.webp" width="300" alt="착한 두더지 두디 (다친 모습)" />
+      <img src="../../../public/asserts/doodi-game/dooka/dooka_hurt.webp" width="300" alt="나쁜 두더지 두카  (다친 모습)" />
+    </div>
+
+    <!-- 캐릭터 animation -->
+    <h1 class="bg-black text-white px-3 rounded-sm">캐릭터 animation</h1>
+    <div class="mt-10">
+      <video class="" autoplay loop playsinline>
+        <source src="../../../public/asserts/doodi-game/Doodi.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </body>
 </html>

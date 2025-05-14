@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/doodi-game.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <title>Doodi-game</title>
+  </head>
+  <body class="flex items-center justify-center h-screen">
+    <!-- cover -->
+    <div id="cover" class="screen w-[43.75rem] h-[31.25rem] relative bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center items-center flex flex-col">
+      <!-- logo -->
+      <div class="absolute mt-9">
+        <img src="../../../public/asserts/doodi-game/doodi_logo.svg" width="230" alt="로고(DOODI)" />
+      </div>
+
+      <!-- video -->
+      <video id="myVideo" class="min-w-[25rem] w-[50%] mt-22 block" autoplay loop playsinline>
+        <source src="../../../public/asserts/doodi-game/Doodi.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- start -->
+      <button id="start" type="button" class="after z-10 cursor-pointer hover:opacity-[50%] active:scale-120"><img src="../../../public/asserts/doodi-game/START.svg" width="80" alt="START(시작버튼)" /></button>
+
+      <!-- soil -->
+      <img class="absolute bottom-0 left-0 rounded-b-[1.4375rem]" src="../../../public/asserts/doodi-game/soli_group.svg" alt="흙 이미지" />
+    </div>
+
+    <!-- instro -->
+    <div id="game" class="screen hidden w-[43.75rem] h-[31.25rem] relative bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center items-center flex-col">
+      <!-- 기능 버튼 list -->
+      <div class="space-x-2">
+        <button class="font-extrabold text-[#5C5C5C] cursor-pointer hover:opacity-[50%] active:scale-120">?번역하기?</button>
+        <button class="after font-extrabold text-[#5C5C5C] cursor-pointer hover:opacity-[50%] active:scale-120">skip &gt;&gt;</button>
+      </div>
+    </div>
+
+    <!-- howto -->
+    <div id="howto" class="screen hidden w-[43.75rem] h-[31.25rem] relative bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center items-center flex-col">
+      <!-- 기능 버튼 list -->
+      <div class="space-x-2">
+        <button class="before font-extrabold text-[#5C5C5C] cursor-pointer hover:opacity-[50%] active:scale-120">&lt;&lt; go back</button>
+        <button class="after font-extrabold text-[#5C5C5C] cursor-pointer hover:opacity-[50%] active:scale-120">start &gt;&gt;</button>
+      </div>
+    </div>
+
+    <!-- game -->
+    <div id="game" class="screen hidden w-[43.75rem] h-[31.25rem] relative bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center items-center flex-col"></div>
+  </body>
+</html>
