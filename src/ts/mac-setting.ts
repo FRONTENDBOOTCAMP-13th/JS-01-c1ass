@@ -7,7 +7,6 @@ const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
 const mac_bottom = document.querySelector('.mac-bottom') as HTMLDivElement;
 const blank_widget_arr = document.querySelectorAll('.blank-widget');
 const icon_bar = document.querySelector('#icon-bar');
-const icon_arr = icon_bar!.querySelectorAll('.icon');
 const icon_color_arr = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#E3BAFF', '#FFCCE5', '#CCE5FF', '#D5FFCC', '#FFF0BA', '#FFCBA4', '#CBA4FF'];
 
 addSelect();
@@ -81,6 +80,7 @@ function addBlankWidgetToggle() {
   });
 }
 function paintIconColorful() {
+  const icon_arr = icon_bar!.querySelectorAll('.icon');
   Array.from(icon_arr).forEach((e, i) => {
     (e as HTMLLIElement).style.backgroundColor = icon_color_arr[i];
   });
@@ -126,6 +126,7 @@ function addCreateIconBtn() {
   btn.addEventListener('click', () => {
     iconBar.insertIcon(iconBar.createIcon(iconBar.icon_cnt, 0, iconBar.icon_cnt.toString()));
     iconBar.icon_cnt++;
+    paintIconColorful();
   });
 }
 function addRemoveIconBtn() {
