@@ -12,6 +12,8 @@ addSelect();
 paintBlankWidgets();
 addBlankWidgetToggle();
 paintIconColorful();
+addBodyDragToggle();
+
 function addSelect() {
   const select = document.createElement('select');
   select.classList.add('mac-screen-size');
@@ -77,5 +79,29 @@ function addBlankWidgetToggle() {
 function paintIconColorful() {
   Array.from(icon_arr).forEach((e, i) => {
     (e as HTMLLIElement).style.backgroundColor = icon_color_arr[i];
+  });
+}
+
+function addBodyDragToggle() {
+  const btn = document.createElement('button');
+  btn.style.position = 'absolute';
+  btn.style.top = '90px';
+  btn.style.left = '10px';
+  btn.style.border = '1px solid black';
+  btn.style.paddingInline = '4px';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#d9d9d9';
+  btn.setAttribute('type', 'button');
+  btn.textContent = '드래그 기능 추가';
+
+  body?.insertBefore(btn, body.firstChild);
+  btn.addEventListener('click', () => {
+    if (body?.classList.contains('select-none')) {
+      body!.classList.remove('select-none');
+      btn.textContent = '드래그 기능 제거';
+    } else {
+      body!.classList.add('select-none');
+      btn.textContent = '드래그 기능 추가';
+    }
   });
 }
