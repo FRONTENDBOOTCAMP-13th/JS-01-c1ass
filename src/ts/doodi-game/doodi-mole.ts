@@ -2,6 +2,7 @@ import { gameActive, addTime, minusTime } from './doodi-timer';
 
 // 두더지(mole)
 const holes = document.querySelectorAll<HTMLDivElement>('.hole');
+
 let previousIndex = -1;
 let previousRow = -1;
 let previousCol = -1;
@@ -40,8 +41,9 @@ export function showMole() {
     mole.remove();
 
     const pointTag = document.getElementById('point');
+    const pointViewTag = document.getElementById('point-view');
     const timerTag = document.getElementById('timer');
-    if (pointTag && timerTag) {
+    if (pointTag && pointViewTag && timerTag) {
       let currentScore = parseInt(pointTag.innerText) || 0;
       let currentTime = parseInt(timerTag.innerText) || 0;
 
@@ -56,6 +58,7 @@ export function showMole() {
       }
 
       pointTag.innerText = currentScore.toString();
+      pointViewTag.innerText = currentScore.toString();
       timerTag.innerText = currentTime.toString();
     }
   });
