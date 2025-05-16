@@ -5,6 +5,39 @@
 }
 
 @layer components {
+  .mac-panel-overlay {
+    @apply pointer-events-auto z-101;
+    .mac-panel-content {
+      @apply bg-white rounded-2xl shadow-2xl w-full max-w-2xl absolute;
+      .mac-panel-header {
+        @apply grid grid-cols-3 items-center h-8 rounded-t-2xl bg-white dark:bg-[#4A4C4E];
+        .mac-panel-header-left {
+          @apply flex justify-start ml-2 space-x-1;
+          .close-mac-panel {
+            @apply w-4 h-4 bg-[#FF5F5B] rounded-full;
+          }
+          .minimize-mac-panel {
+            @apply w-4 h-4 bg-[#FEC331] rounded-full;
+          }
+          .full-mac-panel {
+            @apply w-4 h-4 bg-[#27CE48] rounded-full;
+          }
+        }
+        .mac-panel-title {
+          @apply text-center text-[#A4A6A8] text-sm;
+        }
+        .mac-panel-header-right {
+          @apply block;
+        }
+      }
+      .mac-panel-program {
+        @apply p-4 bg-gray-100 rounded-b-2xl h-100;
+      }
+    }
+  }
+  .icon {
+    @apply flex flex-col items-center justify-center w-[70px] h-[70px] rounded-[23px] shadow-md bg-white cursor-pointer hover:opacity-75 transition-opacity hover:transition-opacity;
+  }
   .card {
     perspective: 1000px;
   }
