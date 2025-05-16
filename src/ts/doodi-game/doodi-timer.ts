@@ -1,5 +1,3 @@
-import { showMole } from './doodi-mole';
-
 // 타이머
 export let time = 30;
 let timerInterval: number;
@@ -28,7 +26,7 @@ export function minusTime(value: number) {
   time -= value;
 }
 
-function startTimer() {
+export function startTimer() {
   const timerTag = document.getElementById('timer');
   timerTag!.innerText = time.toString();
 
@@ -44,8 +42,3 @@ function startTimer() {
     timerTag!.innerText = time.toString();
   }, 1000);
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-  startTimer();
-  showMole();
-});

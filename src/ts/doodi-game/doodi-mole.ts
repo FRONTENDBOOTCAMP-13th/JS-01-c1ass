@@ -1,8 +1,7 @@
-import { gameActive, addTime, minusTime } from './doodi-timer';
+import { gameActive, addTime, minusTime, startTimer } from './doodi-timer';
 
 // 두더지(mole)
 const holes = document.querySelectorAll<HTMLDivElement>('.hole');
-
 let previousIndex = -1;
 let previousRow = -1;
 let previousCol = -1;
@@ -14,6 +13,38 @@ function getRow(index: number) {
 function getCol(index: number) {
   return index % 4; // 4열 기준
 }
+
+// 게임 시작 함수
+function startGame() {
+  setTimeout(() => {
+    showMole();
+    startTimer();
+  }, 500);
+}
+
+// 버튼 클릭 → 스타트 이미지 → 3초 후 게임 시작
+document.querySelector('.start')?.addEventListener('click', () => {
+  const readyStart = document.getElementById('ready-start');
+
+  readyStart?.classList.remove('hidden'); // 스타트 이미지 보이기
+
+  setTimeout(() => {
+    readyStart?.remove(); // 또는 classList.add('hidden')도 가능
+    startGame(); // 게임 시작
+  }, 2000);
+});
+
+// 버튼 클릭 → 스타트 이미지 → 3초 후 게임 시작
+document.getElementById('replay')?.addEventListener('click', () => {
+  const readyStart = document.getElementById('ready-start');
+
+  readyStart?.classList.remove('hidden'); // 스타트 이미지 보이기
+
+  setTimeout(() => {
+    readyStart?.remove(); // 또는 classList.add('hidden')도 가능
+    startGame(); // 게임 시작
+  }, 2000);
+});
 
 export function showMole() {
   if (!gameActive) return;
@@ -32,13 +63,29 @@ export function showMole() {
   previousCol = currentCol;
 
   const isYellow = Math.random() < 0.8;
-  const colorClass = isYellow ? 'bg-yellow-500' : 'bg-red-500';
+
+  const moleImg = document.createElement('img');
+  moleImg.src = isYellow ? '../../../public/asserts/doodi-game/dooka_hole.webp' : '../../../public/asserts/doodi-game/doodi_hole.webp';
+  moleImg.alt = isYellow ? 'Yellow Mole' : 'Red Mole';
+  moleImg.className = 'w-full h-full object-cover';
 
   const mole = document.createElement('div');
-  mole.className = `absolute w-10 h-10 ${colorClass} rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer`;
+  mole.className = `mole absolute w-17 h-17 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/5 cursor-pointer active:scale-[120%] mole-bounce`;
+  mole.appendChild(moleImg);
 
   mole.addEventListener('click', () => {
-    mole.remove();
+    // 애니메이션 클래스 추가
+    mole.classList.remove('mole-bounce');
+    mole.classList.add('mole-shrink');
+
+    // 애니메이션 끝나면 제거
+    mole.addEventListener(
+      'animationend',
+      () => {
+        mole.remove();
+      },
+      { once: true },
+    );
 
     const pointTag = document.getElementById('point');
     const pointViewTag = document.getElementById('point-view');
@@ -66,10 +113,17 @@ export function showMole() {
   holes[randomIndex].appendChild(mole);
 
   setTimeout(() => {
-    mole.remove();
+    mole.classList.add('mole-shrink');
+    mole.addEventListener(
+      'animationend',
+      () => {
+        mole.remove();
+      },
+      { once: true },
+    );
   }, 1500); // 두더지 머무는 시간 (고정 또는 점수 기반으로 조정 가능)
 
-  // ✅ 다음 두더지 등장 시간 계산
+  // 다음 두더지 등장 시간 계산
   const pointTag = document.getElementById('point');
   const currentScore = pointTag ? parseInt(pointTag.innerText) || 0 : 0;
   const nextDelay = getMoleDelay(currentScore);
@@ -105,3 +159,25 @@ function getMoleDelay(score: number): number {
   }
   return 2500; // 기본 값
 }
+
+// bounce 애니메이션
+function addMoleBounceEffect(target: HTMLElement) {
+  target.classList.remove('little-bounce'); // 이미 있을 경우 제거
+  void target.offsetWidth; // 리플로우 강제 → 재적용 가능
+  target.classList.add('little-bounce');
+
+  target.addEventListener(
+    'animationend',
+    () => {
+      target.classList.remove('little-bounce');
+    },
+    { once: true },
+  );
+}
+
+// 두더지 버튼들에 이벤트 추가
+document.querySelectorAll('.mole-btn').forEach(el => {
+  el.addEventListener('click', () => {
+    addMoleBounceEffect(el as HTMLElement);
+  });
+});
