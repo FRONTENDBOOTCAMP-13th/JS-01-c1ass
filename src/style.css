@@ -5,6 +5,7 @@
 }
 
 @layer components {
+  /* 맥패널css */
   .mac-panel-overlay {
     @apply pointer-events-auto z-101;
     .mac-panel-content {
