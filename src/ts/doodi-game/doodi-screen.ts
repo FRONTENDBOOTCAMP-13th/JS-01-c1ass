@@ -33,6 +33,14 @@ function handleNavigation(event: Event): void {
   }
 
   showScreen(currentIndex);
+  effectPopSound();
+}
+
+// 효과음 (pop) : 버튼 클릭 효과음
+export function effectPopSound() {
+  const popSound = new Audio('../../../public/asserts/doodi-game/etc/effect_pop.mp3');
+  popSound.volume = 0.1;
+  popSound.play();
 }
 
 // 모든 before/after 버튼에 이벤트 연결
@@ -91,6 +99,7 @@ function handleReplayClick() {
 if (replayBtn) {
   replayBtn.removeEventListener('click', handleReplayClick); // 혹시 이전 핸들러 제거
   replayBtn.addEventListener('click', handleReplayClick);
+  effectPopSound();
 }
 
 // 'home' 버튼 기능 구현
@@ -103,4 +112,5 @@ document.getElementById('home')?.addEventListener('click', () => {
   home();
   resetGameState();
   console.log('move to home');
+  effectPopSound();
 });

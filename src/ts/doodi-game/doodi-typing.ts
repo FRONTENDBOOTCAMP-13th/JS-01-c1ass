@@ -1,4 +1,5 @@
 // 타이핑 애니메이션, 오디오 효과 (배경음악 등)
+import { effectPopSound } from './doodi-screen';
 
 const startText = 'Doodi Doodi..!!\nDoodi Doodi Doodi\nDododoodidoo Doodi!!';
 const transText = '나는 농부 두디...!!\n해충을 잡고 농작물을 가꿔주지.\n농작물을 훔쳐먹는 나쁜 두카들을 잡아줘!!';
@@ -68,6 +69,7 @@ document.getElementById('skip')?.addEventListener('click', () => {
 
 document.getElementById('trans')?.addEventListener('click', () => {
   translateText(startText, transText, typingEl);
+  effectPopSound();
 });
 
 // 배경음악
