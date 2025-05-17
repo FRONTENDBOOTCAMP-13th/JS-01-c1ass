@@ -1,88 +1,38 @@
-// import { Icon, type Iconbar, type iconList, iconBar } from './icon.ts';
+import { iconBar } from './icon-bar.ts';
+import { panelContainer } from './mac-panel-container.ts';
 const container = document.querySelector('#mac-panel-container');
 const icon_bar = document.querySelector('#icon-bar');
-const icon_arr = icon_bar!.querySelectorAll('.icon');
+const icon_arr = icon_bar?.querySelectorAll('.icon');
 
-Array.from(icon_arr).forEach((e, i) => {
-  e.addEventListener('click', () => {
-    openPanel(i);
+Array.from(icon_arr!).forEach(el => {
+  el.addEventListener('click', e => {
+    const iconElement = e.target as HTMLLIElement;
+    const iconId = iconElement.dataset.id!;
+    const status = iconBar.getIconStatus(iconId);
+    if (status === 0) {
+      openPanel(iconId);
+      iconBar.setIconStatus(iconId, 1);
+    }
   });
 });
 
-function openPanel(idx: number) {
-  const mac_panel_overlay = createMacPanel(idx);
+function insertIcon(icon: HTMLLIElement) {
+  const iconId = icon.dataset.id!;
+  const status = icon.dataset.status!;
+  icon.addEventListener('click', () => {
+    if (status === '0') {
+      openPanel(iconId);
+      iconBar.setIconStatus(iconId, 1);
+    }
+    if (status === '1') {
+      // 구현해야함
+    }
+  });
+}
+
+function openPanel(id: string) {
+  const mac_panel_overlay = panelContainer.createMacPanel(id, 1);
   container?.appendChild(mac_panel_overlay);
 }
 
-function createMacPanel(idx: number) {
-  const mac_panel_overlay = document.createElement('li');
-  mac_panel_overlay.classList.add('mac-panel');
-  mac_panel_overlay.classList.add('mac-panel-overlay');
-  const mac_panel_content = document.createElement('div');
-  mac_panel_content.classList.add('mac-panel-content');
-  const mac_panel_header = document.createElement('div');
-  mac_panel_header.classList.add('mac-panel-header');
-  const mac_panel_title = document.createElement('div');
-  mac_panel_title.classList.add('mac-panel-title');
-  const mac_panel_header_left = document.createElement('div');
-  mac_panel_header_left.classList.add('mac-panel-header-left');
-  const mac_panel_header_right = document.createElement('div');
-  mac_panel_header_right.classList.add('mac-panel-header-right');
-  const mac_panel_program = document.createElement('div');
-  mac_panel_program.classList.add('mac-panel-program');
-  const close_mac_panel = document.createElement('div');
-  close_mac_panel.classList.add('close-mac-panel');
-  const minimize_mac_panel = document.createElement('div');
-  minimize_mac_panel.classList.add('minimize-mac-panel');
-  const full_mac_panel = document.createElement('div');
-  full_mac_panel.classList.add('full-mac-panel');
-  mac_panel_overlay.appendChild(mac_panel_content);
-  mac_panel_content.appendChild(mac_panel_header);
-  mac_panel_content.appendChild(mac_panel_program);
-  mac_panel_header.appendChild(mac_panel_header_left);
-  mac_panel_header.appendChild(mac_panel_title);
-  mac_panel_header.appendChild(mac_panel_header_right);
-  mac_panel_header_left.appendChild(close_mac_panel);
-  mac_panel_header_left.appendChild(minimize_mac_panel);
-  mac_panel_header_left.appendChild(full_mac_panel);
-  mac_panel_overlay.dataset.id = idx.toString();
-  close_mac_panel.addEventListener('click', () => {
-    killMacPanel(idx);
-  });
-  makeDraggable(mac_panel_content, mac_panel_header);
-  return mac_panel_overlay;
-}
-function makeDraggable(modal: HTMLElement, handle: HTMLElement): void {
-  let isDragging = false;
-  const containerRec = container?.getBoundingClientRect();
-  let offsetX = 0;
-  let offsetY = 0;
-
-  handle.addEventListener('mousedown', (e: MouseEvent) => {
-    isDragging = true;
-    const rect = modal.getBoundingClientRect();
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-
-  function onMouseMove(e: MouseEvent) {
-    if (!isDragging) return;
-    modal.style.left = `${e.clientX - offsetX - containerRec!.left}px`;
-    modal.style.top = `${e.clientY - offsetY - containerRec!.top}px`;
-  }
-
-  function onMouseUp() {
-    isDragging = false;
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-  }
-}
-
-function killMacPanel(idx: number) {
-  const mac_panel_arr = container!.querySelectorAll('.mac-panel');
-  const targetMacPanel = Array.from(mac_panel_arr).find(e => (e as HTMLLIElement).dataset.id === idx.toString());
-  targetMacPanel?.remove();
-}
+export { insertIcon };
