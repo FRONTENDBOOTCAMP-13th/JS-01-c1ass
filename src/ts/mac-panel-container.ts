@@ -103,7 +103,11 @@ const panelContainer: MacPanelContainer = {
       content.style.top = content.dataset.top as string;
       content.dataset.left = '';
       content.dataset.top = '';
+      setTimeout(() => {
+        content.classList.remove('transition-all');
+      }, 300);
     } else if (status === 2) {
+      content.classList.add('transition-all');
       content.classList.add('w-full', 'h-full');
       content.dataset.left = content.style.left;
       content.dataset.top = content.style.top;
@@ -115,6 +119,9 @@ const panelContainer: MacPanelContainer = {
       content.style.top = content.dataset.top as string;
       content.dataset.left = '';
       content.dataset.top = '';
+      setTimeout(() => {
+        content.classList.remove('transition-all');
+      }, 300);
     }
   },
 
