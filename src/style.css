@@ -87,3 +87,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.hidden {
+  display: none !important;
+}

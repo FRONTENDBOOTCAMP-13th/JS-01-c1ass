@@ -15,7 +15,7 @@ function typeText(text: string, element: HTMLElement, callback?: () => void) {
     if (i < text.length) {
       element.innerHTML += text[i] === '\n' ? '<br />' : text[i];
       i++;
-      setTimeout(type, 50);
+      setTimeout(type, 30);
     } else {
       callback?.();
     }
@@ -35,7 +35,7 @@ function translateText(original: string, translated: string, element: HTMLElemen
       tempArr[i] = translated[i] ?? ''; // 번역 텍스트가 짧은 경우도 고려
       element.innerHTML = tempArr.map(char => (char === '\n' ? '<br />' : char)).join('');
       i++;
-      setTimeout(change, 50);
+      setTimeout(change, 40);
     }
   }
 

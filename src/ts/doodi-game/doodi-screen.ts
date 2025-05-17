@@ -1,3 +1,6 @@
+import { setTime, isGameActive, setGameActive, reTimerBar } from './doodi-timer';
+import { readyStart, moleTimeoutId } from './doodi-mole';
+
 // video 2배속 재생
 const video = document.getElementById('myVideo') as HTMLVideoElement | null;
 if (video) {
@@ -17,7 +20,7 @@ function showScreen(index: number): void {
   });
 }
 
-// 버튼 클릭 핸들러
+// 버튼 클릭 핸들러 (before, after 버튼을 누를 때 화면 전환)
 function handleNavigation(event: Event): void {
   const target = event.target as HTMLElement;
   const button = target.closest('button');
@@ -39,3 +42,65 @@ document.querySelectorAll<HTMLButtonElement>('.before, .after').forEach(button =
 
 // 시작 시 첫 화면만 보이게
 showScreen(currentIndex);
+
+// 게임 상태 초기화
+function resetGameState() {
+  console.log('게임 상태 초기화 시작: resetGameState()');
+
+  // 1) 게임 활성화 상태 재설정
+  setGameActive(true);
+  if (isGameActive()) {
+  }
+
+  // 2) 타이머 초기화
+  const initialTime = 20;
+  setTime(initialTime);
+  const timerTag = document.getElementById('timer') as HTMLElement;
+  if (timerTag) {
+    timerTag.innerText = initialTime.toString();
+  }
+
+  // 3) 점수 초기화
+  const pointTag = document.getElementById('point') as HTMLElement;
+  const pointViewTag = document.getElementById('point-view');
+  if (pointTag) pointTag.innerText = '0';
+  if (pointViewTag) pointViewTag.innerText = '0';
+
+  // 4) 타임오버 이미지 숨기기
+  const gameOverImg = document.getElementById('game-over') as HTMLImageElement;
+
+  if (gameOverImg) {
+    gameOverImg.classList.add('hidden');
+  }
+
+  // 5) 두더지 반복 제거
+  clearTimeout(moleTimeoutId);
+
+  // 6) 타이머 바 초기화 (있다면)
+  reTimerBar();
+}
+
+const replayBtn = document.getElementById('replay');
+
+function handleReplayClick() {
+  resetGameState();
+  showScreen(3);
+  readyStart();
+}
+
+if (replayBtn) {
+  replayBtn.removeEventListener('click', handleReplayClick); // 혹시 이전 핸들러 제거
+  replayBtn.addEventListener('click', handleReplayClick);
+}
+
+// 'home' 버튼 기능 구현
+function home() {
+  currentIndex = 0;
+  showScreen(0);
+}
+
+document.getElementById('home')?.addEventListener('click', () => {
+  home();
+  resetGameState();
+  console.log('move to home');
+});

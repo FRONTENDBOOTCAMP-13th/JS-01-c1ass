@@ -28,7 +28,7 @@
       </video>
 
       <!-- start -->
-      <button id="start" type="button" class="after z-10 cursor-pointer hover:opacity-[50%] active:scale-120"><img src="../../../public/asserts/doodi-game/START.svg" width="80" alt="START(시작버튼)" /></button>
+      <button id="start" type="button" class="after z-10 hover:opacity-[50%] active:scale-120"><img src="../../../public/asserts/doodi-game/START.svg" width="80" alt="START(시작버튼)" /></button>
 
       <!-- soil -->
       <img class="absolute bottom-0 left-0 rounded-b-[1.4375rem]" src="../../../public/asserts/doodi-game/soli_group.svg" alt="흙 이미지" />
@@ -46,13 +46,13 @@
       <div class="flex justify-center">
         <div class="relative w-[400px]">
           <img src="../../../public/asserts/doodi-game/etc/talking.svg" width="400" alt="말풍선 이미지" />
-          <div id="typing" class="whitespace-pre-line w-[18.75rem] text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4"></div>
+          <div id="typing" class="whitespace-pre-line w-[18.75rem] mt-1.5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4"></div>
         </div>
       </div>
       <!-- 기능 버튼 list -->
       <div class="mt-2 space-x-4">
-        <button id="trans" class="font-extrabold text-[#5C5C5C] cursor-pointer hover:opacity-[50%] active:scale-120">?번역하기?</button>
-        <button id="skip" class="after font-extrabold text-[#5C5C5C] cursor-pointer hover:opacity-[50%] active:scale-120">skip &gt;&gt;</button>
+        <button id="trans" class="font-extrabold text-[#5C5C5C] hover:opacity-[50%] active:scale-120">?번역하기?</button>
+        <button id="skip" class="after font-extrabold text-[#5C5C5C] hover:opacity-[50%] active:scale-120">skip &gt;&gt;</button>
       </div>
     </div>
 
@@ -63,22 +63,22 @@
         <img src="../../../public/asserts/doodi-game/doodi_logo.svg" width="100" alt="로고(DOODI)" />
       </div>
       <!-- 게임 설명 이미지: doodi/dooka -->
-      <div class="grid grid-cols-4 place-items-center mt-8">
-        <img src="../../../public/asserts/doodi-game/etc/fence.svg" width="120" alt="울타리 이미지" />
-        <button type="button" class="cursor-pointer mole-btn"><img src="../../../public/asserts/doodi-game/doodi/doodi-half_hurt.svg" width="300" alt="다친 착한 두더지(두디)" /></button>
-        <button type="button" class="cursor-pointer mole-btn"><img src="../../../public/asserts/doodi-game/dooka/dooka-half_hurt.svg" width="300" alt="다친 나쁜 두더지(두카)" /></button>
-        <img src="../../../public/asserts/doodi-game/etc/fence.svg" width="120" alt="울타리 이미지" />
+      <div class="grid grid-cols-4 place-items-center items-end mt-8">
+        <img src="../../../public/asserts/doodi-game/etc/fence.svg" width="110" alt="울타리 이미지" />
+        <button type="button" class="mole-btn"><img src="../../../public/asserts/doodi-game/doodi/doodi-half_hurt.svg" width="300" alt="다친 착한 두더지(두디)" /></button>
+        <button type="button" class="mole-btn"><img src="../../../public/asserts/doodi-game/dooka/dooka-half_hurt.svg" width="300" alt="다친 나쁜 두더지(두카)" /></button>
+        <img src="../../../public/asserts/doodi-game/etc/fence.svg" width="110" alt="울타리 이미지" />
       </div>
       <!-- 땅구멍 이미지 -->
-      <img class="w-full absolute left-0 -translate-y-6/7" src="../../../public/asserts/doodi-game/etc/soil_covered.svg" alt="흙 이미지" />
+      <img class="w-full absolute left-0 -translate-y-9/10" src="../../../public/asserts/doodi-game/etc/soil_covered.svg" alt="흙 이미지" />
 
       <!-- 땅 아래 이미지 -->
-      <div class="w-full h-[16.25rem] mt-0.5 space-x-4 p-6 rounded-b-[1.4375rem]" id="game-container">
+      <div class="w-full h-[55%] mt-[.0625rem] space-x-4 p-6 rounded-b-[1.4375rem]" id="game-container">
         <!-- story -->
         <div class="flex justify-center mt-3">
           <div class="relative w-[400px]">
             <img src="../../../public/asserts/doodi-game/etc/talking.svg" width="400" alt="말풍선 이미지" />
-            <div id="typing2" class="whitespace-pre-line w-[18.75rem] text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4"></div>
+            <div id="typing2" class="whitespace-pre-line w-[18.75rem] mt-1.5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4"></div>
           </div>
         </div>
         <!-- 기능 버튼 list -->
@@ -91,36 +91,40 @@
 
     <!-- 4. screen: game -->
     <div id="game" class="screen hidden w-[43.75rem] h-[31.25rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center">
-      <!-- 포인트 바 / 타이머 바 -->
-      <div class="">
-        <div class="w-[6.25rem] grid grid-cols-2 bg-white rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]"><span>Point</span><span id="point">0</span></div>
-        <div class="w-[6.25rem] grid grid-cols-2 bg-white rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]"><span>Timer</span><span id="timer">30</span></div>
-      </div>
-
-      <!-- 스타트 이미지 -->
-      <div id="ready-start" class="">
-        <img src="../../../public/asserts/doodi-game/logo/ready_start.svg" alt="스타트 이미지" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10" />
-      </div>
-
-      <!-- 밭 모양의 그리드 (게임 존) -->
-      <div class="w-[50%] h-[70%] bg-[#9B7356] grid grid-cols-4 grid-rows-4 mx-auto my-auto mt-10 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-        <!-- 셀 9개 -->
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
-        <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+      <div class="flex w-full h-full">
+        <div class="w-full">
+          <!-- 포인트 바 / 타이머 바 -->
+          <div class="w-[6.25rem] grid grid-cols-2 bg-white rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]"><span>Point</span><span id="point">0</span></div>
+          <div class="hidden w-[6.25rem] bg-white rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]"><span>Timer</span><span id="timer">20</span></div>
+          <!-- 스타트 이미지 -->
+          <div id="ready-start" class="">
+            <img src="../../../public/asserts/doodi-game/logo/ready_start.svg" alt="스타트 이미지" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10" />
+          </div>
+          <!-- 밭 모양의 그리드 (게임 존) -->
+          <div class="w-[60%] hz-[80%] grid grid-cols-4 grid-rows-4 mx-auto my-auto mt-10">
+            <!-- 셀 9개 -->
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+            <div class="hole relative"><img src="../../../public/asserts/doodi-game/soil_hole.svg" alt="땅구멍 이미지" /></div>
+          </div>
+        </div>
+        <!-- 타이머 바 -->
+        <div id="timer-bar-container" class="w-4 h-full bg-gray-300 rounded-md overflow-hidden relative">
+          <div id="timer-bar" class="absolute w-full top-0 bg-red-500 transition-all duration-300 ease-linear"></div>
+        </div>
       </div>
 
       <!-- 타임오버 이미지 -->
@@ -129,7 +133,8 @@
         <!-- point 결과 / replay 버튼 -->
         <div class="mt-2 grid grid-rows-2 justify-items-center">
           <div class="w-[6.25rem] h-[1.5rem] grid grid-cols-2 bg-white rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]"><span>Point</span><span id="point-view">0</span></div>
-          <button id="replay" type="button" class="mt-2 w-[6.25rem] bg-white hover:bg-[#FDFAF1] rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)] cursor-pointer">Replay</button>
+          <button id="replay" type="button" class="mt-2 w-[6.25rem] bg-white hover:bg-[#FDFAF1] rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]">Replay</button>
+          <button id="home" type="button" class="mt-2 w-[6.25rem] bg-white hover:bg-[#FDFAF1] rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]">HOME</button>
         </div>
       </div>
     </div>

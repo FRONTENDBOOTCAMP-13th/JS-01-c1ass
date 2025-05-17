@@ -1,4 +1,4 @@
-import { gameActive, addTime, minusTime, startTimer } from './doodi-timer';
+import { isGameActive, addTime, minusTime, startTimer, reTimerBar } from './doodi-timer';
 
 // 두더지(mole)
 const holes = document.querySelectorAll<HTMLDivElement>('.hole');
@@ -15,39 +15,35 @@ function getCol(index: number) {
 }
 
 // 게임 시작 함수
-function startGame() {
+export function startGame() {
+  console.log('startGame 실행');
   setTimeout(() => {
     showMole();
     startTimer();
   }, 500);
 }
 
-// 버튼 클릭 → 스타트 이미지 → 3초 후 게임 시작
+// 버튼 클릭 → 스타트 이미지 → 2초 후 게임 시작
 document.querySelector('.start')?.addEventListener('click', () => {
+  readyStart();
+});
+
+export function readyStart() {
   const readyStart = document.getElementById('ready-start');
 
   readyStart?.classList.remove('hidden'); // 스타트 이미지 보이기
+  reTimerBar();
 
   setTimeout(() => {
-    readyStart?.remove(); // 또는 classList.add('hidden')도 가능
+    readyStart?.classList.add('hidden');
     startGame(); // 게임 시작
   }, 2000);
-});
+}
 
-// 버튼 클릭 → 스타트 이미지 → 3초 후 게임 시작
-document.getElementById('replay')?.addEventListener('click', () => {
-  const readyStart = document.getElementById('ready-start');
-
-  readyStart?.classList.remove('hidden'); // 스타트 이미지 보이기
-
-  setTimeout(() => {
-    readyStart?.remove(); // 또는 classList.add('hidden')도 가능
-    startGame(); // 게임 시작
-  }, 2000);
-});
+export let moleTimeoutId: ReturnType<typeof setTimeout>;
 
 export function showMole() {
-  if (!gameActive) return;
+  if (!isGameActive()) return;
 
   const candidateIndices = Array.from(holes.entries())
     .filter(([index]) => index !== previousIndex && getRow(index) !== previousRow && getCol(index) !== previousCol)
@@ -70,7 +66,7 @@ export function showMole() {
   moleImg.className = 'w-full h-full object-cover';
 
   const mole = document.createElement('div');
-  mole.className = `mole absolute w-17 h-17 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/5 cursor-pointer active:scale-[120%] mole-bounce`;
+  mole.className = `mole absolute w-19 h-19 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/5 active:scale-[120%] mole-bounce`;
   mole.appendChild(moleImg);
 
   mole.addEventListener('click', () => {
@@ -128,7 +124,8 @@ export function showMole() {
   const currentScore = pointTag ? parseInt(pointTag.innerText) || 0 : 0;
   const nextDelay = getMoleDelay(currentScore);
 
-  setTimeout(showMole, nextDelay); // 다음 두더지 등장 예약
+  moleTimeoutId = setTimeout(showMole, nextDelay);
+  // 다음 두더지 등장 예약
 }
 
 // 점수 기반 속도 조절 함수
@@ -139,23 +136,23 @@ function getMoleDelay(score: number): number {
   }
   if (score >= 3000) {
     console.log('level6');
-    return 500;
+    return 400;
   }
   if (score >= 2000) {
     console.log('level5');
-    return 700;
+    return 600;
   }
   if (score >= 1000) {
     console.log('level4');
-    return 1000;
+    return 800;
   }
   if (score >= 700) {
     console.log('level3');
-    return 1500;
+    return 1000;
   }
   if (score >= 400) {
     console.log('level2');
-    return 2000;
+    return 1500;
   }
   return 2500; // 기본 값
 }
