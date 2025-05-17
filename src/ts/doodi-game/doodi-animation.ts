@@ -1,3 +1,5 @@
+// 커서 바꾸는 함수
+
 const cursorImgSrc = '../../../public/asserts/doodi-game/etc/toy_hammer.png';
 const cursorClickImgSrc = '../../../public/asserts/doodi-game/etc/toy_hammer-hurt.png';
 

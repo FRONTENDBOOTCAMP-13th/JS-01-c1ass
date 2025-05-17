@@ -1,3 +1,5 @@
+// 화면 전환, 게임 상태 초기화 (replay, home 버튼 기능) 구현
+
 import { setTime, isGameActive, setGameActive, reTimerBar } from './doodi-timer';
 import { readyStart, moleTimeoutId } from './doodi-mole';
 

@@ -1,3 +1,5 @@
+// 두더지 생성 및 제거 함수(효과음), 게임 시작 함수, 레벨 조절 함수, 게임 스타트 구현
+
 import { isGameActive, addTime, minusTime, startTimer, reTimerBar } from './doodi-timer';
 
 const holes = document.querySelectorAll<HTMLDivElement>('.hole');
