@@ -1,15 +1,19 @@
 import { isGameActive, addTime, minusTime, startTimer, reTimerBar } from './doodi-timer';
 
-// 두더지(mole)
 const holes = document.querySelectorAll<HTMLDivElement>('.hole');
 let previousIndex = -1;
 let previousRow = -1;
 let previousCol = -1;
 
+const startSound = new Audio('../../../public/asserts/doodi-game/etc/start.aac');
+startSound.volume = 0.8;
+
+// 같은 행에서 두더지가 나오지 않도록
 function getRow(index: number) {
   return Math.floor(index / 4); // 4행 기준
 }
 
+// 같은 열에서 두더지가 나오지 않도록
 function getCol(index: number) {
   return index % 4; // 4열 기준
 }
@@ -18,12 +22,12 @@ function getCol(index: number) {
 export function startGame() {
   console.log('startGame 실행');
   setTimeout(() => {
-    showMole();
-    startTimer();
+    showMole(); // 두더지 생성 및 삭제
+    startTimer(); // 타이머 시작
   }, 500);
 }
 
-// 버튼 클릭 → 스타트 이미지 → 2초 후 게임 시작
+// 스타트 이미지 생성 및 제거 함수
 document.querySelector('.start')?.addEventListener('click', () => {
   readyStart();
 });
@@ -32,6 +36,7 @@ export function readyStart() {
   const readyStart = document.getElementById('ready-start');
 
   readyStart?.classList.remove('hidden'); // 스타트 이미지 보이기
+  startSound.play();
   reTimerBar();
 
   setTimeout(() => {
@@ -42,6 +47,7 @@ export function readyStart() {
 
 export let moleTimeoutId: ReturnType<typeof setTimeout>;
 
+// 두더지 생성 및 삭제 함수 (애니메이션, 효과음) + 포인트 증감 함수
 export function showMole() {
   if (!isGameActive()) return;
 
@@ -73,6 +79,9 @@ export function showMole() {
     // 애니메이션 클래스 추가
     mole.classList.remove('mole-bounce');
     mole.classList.add('mole-shrink');
+
+    // 맞는 효과음
+    playHitSound();
 
     // 애니메이션 끝나면 제거
     mole.addEventListener(
@@ -128,40 +137,35 @@ export function showMole() {
   // 다음 두더지 등장 예약
 }
 
-// 점수 기반 속도 조절 함수
+// 점수 기반 속도 조절 함수 (LEVEL)
 function getMoleDelay(score: number): number {
   if (score >= 4000) {
-    console.log('level6');
     return 300;
   }
   if (score >= 3000) {
-    console.log('level6');
     return 400;
   }
   if (score >= 2000) {
-    console.log('level5');
     return 600;
   }
   if (score >= 1000) {
-    console.log('level4');
     return 800;
   }
   if (score >= 700) {
-    console.log('level3');
     return 1000;
   }
   if (score >= 400) {
-    console.log('level2');
     return 1500;
   }
   return 2500; // 기본 값
 }
 
-// bounce 애니메이션
+// 게임설명(howto) 페이지 인터랙션: bounce 애니메이션 & audio 이펙트
 function addMoleBounceEffect(target: HTMLElement) {
   target.classList.remove('little-bounce'); // 이미 있을 경우 제거
   void target.offsetWidth; // 리플로우 강제 → 재적용 가능
   target.classList.add('little-bounce');
+  playHitSound();
 
   target.addEventListener(
     'animationend',
@@ -178,3 +182,10 @@ document.querySelectorAll('.mole-btn').forEach(el => {
     addMoleBounceEffect(el as HTMLElement);
   });
 });
+
+// hitSound() 연속 재생 위한 오디오 생성 함수
+function playHitSound() {
+  const sound = new Audio('../../../public/asserts/doodi-game/etc/beep.aac');
+  sound.volume = 0.07;
+  sound.play().catch(console.error);
+}

@@ -1,8 +1,11 @@
-// 타이머
+// 타이머 및 타임 오버
 export let time = 20;
 let timerInterval: number;
 let barTimerInterval: number;
 export let gameActive = true;
+
+const overSound = new Audio('../../../public/asserts/doodi-game/etc/start.aac');
+overSound.volume = 0.8;
 
 export function setGameActive(state: boolean) {
   gameActive = state;
@@ -23,6 +26,7 @@ function showGameOverImage() {
   const gameOverImg = document.getElementById('game-over') as HTMLImageElement;
   if (gameOverImg) {
     gameOverImg.classList.remove('hidden');
+    overSound.play();
   }
 
   // 모든 홀에서 두더지를 제거
