@@ -122,6 +122,7 @@ function addBlankWidgetToggle() {
     });
   });
 }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function paintIconColorful() {
   const icon_arr = icon_bar!.querySelectorAll('.icon');
   Array.from(icon_arr).forEach((e, i) => {
