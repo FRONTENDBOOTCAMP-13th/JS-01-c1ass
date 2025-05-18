@@ -4,7 +4,7 @@ let timerInterval: number;
 let barTimerInterval: number;
 export let gameActive = true;
 
-const overSound = new Audio('../../../public/asserts/doodi-game/etc/start.aac');
+const overSound = new Audio('/public/asserts/doodi-game/etc/start.aac');
 overSound.volume = 0.8;
 
 export function setGameActive(state: boolean) {

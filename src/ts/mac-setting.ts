@@ -2,7 +2,6 @@ import { default as size_arr } from './mac-screen-size.ts';
 import { iconBar } from './icon-bar.ts';
 import { insertIcon } from './mac-panel-manager.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { panelContainer } from './mac-panel-container.ts';
 const body = document.querySelector('body');
 const mac = document.querySelector('.mac') as HTMLDivElement;
 const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;

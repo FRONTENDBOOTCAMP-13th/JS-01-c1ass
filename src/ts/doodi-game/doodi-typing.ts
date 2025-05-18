@@ -9,7 +9,7 @@ const startText2 = '시간 제한이 사라지기 전에\n나쁜 두카들을 �
 const typingEl = document.getElementById('typing') as HTMLElement;
 const typingEl2 = document.getElementById('typing2') as HTMLElement;
 
-const doodiSound = new Audio('../../../public/asserts/doodi-game/doodi/doodi_dub.aac');
+const doodiSound = new Audio('/public/asserts/doodi-game/doodi/doodi_dub.aac');
 doodiSound.volume = 0.3;
 
 // hitSound() 연속 재생 위한 오디오 생성 함수
@@ -75,7 +75,7 @@ document.getElementById('trans')?.addEventListener('click', () => {
 // 배경음악
 let bgm: HTMLAudioElement;
 document.addEventListener('DOMContentLoaded', () => {
-  bgm = new Audio('../../../public/asserts/doodi-game/etc/background.aac');
+  bgm = new Audio('/public/asserts/doodi-game/etc/background.aac');
   bgm.loop = true;
   bgm.volume = 0.01;
 });
