@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/card.ts"></script>
+    <title>Card</title>
+  </head>
+  <body>
+    <main class="bg-[url('../../public/asserts/card/img/card-bg.svg')] bg-center w-full h-screen flex">
+      <section class="w-full h-full flex-[7] flex justify-center items-center">
+        <div id="card-container" class="flex justify-center items-center gap-4"></div>
+      </section>
+      <section class="flex-[3] flex flex-col items-center border-l-2">
+        <div class="flex bg-white w-[80%] h-1/12 rounded-2xl justify-center items-center mt-10 shadow-2xl">
+          <img src="../../public/asserts/card/img/ticket.svg" alt="티켓" class="w-1/4 ml-3 lg:w-1/6" />
+          <span class="ml-1 lg:text-3xl">X</span><span id="ticket-quantity" class="lg:text-3xl"></span>
+        </div>
+        <div id="draw-button" class="flex bg-white w-[80%] h-1/12 rounded-2xl justify-center items-center mt-10 shadow-2xl">
+          <button class="w-full h-full lg:text-2xl font-bold cursor-pointer">랜덤 뽑기</button>
+        </div>
+        <div class="flex bg-white w-[80%] h-1/12 rounded-2xl justify-center items-center mt-10 shadow-2xl">
+          <button id="view-collection" class="w-full h-full lg:text-2xl font-bold cursor-pointer">컬렉션 보기</button>
+        </div>
+        <div class="flex justify-center items-center w-1/2 h-1/10 mt-auto">
+          <img src="../../public/asserts/card/img/left-click.svg" alt="좌클릭" class="w-1/4" />
+          <span class="text-lg lg:text-4xl">X</span><span id="click-count" class="text-lg lg:text-4xl"></span>
+        </div>
+        <div class="flex bg-white w-[80%] h-1/12 rounded-2xl justify-center items-center mb-10 shadow-2xl">
+          <button id="get-ticket-button" class="w-full h-full lg:text-2xl font-bold cursor-pointer">뽑기권 획득</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
