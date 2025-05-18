@@ -5,15 +5,69 @@ const container = document.querySelector('#mac-panel-container');
 // const icon_arr = icon_bar?.querySelectorAll('.icon');
 
 function insertIcon(icon: HTMLLIElement) {
-  const iconId = icon.dataset.id!;
-  const status = icon.dataset.status!;
   icon.addEventListener('click', () => {
+    const iconId = icon.dataset.id!;
+    const status = icon.dataset.status!;
     if (status === '0') {
       openPanel(iconId);
       iconBar.setIconStatus(iconId, 1);
-    }
-    if (status === '1') {
-      // 구현해야함
+    } else if (status === '1') {
+      const targetPanel = document.querySelector(`li.mac-panel[data-id="${iconId}"]`) as HTMLElement;
+      if (targetPanel) {
+        const targetContent = targetPanel.querySelector('.mac-panel-content') as HTMLElement;
+        targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
+        targetContent.style.zIndex = targetPanel.dataset.zIndex;
+      }
+    } else if (status === '3') {
+      const targetPanel = document.querySelector(`li.mac-panel[data-id="${iconId}"]`) as HTMLElement;
+      if (targetPanel) {
+        targetPanel.classList.remove('pointer-events-none');
+        const targetContent = targetPanel.querySelector('.mac-panel-content') as HTMLElement;
+        const targetProgram = targetContent.querySelector('.mac-panel-program') as HTMLElement;
+        targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
+        targetContent.style.zIndex = targetPanel.dataset.zIndex;
+        if (icon) {
+          // const containerRect = container?.getBoundingClientRect();
+          const rect = icon.getBoundingClientRect();
+
+          targetContent.style.position = 'absolute';
+          targetContent.style.width = rect.width + 'px';
+          targetContent.style.height = rect.height + 'px';
+          // targetContent.dataset.left = targetContent.style.left;
+          // targetContent.dataset.top = targetContent.style.top;
+          // targetContent.style.left = rect.left - containerRect!.left + 'px';
+          // targetContent.style.top = rect.top - containerRect!.top + 'px';
+          targetContent.style.opacity = '0';
+          targetProgram.style.height = rect.height - 32 + 'px';
+          targetContent.style.transition = 'all 0.3s ease-out';
+          targetProgram.style.transition = 'all 0.3s ease-out';
+
+          requestAnimationFrame(() => {
+            targetContent.style.position = '';
+            targetContent.style.width = '';
+            targetContent.style.height = '';
+            targetContent.style.left = targetContent.dataset.left + 'px';
+            targetContent.style.top = targetContent.dataset.top + 'px';
+            // targetContent.style.left = targetContent.dataset.left as string;
+            // targetContent.style.top = targetContent.dataset.top as string;
+            targetContent.style.opacity = '1';
+            targetProgram.style.height = '';
+            setTimeout(() => {
+              targetContent.style.transition = '';
+            }, 310);
+          });
+        }
+        if (targetContent.classList.contains('w-full') && targetContent.classList.contains('h-full')) {
+          targetContent.classList.remove('w-full', 'h-full');
+          targetContent.style.width = '';
+          targetContent.style.height = '';
+          targetContent.classList.add('w-full', 'h-full');
+          panelContainer.setStatus(iconId, 2);
+        } else {
+          iconBar.setIconStatus(iconId, 1);
+          panelContainer.setStatus(iconId, 1);
+        }
+      }
     }
   });
 }
