@@ -43,8 +43,32 @@ const panelContainer: MacPanelContainer = {
     mac_panel_header_left.appendChild(full_mac_panel);
 
     close_mac_panel.addEventListener('click', () => {
-      this.removePanel(id);
-      iconBar.setIconStatus(id, 0);
+      const icon = document.querySelector(`li.icon[data-id="${id}"]`);
+      if (icon) {
+        const containerRect = container?.getBoundingClientRect();
+        const rect = icon.getBoundingClientRect();
+
+        mac_panel_content.style.position = 'absolute';
+        mac_panel_content.style.transition = 'all 0.3s ease-out';
+        mac_panel_program.style.transition = 'all 0.3s ease-out';
+
+        requestAnimationFrame(() => {
+          mac_panel_content.style.position = '';
+          mac_panel_content.style.width = rect.width + 'px';
+          mac_panel_content.style.height = rect.height + 'px';
+          mac_panel_content.style.left = rect.left - containerRect!.left + 'px';
+          mac_panel_content.style.top = rect.top - containerRect!.top + 'px';
+          mac_panel_content.style.opacity = '0';
+          mac_panel_program.style.height = rect.height - 32 + 'px';
+          setTimeout(() => {
+            mac_panel_content.style.transition = '';
+          }, 310);
+        });
+      }
+      setTimeout(() => {
+        this.removePanel(id);
+        iconBar.setIconStatus(id, 0);
+      }, 340);
     });
     minimize_mac_panel.addEventListener('click', () => {
       this.setStatus(id, 3);
