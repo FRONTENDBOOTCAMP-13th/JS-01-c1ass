@@ -1,5 +1,5 @@
 // 타이머 및 타임 오버 함수
-export let time = 20;
+export let time = 40;
 let timerInterval: number;
 let barTimerInterval: number;
 export let gameActive = true;
