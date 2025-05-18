@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/socks-game.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <title>sockast</title>
+  </head>
+  <body class="flex items-center justify-center h-screen">
+    <div class="w-[43.75rem] h-[31.25rem] relative bg-[url('/public/asserts/socks-game/check.svg')] bg-cover rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center items-center flex flex-col">
+      <img src="/public/asserts/socks-game/label_404.png" width="90" class="mt-5" alt="404 라벨 이미지" />
+      <img src="/public/asserts/socks-game/logo_sockast.png" width="290" class="mt-3" alt="Sockast 로고 이미지" />
+      <img src="/public/asserts/socks-game/story_eng.png" width="430" class="mt-3" alt="오프닝 글귀" />
+      <button type="button" class="cursor-pointer hover:drop-shadow-[0_0_10px]"><img src="/public/asserts/socks-game/postBox.png" width="300" class="mt-5" alt="우체통 입구 이미지 (버튼)" /></button>
+      <div id="draw" class="hidden">
+        <div class="w-[40.625rem] h-[31.25rem] bg-[url('/asserts/socks-game/paper_package.png')] bg-cover bg-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center space-y-10">
+          <div class="w-[18.75rem] h-[12.5rem] bg-white"></div>
+          <span id="title">구멍 뚫린 발가락 양말</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
