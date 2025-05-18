@@ -193,23 +193,29 @@ const viewCollectionButton = document.querySelector('#view-collection');
 
 viewCollectionButton?.addEventListener('click', () => {
   const list = collection
-    .map(
-      item => `
-    <div class="border rounded-lg text-center">
-      <img src="${item.images}" class="sm:w-[4rem] sm:h-[6rem] lg:w-[11rem] lg:h-[15rem]" />
-      <p class="text-sm">${item.name}</p>
-    </div>
-  `,
-    )
+    .map(item => {
+      let borderClass = '';
+      if (item.rarity === 'N') borderClass = 'border-[#9D7E69] border-4';
+      else if (item.rarity === 'R') borderClass = 'border-[#FE71F3] border-4';
+      else if (item.rarity === 'SR') borderClass = 'border-[#FFD963] border-4';
+      else if (item.rarity === 'SSR') borderClass = 'border-[#75008D] border-4';
+
+      return `
+        <div class="border rounded-lg flex flex-col justify-between items-center ${borderClass}">
+          <img src="${item.images}" class="w-full h-auto mb-2 rounded-t-sm" />
+          <p class="text-sm text-center mb-2">${item.name}</p>
+        </div>
+      `;
+    })
     .join('');
 
+  // 컬렉션 모달
   const modal = document.createElement('div');
   modal.className = 'close-modal fixed inset-0 flex justify-center items-center bg-white/50';
   modal.innerHTML = `
     <div class="bg-white p-6 w-[70%] h-[70%] overflow-y-auto rounded-2xl shadow-2xl border-1 border-gray-200">
       <div class="flex justify-between items-center">
         <h2 class="text-xl font-bold mb-5">내 컬렉션</h2>
-        
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">${list}</div>
     </div>
