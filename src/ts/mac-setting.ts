@@ -2,7 +2,7 @@ import { default as size_arr } from './mac-screen-size.ts';
 import { iconBar } from './icon-bar.ts';
 import { insertIcon } from './mac-panel-manager.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { panelContainer } from './mac-panel-container.ts';
+// import { panelContainer } from './mac-panel-container.ts';
 const body = document.querySelector('body');
 const mac = document.querySelector('.mac') as HTMLDivElement;
 const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
@@ -17,48 +17,49 @@ setInitIcon();
 addSelect();
 paintBlankWidgets();
 addBlankWidgetToggle();
-paintIconColorful();
+// paintIconColorful();
 addBodyDragToggle();
 addCreateIconBtn();
 addRemoveIconBtn();
 
-body?.addEventListener('click', showID);
+// body?.addEventListener('click', showID);
 
 function setInitIcon() {
   iconCounter++;
   const tmpicon1 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon1);
-  (tmpicon1 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon1 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
   iconCounter++;
   const tmpicon2 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon2);
-  (tmpicon2 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon2 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
   iconCounter++;
   const tmpicon3 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon3);
-  (tmpicon3 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon3 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
   iconCounter++;
   const tmpicon4 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon4);
-  (tmpicon4 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
-  (tmpicon1 as HTMLElement).textContent = tmpicon1.dataset.id!;
-  (tmpicon2 as HTMLElement).textContent = tmpicon2.dataset.id!;
-  (tmpicon3 as HTMLElement).textContent = tmpicon3.dataset.id!;
-  (tmpicon4 as HTMLElement).textContent = tmpicon4.dataset.id!;
+  // (tmpicon4 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon1 as HTMLElement).textContent = tmpicon1.dataset.id!;
+  // (tmpicon2 as HTMLElement).textContent = tmpicon2.dataset.id!;
+  // (tmpicon3 as HTMLElement).textContent = tmpicon3.dataset.id!;
+  // (tmpicon4 as HTMLElement).textContent = tmpicon4.dataset.id!;
 }
 
-function showID() {
-  const iconarr = document.querySelectorAll('.icon');
-  iconarr.forEach(e => {
-    e.textContent = (e as HTMLLIElement).dataset.id!;
-  });
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// function showID() {
+//   const iconarr = document.querySelectorAll('.icon');
+//   iconarr.forEach(e => {
+//     e.textContent = (e as HTMLLIElement).dataset.id!;
+//   });
 
-  const panelarr = document.querySelectorAll('.mac-panel');
-  panelarr.forEach(e => {
-    const content = e.querySelector('.mac-panel-program');
-    content!.textContent = (e as HTMLDivElement).dataset.id!;
-  });
-}
+//   const panelarr = document.querySelectorAll('.mac-panel');
+//   panelarr.forEach(e => {
+//     const content = e.querySelector('.mac-panel-program');
+//     content!.textContent = (e as HTMLDivElement).dataset.id!;
+//   });
+// }
 
 function addSelect() {
   const select = document.createElement('select');
