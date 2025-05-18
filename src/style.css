@@ -36,7 +36,10 @@
     }
   }
   .icon {
-    @apply flex flex-col items-center justify-center w-[70px] h-[70px] rounded-[23px] shadow-md bg-white cursor-pointer hover:opacity-75 transition-opacity hover:transition-opacity relative;
+    @apply flex flex-col items-center justify-center w-[70px] h-[70px] rounded-[23px] shadow-md bg-white cursor-pointer relative opacity-100;
+    .icon-cover {
+      @apply w-full h-full bg-black rounded-[23px] opacity-0 hover:opacity-15 transition-opacity hover:transition-opacity;
+    }
   }
   .icon.active {
     @apply after:content-["."] after:text-[36px] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-6;
