@@ -8,7 +8,7 @@ export default defineConfig({
         index: 'index.html', // 기본 index.html
         mac: 'src/pages/mac.html',
         card: 'src/pages/card.html',
-        'doddi-game': 'src/pages/doddi-game.html',
+        'doodi-game': 'src/pages/doodi-game.html',
 
         'calendar-widget': 'src/components/calendar-widget.html',
         'clock-widget': 'src/components/clock-widget.html',
