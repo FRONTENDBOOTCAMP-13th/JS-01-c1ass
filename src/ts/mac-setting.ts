@@ -1,6 +1,7 @@
 import { default as size_arr } from './mac-screen-size.ts';
 import { iconBar } from './icon-bar.ts';
 import { insertIcon } from './mac-panel-manager.ts';
+import { programIDSet, programID } from '../programID.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // import { panelContainer } from './mac-panel-container.ts';
 
@@ -26,21 +27,32 @@ addRemoveIconBtn();
 // body?.addEventListener('click', showID);
 
 function setInitIcon() {
-  iconCounter++;
-  const tmpicon1 = iconBar.createIcon(0, iconCounter.toString());
-  insertIcon(tmpicon1);
+  if (programIDSet.has(programID[0].pid)) {
+    iconCounter++;
+    const tmpicon1 = iconBar.createIcon(0, programID[0].pid);
+    insertIcon(tmpicon1);
+  }
   // (tmpicon1 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
-  iconCounter++;
-  const tmpicon2 = iconBar.createIcon(0, iconCounter.toString());
-  insertIcon(tmpicon2);
+
+  if (programIDSet.has(programID[1].pid)) {
+    iconCounter++;
+    const tmpicon2 = iconBar.createIcon(0, programID[1].pid);
+    insertIcon(tmpicon2);
+  }
   // (tmpicon2 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
-  iconCounter++;
-  const tmpicon3 = iconBar.createIcon(0, iconCounter.toString());
-  insertIcon(tmpicon3);
+
+  if (programIDSet.has(programID[2].pid)) {
+    iconCounter++;
+    const tmpicon3 = iconBar.createIcon(0, programID[2].pid);
+    insertIcon(tmpicon3);
+  }
   // (tmpicon3 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
-  iconCounter++;
-  const tmpicon4 = iconBar.createIcon(0, iconCounter.toString());
-  insertIcon(tmpicon4);
+
+  if (programIDSet.has(programID[3].pid)) {
+    iconCounter++;
+    const tmpicon4 = iconBar.createIcon(0, programID[3].pid);
+    insertIcon(tmpicon4);
+  }
   // (tmpicon4 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
   // (tmpicon1 as HTMLElement).textContent = tmpicon1.dataset.id!;
   // (tmpicon2 as HTMLElement).textContent = tmpicon2.dataset.id!;

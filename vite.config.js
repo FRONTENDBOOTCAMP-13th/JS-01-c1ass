@@ -23,10 +23,7 @@ export default defineConfig({
         'doodi-gamepage': 'src/components/doodi-game/doodi-gamepage.html',
         'doodi-interface': 'src/components/doodi-game/doodi-interface.html',
 
-        // list: 'src/pages/todo/list.html', // 추가 HTML 파일
-        // regist: 'src/pages/todo/regist.html', // 추가 HTML 파일
-        // info: 'src/pages/todo/info.html', // 추가 HTML 파일
-        // 필요한 다른 HTML 파일을 여기에 추가
+        notfound: 'src/pages/notfound.html',
       },
     },
   },

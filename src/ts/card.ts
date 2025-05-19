@@ -49,7 +49,9 @@ const cardItems: Item[] = [
   { name: '브르르 브르르 파타핌', rarity: 'SSR', rate: 5, images: `${cardImgPath}/ssr/brr.svg`, audio: `${cardAudioPath}/brr` },
   { name: '침판지니 바나니니', rarity: 'SSR', rate: 5, images: `${cardImgPath}/ssr/banana.svg`, audio: `${cardAudioPath}/banana` },
 ];
-
+// document.addEventListener('click', () => {
+//   window.parent.postMessage('iframeClicked', 'card');
+// });
 // 초기 로드 시 localStorage에서 티켓 수량 불러오기
 const ticketQuantity = document.querySelector('#ticket-quantity');
 if (ticketQuantity) {
