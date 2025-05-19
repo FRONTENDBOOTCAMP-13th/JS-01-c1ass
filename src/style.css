@@ -149,4 +149,18 @@
   .card-front {
     transform: rotateY(180deg);
   }
+
+  /* 위젯 드래그 애니메이션 */
+  .drop-animation {
+    animation: dropScale 0.3s ease forwards;
+  }
+
+  @keyframes dropScale {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 }
