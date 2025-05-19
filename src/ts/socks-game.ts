@@ -11,6 +11,8 @@ const socksItems = [
   { img: '/asserts/socks-game/socks-list/socks4.png', title: '털을 달면 귀여울거라 생각했지만\n 큰 오산이었던 양말.', anal: '계획한 느낌은 아닌데 괜히 기억에 남는 하루가 될 지도!\n오늘만 P로 살아보는 건 어떤가용?', purchase: 'https://wear.jp/item/3687866/' },
   { img: '/asserts/socks-game/socks-list/socks5.png', title: '털을 달면 귀여울거라 생각했지만\n 큰 오산이었던 양말.', anal: '계획한 느낌은 아닌데 괜히 기억에 남는 하루가 될 지도!\n오늘만 P로 살아보는 건 어떤가용?', purchase: 'https://wear.jp/item/3687866/' },
 ];
+const allImagesToPreload = [...bgImages, ...socksItems.map(sock => sock.img)];
+preloadImages(allImagesToPreload);
 
 // ✅ 이미 보여준 양말 인덱스 추적용 배열
 let usedSocks: number[] = [];
@@ -113,3 +115,11 @@ document.addEventListener('click', event => {
   // 이 외의 영역 클릭 시 draw 숨김
   draw.classList.add('hidden');
 });
+
+// 이미지 프리로드
+function preloadImages(urls: string[]) {
+  urls.forEach(url => {
+    const img = new Image();
+    img.src = url;
+  });
+}
