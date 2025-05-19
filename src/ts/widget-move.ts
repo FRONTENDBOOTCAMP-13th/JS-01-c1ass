@@ -52,7 +52,6 @@ function getGridPosition(e: DragEvent): { col: number; row: number } | null {
   const rect = container.getBoundingClientRect();
 
   // 위젯의 크기 계산
-  const colSpan = parseInt(draggedElement.dataset.col || '1');
   const rowSpan = parseInt(draggedElement.dataset.row || '1');
 
   // 마우스의 절대 위치에서 컨테이너의 위치를 빼서 상대 위치 계산
