@@ -108,6 +108,9 @@
       }
       .mac-panel-program {
         @apply p-4 bg-gray-100 rounded-b-2xl h-[calc(100%_-_32px)];
+        .mac-panel-cover {
+          @apply absolute w-full h-[calc(100%_-_32px)] left-0 bottom-0;
+        }
       }
     }
   }
@@ -119,6 +122,12 @@
   }
   .icon.active {
     @apply after:content-["."] after:text-[36px] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-6;
+  }
+  .oncover {
+    @apply visible;
+  }
+  .outcover {
+    @apply invisible;
   }
 
   /* 카드게임 css */
@@ -164,4 +173,3 @@
     }
   }
 }
-

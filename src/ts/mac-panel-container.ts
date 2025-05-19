@@ -46,6 +46,8 @@ const panelContainer: MacPanelContainer = {
     // mac_panel_inner_program.src = 'https://quokkadocs.netlify.app/';
     mac_panel_inner_program.classList.add('w-full', 'h-full');
     mac_panel_inner_program.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups allow-forms');
+    const mac_panel_cover = document.createElement('div');
+    mac_panel_cover.classList.add('mac-panel-cover');
 
     mac_panel_overlay.appendChild(mac_panel_content);
     mac_panel_content.appendChild(mac_panel_header);
@@ -57,6 +59,19 @@ const panelContainer: MacPanelContainer = {
     mac_panel_header_left.appendChild(minimize_mac_panel);
     mac_panel_header_left.appendChild(full_mac_panel);
     mac_panel_program.appendChild(mac_panel_inner_program);
+    mac_panel_program.appendChild(mac_panel_cover);
+    mac_panel_cover.addEventListener('click', () => {
+      const panels = document.querySelectorAll('li.mac-panel') as NodeListOf<HTMLElement>;
+      Array.from(panels).forEach(e => {
+        if ((e as HTMLElement).dataset.id !== id) {
+          e.querySelector('.mac-panel-cover')?.classList.add('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.remove('outcover');
+        } else {
+          e.querySelector('.mac-panel-cover')?.classList.remove('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.add('outcover');
+        }
+      });
+    });
 
     close_mac_panel.addEventListener('click', () => {
       const icon = document.querySelector(`li.icon[data-id="${id}"]`);
@@ -66,6 +81,16 @@ const panelContainer: MacPanelContainer = {
         targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
         targetContent.style.zIndex = targetPanel.dataset.zIndex;
       }
+      const panels = document.querySelectorAll('li.mac-panel') as NodeListOf<HTMLElement>;
+      Array.from(panels).forEach(e => {
+        if ((e as HTMLElement).dataset.id !== id) {
+          e.querySelector('.mac-panel-cover')?.classList.add('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.remove('outcover');
+        } else {
+          e.querySelector('.mac-panel-cover')?.classList.remove('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.add('outcover');
+        }
+      });
       if (icon) {
         const containerRect = container?.getBoundingClientRect();
         const rect = icon.getBoundingClientRect();
@@ -141,6 +166,16 @@ const panelContainer: MacPanelContainer = {
         targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
         targetContent.style.zIndex = targetPanel.dataset.zIndex;
       }
+      const panels = document.querySelectorAll('li.mac-panel') as NodeListOf<HTMLElement>;
+      Array.from(panels).forEach(e => {
+        if ((e as HTMLElement).dataset.id !== id) {
+          e.querySelector('.mac-panel-cover')?.classList.add('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.remove('outcover');
+        } else {
+          e.querySelector('.mac-panel-cover')?.classList.remove('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.add('outcover');
+        }
+      });
     });
     close_mac_panel.addEventListener('mousedown', event => {
       event.stopPropagation();
@@ -184,6 +219,16 @@ const panelContainer: MacPanelContainer = {
         targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
         targetContent.style.zIndex = targetPanel.dataset.zIndex;
       }
+      const panels = document.querySelectorAll('li.mac-panel') as NodeListOf<HTMLElement>;
+      Array.from(panels).forEach(e => {
+        if ((e as HTMLElement).dataset.id !== id) {
+          e.querySelector('.mac-panel-cover')?.classList.add('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.remove('outcover');
+        } else {
+          e.querySelector('.mac-panel-cover')?.classList.remove('oncover');
+          e.querySelector('.mac-panel-cover')?.classList.add('outcover');
+        }
+      });
     });
 
     return mac_panel_overlay;
