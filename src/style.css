@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Pretendard Variable';
+  --font-sans: 'Pretendard Variable', 'sans-serif';
 }
 
 /* doodi-game: 두더지 등장하는 애니메이션 */
@@ -79,21 +79,12 @@
   animation: floatFade 0.7s ease-out;
 }
 
-/* doodi-game: 배경이미지 (수정 예정) */
-#game-container {
-  width: 100%;
-  background-image: url('../public/asserts/doodi-game/etc/soil_square.svg'); /* 이미지 경로 */
-  background-size: cover; /* 꽉 채우기 */
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
 @layer components {
   /* 맥패널css */
   .mac-panel-overlay {
     @apply pointer-events-auto z-101;
     .mac-panel-content {
-      @apply bg-white rounded-2xl shadow-2xl w-2xl absolute;
+      @apply bg-white rounded-2xl shadow-2xl w-2xl absolute h-108;
       .mac-panel-header {
         @apply grid grid-cols-3 items-center h-8 rounded-t-2xl bg-white dark:bg-[#4A4C4E];
         .mac-panel-header-left {
@@ -116,7 +107,7 @@
         }
       }
       .mac-panel-program {
-        @apply p-4 bg-gray-100 rounded-b-2xl h-100;
+        @apply p-4 bg-gray-100 rounded-b-2xl h-[calc(100%_-_32px)];
       }
     }
   }
@@ -158,6 +149,19 @@
   .card-front {
     transform: rotateY(180deg);
   }
+
+  /* 위젯 드래그 애니메이션 */
+  .drop-animation {
+    animation: dropScale 0.3s ease forwards;
+  }
+
+  @keyframes dropScale {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 }
 
-/* doodi-game: 두더지 등장하는 애니메이션 */

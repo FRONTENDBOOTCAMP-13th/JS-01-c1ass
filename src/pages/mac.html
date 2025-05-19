@@ -11,13 +11,16 @@
     <script type="module" src="/src/ts/icon-bar.ts"></script>
     <script type="module" src="/src/ts/mac-panel-container.ts"></script>
     <script type="module" src="/src/ts/mac-panel-manager.ts"></script>
+    <script type="module" src="/src/ts/widget-move.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
     <!-- scroll 막는 ts -->
     <script type="module" src="/src/ts/mac-no-scroll.ts"></script>
     <!-- dev할 때만 쓰일 여러 가지 기능을 넣은 ts -->
     <script type="module" src="/src/ts/mac-setting.ts"></script>
     <title>Mac</title>
   </head>
-  <body class="overflow-hidden no-scroll flex justify-center items-center pt-10 select-none">
+  <body class="font-sans overflow-hidden no-scroll flex justify-center items-center pt-10 select-none">
     <div class="mac">
       <div class="shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
         <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] bg-cover rounded-[15px]">
@@ -42,22 +45,23 @@
             <div class="blank-widget w-full h-full"></div>
             <div class="blank-widget w-full h-full"></div>
             <div class="blank-widget w-full h-full"></div>
-            <div class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] dark:bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1">
+            <div draggable="true" class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] dark:bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1">
               <img class="col-start-1 row-start-1 place-self-center" src="/public/asserts/clock-widget/pan.svg" alt="" />
               <div class="relative w-full h-full col-start-1 row-start-1 second-niddle-div place-self-center">
-                <img class="absolute top-[8px] left-[49.2px]" src="/public/asserts/clock-widget/second-niddle.svg" alt="" />
+                <img draggable="false" class="absolute top-[8px] left-[49.2px]" src="/public/asserts/clock-widget/second-niddle.svg" alt="" />
               </div>
               <div class="relative w-full h-full col-start-1 row-start-1 minute-niddle-div place-self-center">
                 <img class="absolute top-[11px] left-[48.7px]" src="/public/asserts/clock-widget/minute-niddle.svg" alt="" />
               </div>
               <div class="relative w-full h-full col-start-1 row-start-1 hour-niddle-div place-self-center">
-                <img class="absolute top-[27px] left-[48.2px]" src="/public/asserts/clock-widget/hour-niddle.svg" alt="" />
+                <img draggable="false" class="absolute top-[27px] left-[48.2px]" src="/public/asserts/clock-widget/hour-niddle.svg" alt="" />
               </div>
-              <img class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
+              <img draggable="false" class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
             </div>
             <div class="blank-widget w-full h-full"></div>
             <div class="blank-widget w-full h-full"></div>
-            <div class="w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col">
+            <!-- 달력 위젯 -->
+            <div draggable="true" class="w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col">
               <div class="day-name dark:text-white text-[1rem] font-semibold h-[1.25rem]"></div>
               <div class="day-number mt-0 p-0 dark:text-white text-6xl font-bold h-[3.4375rem]"></div>
             </div>
@@ -71,8 +75,8 @@
             <div class="blank-widget w-full h-full"></div>
             <div class="blank-widget w-full h-full"></div>
             <div class="blank-widget w-full h-full"></div>
-            <div class="col-span-2 overflow-hidden text-white weather-widget1 w-55 h-25 py-4 pl-[10px] pr-[17px] bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center">
-              <img class="object-contain h-full weather-status-img" src="/public/asserts/weather-widget/clear.svg" alt="" />
+            <div draggable="true" class="col-span-2 overflow-hidden text-white weather-widget1 w-55 h-25 py-4 pl-[10px] pr-[17px] bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center">
+              <img draggable="false" class="object-contain h-full weather-status-img" src="/public/asserts/weather-widget/clear.svg" alt="" />
               <div class="flex flex-col items-end gap-1">
                 <div class="leading-[32px] temperature text-[32px] after:content-['°C']">26</div>
                 <div class="leading-[12px] weather-status text-[12px]">맑음</div>
@@ -90,11 +94,12 @@
             <div class="blank-widget w-full h-full"></div>
             <div class="blank-widget w-full h-full"></div>
             <div class="blank-widget w-full h-full"></div>
-            <div class="col-span-2 w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white dark:bg-[#1B1B1D] dark:text-white">
+            <!-- 메모 위젯 -->
+            <div draggable="true" class="col-span-2 w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white dark:bg-gradient-to-b dark:text-white dark:from-[#000000] dark:to-[#000000]">
               <!-- 헤더(yellow) -->
               <div class="flex w-full h-7 bg-gradient-to-b from-[#FFE855] to-[#FFB115] rounded-t-[1.4375rem] px-[1.125rem] items-center">
                 <button type="button" class="flex items-center cursor-pointer gap-1.5 pt-[.0313rem] active:opacity-50">
-                  <img src="../../public/asserts/memo-widget/folder.svg" width="12" height="12" class="pb-[.0313rem]" alt="폴더 모양 아이콘" />
+                  <img draggable="false" src="../../public/asserts/memo-widget/folder.svg" width="12" height="12" class="pb-[.0313rem]" alt="폴더 모양 아이콘" />
                   <span class="text-[.75rem] text-white font-normal">메모</span>
                 </button>
               </div>

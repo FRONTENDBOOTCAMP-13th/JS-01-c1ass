@@ -1,4 +1,5 @@
 import { iconBar } from './icon-bar.ts';
+import { programIDSet, programID } from '../programID.ts';
 const container = document.querySelector('#mac-panel-container');
 
 interface MacPanelContainer {
@@ -31,6 +32,20 @@ const panelContainer: MacPanelContainer = {
     minimize_mac_panel.classList.add('minimize-mac-panel');
     const full_mac_panel = document.createElement('div');
     full_mac_panel.classList.add('full-mac-panel');
+    const mac_panel_inner_program = document.createElement('iframe');
+    // mac_panel_inner_program.src = '/src/pages/card.html';
+    if (programIDSet.has(id)) {
+      for (let i = 0; i < programID.length; i++) {
+        if (programID[i].pid === id) {
+          mac_panel_inner_program.src = programID[i].fileURL;
+          break;
+        }
+      }
+    } else mac_panel_inner_program.src = '/src/pages/notfound.html';
+    // mac_panel_inner_program.src = 'https://papago.naver.com/';
+    // mac_panel_inner_program.src = 'https://quokkadocs.netlify.app/';
+    mac_panel_inner_program.classList.add('w-full', 'h-full');
+    mac_panel_inner_program.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups allow-forms');
 
     mac_panel_overlay.appendChild(mac_panel_content);
     mac_panel_content.appendChild(mac_panel_header);
@@ -41,6 +56,7 @@ const panelContainer: MacPanelContainer = {
     mac_panel_header_left.appendChild(close_mac_panel);
     mac_panel_header_left.appendChild(minimize_mac_panel);
     mac_panel_header_left.appendChild(full_mac_panel);
+    mac_panel_program.appendChild(mac_panel_inner_program);
 
     close_mac_panel.addEventListener('click', () => {
       const icon = document.querySelector(`li.icon[data-id="${id}"]`);
@@ -56,7 +72,7 @@ const panelContainer: MacPanelContainer = {
 
         mac_panel_content.style.position = 'absolute';
         mac_panel_content.style.transition = 'all 0.3s ease-out';
-        mac_panel_program.style.transition = 'all 0.3s ease-out';
+        // mac_panel_program.style.transition = 'all 0.3s ease-out';
 
         requestAnimationFrame(() => {
           mac_panel_content.style.position = '';
@@ -94,7 +110,7 @@ const panelContainer: MacPanelContainer = {
 
         mac_panel_content.style.position = 'absolute';
         mac_panel_content.style.transition = 'all 0.3s ease-out';
-        mac_panel_program.style.transition = 'all 0.3s ease-out';
+        // mac_panel_program.style.transition = 'all 0.3s ease-out';
         targetPanel.classList.add('pointer-events-none');
 
         requestAnimationFrame(() => {

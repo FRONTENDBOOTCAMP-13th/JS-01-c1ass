@@ -4,6 +4,12 @@ const container = document.querySelector('#mac-panel-container');
 // const icon_bar = document.querySelector('#icon-bar');
 // const icon_arr = icon_bar?.querySelectorAll('.icon');
 
+// window.addEventListener('message', e => {
+//   if (e.data === 'iframeClicked') {
+//     console.log('iframe 안에서 클릭됨');
+//   }
+// });
+
 function insertIcon(icon: HTMLLIElement) {
   icon.addEventListener('click', () => {
     const iconId = icon.dataset.id!;
@@ -40,7 +46,7 @@ function insertIcon(icon: HTMLLIElement) {
           targetContent.style.opacity = '0';
           targetProgram.style.height = rect.height - 32 + 'px';
           targetContent.style.transition = 'all 0.3s ease-out';
-          targetProgram.style.transition = 'all 0.3s ease-out';
+          // targetProgram.style.transition = 'all 0.3s ease-out';
 
           requestAnimationFrame(() => {
             targetContent.style.position = '';
@@ -89,7 +95,7 @@ function openPanel(id: string) {
     content.style.opacity = '0';
     program.style.height = rect.height - 32 + 'px';
     content.style.transition = 'all 0.3s ease-out';
-    program.style.transition = 'all 0.3s ease-out';
+    // program.style.transition = 'all 0.01s ease-out';
     container?.appendChild(mac_panel_overlay);
 
     requestAnimationFrame(() => {
