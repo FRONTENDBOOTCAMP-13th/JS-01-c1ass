@@ -2,12 +2,14 @@ import { default as size_arr } from './mac-screen-size.ts';
 import { iconBar } from './icon-bar.ts';
 import { insertIcon } from './mac-panel-manager.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// import { panelContainer } from './mac-panel-container.ts';
+
 const body = document.querySelector('body');
 const mac = document.querySelector('.mac') as HTMLDivElement;
 const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
 const mac_bottom = document.querySelector('.mac-bottom') as HTMLDivElement;
 const blank_widget_arr = document.querySelectorAll('.blank-widget');
-const icon_bar = document.querySelector('#icon-bar');
+// const icon_bar = document.querySelector('#icon-bar');
 const icon_color_arr = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#E3BAFF', '#FFCCE5', '#CCE5FF', '#D5FFCC', '#FFF0BA', '#FFCBA4', '#CBA4FF'];
 
 let iconCounter = 0;
@@ -16,48 +18,49 @@ setInitIcon();
 addSelect();
 paintBlankWidgets();
 addBlankWidgetToggle();
-paintIconColorful();
+// paintIconColorful();
 addBodyDragToggle();
 addCreateIconBtn();
 addRemoveIconBtn();
 
-body?.addEventListener('click', showID);
+// body?.addEventListener('click', showID);
 
 function setInitIcon() {
   iconCounter++;
   const tmpicon1 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon1);
-  (tmpicon1 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon1 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
   iconCounter++;
   const tmpicon2 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon2);
-  (tmpicon2 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon2 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
   iconCounter++;
   const tmpicon3 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon3);
-  (tmpicon3 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon3 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
   iconCounter++;
   const tmpicon4 = iconBar.createIcon(0, iconCounter.toString());
   insertIcon(tmpicon4);
-  (tmpicon4 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
-  (tmpicon1 as HTMLElement).textContent = tmpicon1.dataset.id!;
-  (tmpicon2 as HTMLElement).textContent = tmpicon2.dataset.id!;
-  (tmpicon3 as HTMLElement).textContent = tmpicon3.dataset.id!;
-  (tmpicon4 as HTMLElement).textContent = tmpicon4.dataset.id!;
+  // (tmpicon4 as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+  // (tmpicon1 as HTMLElement).textContent = tmpicon1.dataset.id!;
+  // (tmpicon2 as HTMLElement).textContent = tmpicon2.dataset.id!;
+  // (tmpicon3 as HTMLElement).textContent = tmpicon3.dataset.id!;
+  // (tmpicon4 as HTMLElement).textContent = tmpicon4.dataset.id!;
 }
 
-function showID() {
-  const iconarr = document.querySelectorAll('.icon');
-  iconarr.forEach(e => {
-    e.textContent = (e as HTMLLIElement).dataset.id!;
-  });
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// function showID() {
+//   const iconarr = document.querySelectorAll('.icon');
+//   iconarr.forEach(e => {
+//     e.textContent = (e as HTMLLIElement).dataset.id!;
+//   });
 
-  const panelarr = document.querySelectorAll('.mac-panel');
-  panelarr.forEach(e => {
-    const content = e.querySelector('.mac-panel-program');
-    content!.textContent = (e as HTMLDivElement).dataset.id!;
-  });
-}
+//   const panelarr = document.querySelectorAll('.mac-panel');
+//   panelarr.forEach(e => {
+//     const content = e.querySelector('.mac-panel-program');
+//     content!.textContent = (e as HTMLDivElement).dataset.id!;
+//   });
+// }
 
 function addSelect() {
   const select = document.createElement('select');
@@ -120,12 +123,13 @@ function addBlankWidgetToggle() {
     });
   });
 }
-function paintIconColorful() {
-  const icon_arr = icon_bar!.querySelectorAll('.icon');
-  Array.from(icon_arr).forEach((e, i) => {
-    (e as HTMLLIElement).style.backgroundColor = icon_color_arr[i];
-  });
-}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// function paintIconColorful() {
+//   const icon_arr = icon_bar!.querySelectorAll('.icon');
+//   Array.from(icon_arr).forEach((e, i) => {
+//     (e as HTMLLIElement).style.backgroundColor = icon_color_arr[i];
+//   });
+// }
 
 function addBodyDragToggle() {
   const btn = document.createElement('button');

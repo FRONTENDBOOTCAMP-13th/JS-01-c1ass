@@ -43,17 +43,88 @@ const panelContainer: MacPanelContainer = {
     mac_panel_header_left.appendChild(full_mac_panel);
 
     close_mac_panel.addEventListener('click', () => {
-      this.removePanel(id);
-      iconBar.setIconStatus(id, 0);
+      const icon = document.querySelector(`li.icon[data-id="${id}"]`);
+      const targetPanel = document.querySelector(`li.mac-panel[data-id="${id}"]`) as HTMLElement;
+      if (targetPanel) {
+        const targetContent = targetPanel.querySelector('.mac-panel-content') as HTMLElement;
+        targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
+        targetContent.style.zIndex = targetPanel.dataset.zIndex;
+      }
+      if (icon) {
+        const containerRect = container?.getBoundingClientRect();
+        const rect = icon.getBoundingClientRect();
+
+        mac_panel_content.style.position = 'absolute';
+        mac_panel_content.style.transition = 'all 0.3s ease-out';
+        mac_panel_program.style.transition = 'all 0.3s ease-out';
+
+        requestAnimationFrame(() => {
+          mac_panel_content.style.position = '';
+          mac_panel_content.style.width = rect.width + 'px';
+          mac_panel_content.style.height = rect.height + 'px';
+          mac_panel_content.style.left = rect.left - containerRect!.left + 'px';
+          mac_panel_content.style.top = rect.top - containerRect!.top + 'px';
+          mac_panel_content.style.opacity = '0';
+          mac_panel_program.style.height = rect.height - 32 + 'px';
+          setTimeout(() => {
+            mac_panel_content.style.transition = '';
+          }, 310);
+        });
+      }
+      setTimeout(() => {
+        this.removePanel(id);
+        iconBar.setIconStatus(id, 0);
+      }, 340);
     });
     minimize_mac_panel.addEventListener('click', () => {
-      this.setStatus(id, 3);
-      iconBar.setIconStatus(id, 3);
+      const icon = document.querySelector(`li.icon[data-id="${id}"]`);
+      const targetPanel = document.querySelector(`li.mac-panel[data-id="${id}"]`) as HTMLElement;
+      if (targetPanel) {
+        const targetContent = targetPanel.querySelector('.mac-panel-content') as HTMLElement;
+        targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
+        targetContent.style.zIndex = targetPanel.dataset.zIndex;
+      }
+      if (icon) {
+        const containerRect = container?.getBoundingClientRect();
+        const rect = icon.getBoundingClientRect();
+        if (targetPanel.dataset!.status !== '2') {
+          mac_panel_content.dataset.left = mac_panel_content.style.left;
+          mac_panel_content.dataset.top = mac_panel_content.style.top;
+        }
+
+        mac_panel_content.style.position = 'absolute';
+        mac_panel_content.style.transition = 'all 0.3s ease-out';
+        mac_panel_program.style.transition = 'all 0.3s ease-out';
+        targetPanel.classList.add('pointer-events-none');
+
+        requestAnimationFrame(() => {
+          mac_panel_content.style.position = '';
+          mac_panel_content.style.width = rect.width + 'px';
+          mac_panel_content.style.height = rect.height + 'px';
+          mac_panel_content.style.left = rect.left - containerRect!.left + 'px';
+          mac_panel_content.style.top = rect.top - containerRect!.top + 'px';
+          mac_panel_content.style.opacity = '0';
+          mac_panel_program.style.height = rect.height - 32 + 'px';
+          setTimeout(() => {
+            mac_panel_content.style.transition = '';
+          }, 310);
+        });
+      }
+      setTimeout(() => {
+        this.setStatus(id, 3);
+        iconBar.setIconStatus(id, 3);
+      }, 340);
     });
     full_mac_panel.addEventListener('click', () => {
       const currentStatus = mac_panel_overlay.dataset.status;
       const newStatus = currentStatus === '1' ? 2 : 1;
       this.setStatus(id, newStatus);
+      const targetPanel = document.querySelector(`li.mac-panel[data-id="${id}"]`) as HTMLElement;
+      if (targetPanel) {
+        const targetContent = targetPanel.querySelector('.mac-panel-content') as HTMLElement;
+        targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
+        targetContent.style.zIndex = targetPanel.dataset.zIndex;
+      }
     });
     close_mac_panel.addEventListener('mousedown', event => {
       event.stopPropagation();
@@ -87,6 +158,17 @@ const panelContainer: MacPanelContainer = {
     mac_panel_overlay.dataset.id = id;
     mac_panel_overlay.dataset.status = status.toString();
     mac_panel_overlay.dataset.zIndex = this.getNextZIndex().toString();
+    mac_panel_content.style.zIndex = mac_panel_overlay.dataset.zIndex;
+    mac_panel_title.textContent = id;
+
+    mac_panel_program.addEventListener('mousedown', () => {
+      const targetPanel = document.querySelector(`li.mac-panel[data-id="${id}"]`) as HTMLElement;
+      if (targetPanel) {
+        const targetContent = targetPanel.querySelector('.mac-panel-content') as HTMLElement;
+        targetPanel.dataset!.zIndex = panelContainer.getNextZIndex().toString();
+        targetContent.style.zIndex = targetPanel.dataset.zIndex;
+      }
+    });
 
     return mac_panel_overlay;
   },
@@ -108,17 +190,14 @@ const panelContainer: MacPanelContainer = {
       }, 300);
     } else if (status === 2) {
       content.classList.add('transition-all');
+      if (!(content.classList.contains('w-full') && content.classList.contains('h-full'))) {
+        content.dataset.left = content.style.left;
+        content.dataset.top = content.style.top;
+      }
       content.classList.add('w-full', 'h-full');
-      content.dataset.left = content.style.left;
-      content.dataset.top = content.style.top;
       content.style.left = '0';
       content.style.top = '0';
     } else if (status === 3) {
-      content.classList.remove('w-full', 'h-full');
-      content.style.left = content.dataset.left as string;
-      content.style.top = content.dataset.top as string;
-      content.dataset.left = '';
-      content.dataset.top = '';
       setTimeout(() => {
         content.classList.remove('transition-all');
       }, 300);
@@ -150,7 +229,8 @@ function makeDraggable(modal: HTMLElement, handle: HTMLElement): void {
   handle.addEventListener('mousedown', (e: MouseEvent) => {
     // fullscreen 상태면 드래그 금지
     if (modal.parentElement?.dataset.status === '2') return;
-
+    modal.parentElement!.dataset!.zIndex = panelContainer.getNextZIndex().toString();
+    modal.style.zIndex = modal.parentElement!.dataset.zIndex;
     isDragging = true;
     const rect = modal.getBoundingClientRect();
     offsetX = e.clientX - rect.left;
