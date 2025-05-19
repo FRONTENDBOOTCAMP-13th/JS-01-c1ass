@@ -1,4 +1,5 @@
 import { iconBar } from './icon-bar.ts';
+import { programIDSet, programID } from '../programID.ts';
 const container = document.querySelector('#mac-panel-container');
 
 interface MacPanelContainer {
@@ -33,7 +34,14 @@ const panelContainer: MacPanelContainer = {
     full_mac_panel.classList.add('full-mac-panel');
     const mac_panel_inner_program = document.createElement('iframe');
     // mac_panel_inner_program.src = '/src/pages/card.html';
-    mac_panel_inner_program.src = '/src/pages/doodi-game.html';
+    if (programIDSet.has(id)) {
+      for (let i = 0; i < programID.length; i++) {
+        if (programID[i].pid === id) {
+          mac_panel_inner_program.src = programID[i].fileURL;
+          break;
+        }
+      }
+    } else mac_panel_inner_program.src = '/src/pages/notfound.html';
     // mac_panel_inner_program.src = 'https://papago.naver.com/';
     // mac_panel_inner_program.src = 'https://quokkadocs.netlify.app/';
     mac_panel_inner_program.classList.add('w-full', 'h-full');

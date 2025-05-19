@@ -1,3 +1,4 @@
+import { programIDSet, programID } from '../programID.ts';
 const icon_bar = document.querySelector('#icon-bar');
 
 interface Iconbar {
@@ -10,7 +11,14 @@ interface Iconbar {
 const iconBar: Iconbar = {
   createIcon(status: number, id: string): HTMLLIElement {
     const iconLi = document.createElement('li');
-    iconLi.style.backgroundImage = `url('/asserts/mac/${id}.png')`;
+    if (programIDSet.has(id)) {
+      for (let i = 0; i < programID.length; i++) {
+        if (programID[i].pid === id) {
+          iconLi.style.backgroundImage = `url('${programID[i].imageURL}')`;
+          break;
+        }
+      }
+    } else iconLi.style.backgroundImage = `url('/asserts/mac/notfound.png')`;
     iconLi.style.backgroundRepeat = 'no-repeat';
     iconLi.style.backgroundPosition = 'center';
     iconLi.style.backgroundSize = 'cover';
