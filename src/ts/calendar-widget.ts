@@ -18,7 +18,8 @@ function updateDateInfo() {
 function nextMidnightUpdate() {
   const now = new Date();
   const tomorrow = new Date(now);
-  tomorrow.setHours(24, 0, 0, 0); // 다음 자정(00:00:00)
+  tomorrow.setDate(now.getDate() + 1); // 내일로 날짜 이동
+  tomorrow.setHours(0, 0, 0, 0); // 00:00:00.000 자정 정렬
 
   // 다음 자정까지의 시간 계산
   const delay = tomorrow.getTime() - now.getTime();
