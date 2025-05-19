@@ -48,14 +48,14 @@ const cardItems: Item[] = [
 ];
 
 // 초기 로드 시 localStorage에서 티켓 수량 불러오기
-let ticketQuantity = document.querySelector('#ticket-quantity');
+const ticketQuantity = document.querySelector('#ticket-quantity');
 if (ticketQuantity) {
   const savedTicket = localStorage.getItem('ticket');
   ticketQuantity.textContent = savedTicket ?? '10';
 }
 
-let clickCount = document.querySelector('#click-count');
-let getTicketButton = document.querySelector('#get-ticket-button');
+const clickCount = document.querySelector('#click-count');
+const getTicketButton = document.querySelector('#get-ticket-button');
 
 if (clickCount && getTicketButton && ticketQuantity) {
   const savedClick = localStorage.getItem('clickCount');
@@ -116,10 +116,27 @@ drawButton?.addEventListener('click', () => {
 
     card.innerHTML = `
       <div class="card-inner w-full h-full">
-        <img src="/asserts/card/img/card-back.svg" class="card-back w-full h-full object-cover rounded-lg" />
+        <img src="/asserts/card/img/card-back.svg" tabindex="0" class="card-back w-full h-full object-cover rounded-lg" />
         <img src="${item.images}" class="card-front w-full h-full object-cover rounded-lg" />
       </div>
     `;
+
+    const cardBack = card.querySelector('.card-back') as HTMLElement;
+
+    // 마우스 클릭으로 뒤집기
+    card.addEventListener('click', () => {
+      card.classList.add('flipped');
+      handleCardClick(card, item);
+    });
+
+    // 키보드 Enter/Space로 뒤집기
+    cardBack?.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault(); // 스페이스바의 기본 스크롤 방지
+        card.classList.add('flipped');
+        handleCardClick(card, item);
+      }
+    });
 
     card.addEventListener('click', () => {
       card.classList.add('flipped');
@@ -190,9 +207,14 @@ function handleCardClick(card: HTMLElement, item: Item) {
 
 // 컬렉션 보기 버튼 처리
 const viewCollectionButton = document.querySelector('#view-collection');
+const collectionModal = document.getElementById('collection-modal');
+const closeModalButton = document.getElementById('close-modal');
+const collectionGrid = document.getElementById('collection-grid');
 
 viewCollectionButton?.addEventListener('click', () => {
-  const list = collection
+  if (!collectionGrid || !collectionModal) return;
+
+  collectionGrid.innerHTML = collection
     .map(item => {
       let borderClass = '';
       if (item.rarity === 'N') borderClass = 'border-[#9D7E69] border-4';
@@ -209,21 +231,20 @@ viewCollectionButton?.addEventListener('click', () => {
     })
     .join('');
 
-  // 컬렉션 모달
-  const modal = document.createElement('div');
-  modal.className = 'close-modal fixed inset-0 flex justify-center items-center bg-white/50';
-  modal.innerHTML = `
-    <div class="bg-white p-6 w-[70%] h-[70%] overflow-y-auto rounded-2xl shadow-2xl border-1 border-gray-200">
-      <div class="flex justify-between items-center">
-        <h2 class="text-xl font-bold mb-5">내 컬렉션</h2>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">${list}</div>
-    </div>
-  `;
+  collectionModal?.classList.remove('hidden');
+  collectionModal?.classList.add('flex');
+});
 
-  document.body.appendChild(modal);
+closeModalButton?.addEventListener('click', () => {
+  collectionModal?.classList.remove('flex');
+  collectionModal?.classList.add('hidden');
+});
 
-  document.querySelector('.close-modal')?.addEventListener('click', () => {
-    modal.remove();
-  });
+// 바깥 영역 클릭 시 모달 닫기
+collectionModal?.addEventListener('click', event => {
+  // 클릭한 대상이 모달 그 자체(배경)일 때만 닫기
+  if (event.target === collectionModal) {
+    collectionModal.classList.remove('flex');
+    collectionModal.classList.add('hidden');
+  }
 });
