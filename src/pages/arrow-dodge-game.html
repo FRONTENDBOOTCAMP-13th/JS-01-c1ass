@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>극한의 화살 피하기!</title>
+    <script type="module" src="/src/main.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+  </head>
+  <body class="m-0 flex flex-col justify-center items-center h-screen bg-[#111] text-[#fff] select-none overflow-hidden">
+    <div id="game-container" class="relative shadow-[0_0_30px_rgba(0,255,255,0.5)] rounded-[5px]">
+      <div id="ui-container" class="w-full flex justify-between py-2.5 px-0 box-border">
+        <div id="scoreBoard" class="text-[1.8em] text-[#ffd700]">점수: 0</div>
+        <div id="difficultyLevel" class="text-[1.2em] text-[#ff6b6b]">난이도: 1</div>
+      </div>
+      <canvas id="gameCanvas" class="border-2 border-[#00ffff] bg-[#001f3f] block"></canvas>
+      <div id="startScreen" class="message-overlay absolute inset-0 bg-[rgba(0,0,0,0.8)] flex flex-col justify-center items-center text-center z-10" style="transition: opacity 0.3s ease-out">
+        <h1 class="text-[3em] mb-[15px] text-[#ff4136]">화살 피하기!</h1>
+        <p class="text-[1.2em] mb-5">키보드 방향키 또는 WASD로 이동</p>
+        <button id="startButton" class="py-2.5 px-5 text-base text-white bg-[#0074d9] border-none rounded-[5px] cursor-pointer hover:bg-[#0056b3]">게임 시작</button>
+      </div>
+      <div id="gameOverMessage" class="message-overlay absolute inset-0 bg-[rgba(0,0,0,0.8)] flex flex-col justify-center items-center text-center z-10 opacity-0 pointer-events-none" style="transition: opacity 0.3s ease-out">
+        <h1 class="text-[3em] mb-[15px] text-[#ff4136]">게임 오버!</h1>
+        <p class="text-[1.2em] mb-5">최종 점수: <span id="finalScore">0</span></p>
+        <button id="restartButton" class="py-2.5 px-5 text-base text-white bg-[#0074d9] border-none rounded-[5px] cursor-pointer hover:bg-[#0056b3]">다시 시작</button>
+      </div>
+    </div>
+
+    <script>
+      console.log('극한의 화살 피하기 (Pure Tailwind Classes) 스크립트 시작');
+
+      window.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded: 게임 설정 시작');
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreBoard = document.getElementById('scoreBoard');
+        const difficultyLevelEl = document.getElementById('difficultyLevel');
+        const uiContainer = document.getElementById('ui-container');
+
+        const startScreenEl = document.getElementById('startScreen');
+        const startButton = document.getElementById('startButton');
+        const gameOverMessageEl = document.getElementById('gameOverMessage');
+        const finalScoreEl = document.getElementById('finalScore');
+        const restartButton = document.getElementById('restartButton');
+
+        const BASE_CANVAS_WIDTH = 1120;
+        const BASE_CANVAS_HEIGHT = 630;
+        let currentCanvasWidth = BASE_CANVAS_WIDTH;
+        let currentCanvasHeight = BASE_CANVAS_HEIGHT;
+
+        function showElement(element) {
+          if (element) {
+            element.style.opacity = '1';
+            element.style.pointerEvents = 'auto';
+            if (element.style.display === 'none') {
+              element.style.display = 'flex';
+            }
+          }
+        }
+        function hideElement(element) {
+          if (element) {
+            element.style.opacity = '0';
+            element.style.pointerEvents = 'none';
+          }
+        }
+
+        function resizeCanvas() {
+          const aspectRatio = BASE_CANVAS_WIDTH / BASE_CANVAS_HEIGHT;
+          let newWidth = window.innerWidth * 0.95;
+          let newHeight = window.innerHeight * 0.85;
+
+          if (newWidth / newHeight > aspectRatio) {
+            newWidth = newHeight * aspectRatio;
+          } else {
+            newHeight = newWidth / aspectRatio;
+          }
+
+          newWidth = Math.min(newWidth, BASE_CANVAS_WIDTH);
+          newHeight = Math.min(newHeight, BASE_CANVAS_HEIGHT);
+          newWidth = Math.max(newWidth, 300);
+          newHeight = Math.max(newHeight, newWidth / aspectRatio);
+
+          if (canvas.width !== Math.floor(newWidth) || canvas.height !== Math.floor(newHeight)) {
+            currentCanvasWidth = Math.floor(newWidth);
+            currentCanvasHeight = Math.floor(newHeight);
+            canvas.width = currentCanvasWidth;
+            canvas.height = currentCanvasHeight;
+            document.getElementById('game-container').style.width = `${currentCanvasWidth}px`;
+            uiContainer.style.maxWidth = `${currentCanvasWidth}px`;
+            console.log(`캔버스 크기 재설정: ${canvas.width}x${canvas.height}`);
+
+            if (typeof initGame === 'function' && (gameStarted || gameOver) && startScreenEl.style.opacity === '0') {
+            } else if (typeof draw === 'function') {
+              if (typeof draw === 'function' && !gameStarted && !gameOver && ctx) draw();
+            }
+          }
+        }
+
+        const playerWidth = 25;
+        const playerHeight = 25;
+        const playerSpeed = 5;
+        const playerColor = '#00FFFF';
+
+        let player = {
+          x: currentCanvasWidth / 2 - playerWidth / 2,
+          y: currentCanvasHeight / 2 - playerHeight / 2,
+          width: playerWidth,
+          height: playerHeight,
+          color: playerColor,
+        };
+
+        let projectiles = [];
+        let score = 0;
+        let gameOver = false;
+        let gameStarted = false;
+        let gameLoopId;
+
+        let difficultyLevel = 1;
+        let projectileBaseSpeed = 2.0;
+        let projectileCurrentSpeed;
+        let projectileSpawnInterval = 80;
+        let maxProjectiles = 4;
+        let frameCount = 0;
+        let lastScoreForDifficultyUpdate = 0;
+
+        function updateDifficultyDisplay() {
+          scoreBoard.textContent = `점수: ${score}`;
+          difficultyLevelEl.textContent = `난이도: ${difficultyLevel}`;
+        }
+
+        function increaseDifficulty() {
+          difficultyLevel++;
+          projectileBaseSpeed += 0.5;
+          if (projectileSpawnInterval > 10) projectileSpawnInterval -= 6;
+          if (maxProjectiles < 30) maxProjectiles += 1;
+          updateDifficultyDisplay();
+        }
+
+        function initGame() {
+          console.log('initGame: 게임 초기화');
+          player.x = currentCanvasWidth / 2 - player.width / 2;
+          player.y = currentCanvasHeight / 2 - player.height / 2;
+          projectiles = [];
+          score = 0;
+          difficultyLevel = 1;
+          projectileBaseSpeed = 2.0;
+          projectileSpawnInterval = 90;
+          maxProjectiles = 3;
+          frameCount = 0;
+          lastScoreForDifficultyUpdate = 0;
+
+          gameOver = false;
+          gameStarted = true;
+
+          updateDifficultyDisplay();
+          hideElement(startScreenEl);
+          hideElement(gameOverMessageEl);
+
+          if (gameLoopId) cancelAnimationFrame(gameLoopId);
+          gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        let keysPressed = {};
+        const validKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 's', 'a', 'd'];
+        document.addEventListener('keydown', e => {
+          const key = e.key.toLowerCase();
+          if (validKeys.includes(key)) keysPressed[key] = true;
+        });
+        document.addEventListener('keyup', e => {
+          const key = e.key.toLowerCase();
+          if (validKeys.includes(key)) keysPressed[key] = false;
+        });
+
+        function spawnProjectile() {
+          if (!gameStarted || gameOver || projectiles.length >= maxProjectiles) return;
+          const width = 10 + Math.random() * 12;
+          const height = 25 + Math.random() * 20;
+          let x, y, vx, vy;
+          projectileCurrentSpeed = projectileBaseSpeed + (Math.random() * 1.5 - 0.75);
+          const side = Math.floor(Math.random() * 4);
+          switch (side) {
+            case 0:
+              x = Math.random() * (currentCanvasWidth - width);
+              y = -height;
+              vx = (Math.random() - 0.5) * projectileCurrentSpeed;
+              vy = projectileCurrentSpeed * (0.7 + Math.random() * 0.6);
+              break;
+            case 1:
+              x = currentCanvasWidth + width;
+              y = Math.random() * (currentCanvasHeight - height);
+              vx = -projectileCurrentSpeed * (0.7 + Math.random() * 0.6);
+              vy = (Math.random() - 0.5) * projectileCurrentSpeed;
+              break;
+            case 2:
+              x = Math.random() * (currentCanvasWidth - width);
+              y = currentCanvasHeight + height;
+              vx = (Math.random() - 0.5) * projectileCurrentSpeed;
+              vy = -projectileCurrentSpeed * (0.7 + Math.random() * 0.6);
+              break;
+            case 3:
+              x = -width;
+              y = Math.random() * (currentCanvasHeight - height);
+              vx = projectileCurrentSpeed * (0.7 + Math.random() * 0.6);
+              vy = (Math.random() - 0.5) * projectileCurrentSpeed;
+              break;
+          }
+          if (player && Math.hypot(x - player.x, y - player.y) < player.width * 4) return;
+          projectiles.push({ x, y, width, height, vx, vy, color: `hsl(${Math.random() * 360}, 80%, 65%)` });
+        }
+
+        function update() {
+          if (gameOver || !gameStarted) return;
+          frameCount++;
+          let moveX = 0;
+          let moveY = 0;
+          if (keysPressed['arrowleft'] || keysPressed['a']) moveX -= 1;
+          if (keysPressed['arrowright'] || keysPressed['d']) moveX += 1;
+          if (keysPressed['arrowup'] || keysPressed['w']) moveY -= 1;
+          if (keysPressed['arrowdown'] || keysPressed['s']) moveY += 1;
+
+          if (moveX !== 0 && moveY !== 0) {
+            const diagonalFactor = Math.sqrt(0.5);
+            player.x += moveX * playerSpeed * diagonalFactor;
+            player.y += moveY * playerSpeed * diagonalFactor;
+          } else {
+            player.x += moveX * playerSpeed;
+            player.y += moveY * playerSpeed;
+          }
+
+          if (player.x < 0) player.x = 0;
+          if (player.x + player.width > currentCanvasWidth) player.x = currentCanvasWidth - player.width;
+          if (player.y < 0) player.y = 0;
+          if (player.y + player.height > currentCanvasHeight) player.y = currentCanvasHeight - player.height;
+
+          if (frameCount % Math.max(5, Math.floor(projectileSpawnInterval)) === 0) spawnProjectile();
+
+          for (let i = projectiles.length - 1; i >= 0; i--) {
+            const p = projectiles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            if (player.x < p.x + p.width && player.x + player.width > p.x && player.y < p.y + p.height && player.y + player.height > p.y) {
+              gameOver = true;
+              gameStarted = false;
+              finalScoreEl.textContent = score;
+              showElement(gameOverMessageEl);
+              console.log('GAME OVER: 발사체 충돌!');
+              break;
+            }
+            const outOfBoundsBuffer = 100;
+            if (p.x + p.width < -outOfBoundsBuffer || p.x > currentCanvasWidth + outOfBoundsBuffer || p.y + p.height < -outOfBoundsBuffer || p.y > currentCanvasHeight + outOfBoundsBuffer) {
+              projectiles.splice(i, 1);
+              score += 10;
+              updateDifficultyDisplay();
+              if (score >= lastScoreForDifficultyUpdate + 30 && score > 0) {
+                increaseDifficulty();
+                lastScoreForDifficultyUpdate += 30;
+              }
+            }
+          }
+        }
+
+        function drawProjectile(p) {
+          if (!ctx) return;
+          ctx.fillStyle = p.color;
+          const centerX = p.x + p.width / 2;
+          const centerY = p.y + p.height / 2;
+          const angle = Math.atan2(p.vy, p.vx);
+          ctx.save();
+          ctx.translate(centerX, centerY);
+          ctx.rotate(angle);
+          const arrowLength = Math.max(p.width, p.height) * 1.2;
+          const arrowWidth = Math.min(p.width, p.height) * 0.8;
+          ctx.beginPath();
+          ctx.rect(-arrowLength / 2, -arrowWidth / 2, arrowLength * 0.7, arrowWidth);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo((arrowLength * 0.7) / 2, 0);
+          ctx.lineTo((arrowLength * 0.7) / 2 - arrowWidth, -arrowWidth * 0.7);
+          ctx.lineTo((arrowLength * 0.7) / 2 - arrowWidth, arrowWidth * 0.7);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
+
+        function draw() {
+          if (!ctx) return;
+          ctx.fillStyle = '#001f3f'; // 캔버스 배경색 직접 지정
+          ctx.fillRect(0, 0, currentCanvasWidth, currentCanvasHeight);
+
+          if (gameStarted && player) {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+          }
+
+          projectiles.forEach(p => drawProjectile(p));
+        }
+
+        function gameLoop() {
+          if (!gameStarted && !gameOver) {
+          } else if (gameOver) {
+            console.log('Game Over 상태. 루프 중단됨.');
+            if (gameLoopId) cancelAnimationFrame(gameLoopId);
+            gameLoopId = undefined;
+            return;
+          } else if (gameStarted && !gameOver) {
+            update();
+            draw();
+          }
+          if (!gameOver) gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        startButton.addEventListener('click', () => {
+          console.log('Start button clicked.');
+          if (!gameStarted) {
+            initGame();
+          }
+        });
+        restartButton.addEventListener('click', () => {
+          console.log('Restart button clicked.');
+          if (gameOver || !gameStarted) {
+            initGame();
+          }
+        });
+
+        resizeCanvas();
+        showElement(startScreenEl);
+        hideElement(gameOverMessageEl); // 초기에는 게임오버 메시지 숨김
+
+        console.log('모든 함수 정의 완료. 시작 버튼 대기 중.');
+        gameLoopId = requestAnimationFrame(gameLoop);
+      });
+    </script>
+  </body>
+</html>
