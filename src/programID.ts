@@ -8,7 +8,7 @@ interface program {
 const doodi: program = {
   pid: 'doodi',
   imageURL: '/asserts/mac/doodi.png',
-  fileURL: '/src/components/doodi-game/doodi-all.html',
+  fileURL: '/src/pages/doodi-all.html',
 };
 const card: program = {
   pid: 'card',
