@@ -4,7 +4,6 @@
   --font-sans: 'Pretendard Variable';
 }
 
-
 /* doodi-game: 두더지 등장하는 애니메이션 */
 @keyframes moleBounce {
   0% {
@@ -89,6 +88,43 @@
   background-repeat: no-repeat;
 }
 
+/* socks-game: 종이 흔드는 애니메이션 */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-5px);
+  }
+  20% {
+    transform: translateX(5px);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(5px);
+  }
+  70% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  90% {
+    transform: translateX(-5px);
+  }
+}
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
 
 @layer components {
   /* 맥패널css */
