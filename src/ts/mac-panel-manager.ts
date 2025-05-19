@@ -4,6 +4,12 @@ const container = document.querySelector('#mac-panel-container');
 // const icon_bar = document.querySelector('#icon-bar');
 // const icon_arr = icon_bar?.querySelectorAll('.icon');
 
+// window.addEventListener('message', e => {
+//   if (e.data === 'iframeClicked') {
+//     console.log('iframe 안에서 클릭됨');
+//   }
+// });
+
 function insertIcon(icon: HTMLLIElement) {
   icon.addEventListener('click', () => {
     const iconId = icon.dataset.id!;
