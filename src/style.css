@@ -1,9 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Pretendard Variable';
+  --font-sans: 'Pretendard Variable', 'sans-serif';
 }
-
 
 /* doodi-game: 두더지 등장하는 애니메이션 */
 @keyframes moleBounce {
@@ -88,7 +87,6 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-
 
 @layer components {
   /* 맥패널css */
