@@ -10,7 +10,10 @@ interface Iconbar {
 const iconBar: Iconbar = {
   createIcon(status: number, id: string): HTMLLIElement {
     const iconLi = document.createElement('li');
-    iconLi.style.backgroundImage = "url('/asserts/mac/icon-test.png')";
+    iconLi.style.backgroundImage = `url('/asserts/mac/${id}.png')`;
+    iconLi.style.backgroundRepeat = 'no-repeat';
+    iconLi.style.backgroundPosition = 'center';
+    iconLi.style.backgroundSize = 'cover';
     iconLi.classList.add('icon');
     iconLi.dataset.status = status.toString();
     iconLi.dataset.id = id;

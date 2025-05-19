@@ -40,7 +40,7 @@ function insertIcon(icon: HTMLLIElement) {
           targetContent.style.opacity = '0';
           targetProgram.style.height = rect.height - 32 + 'px';
           targetContent.style.transition = 'all 0.3s ease-out';
-          targetProgram.style.transition = 'all 0.3s ease-out';
+          // targetProgram.style.transition = 'all 0.3s ease-out';
 
           requestAnimationFrame(() => {
             targetContent.style.position = '';
@@ -89,7 +89,7 @@ function openPanel(id: string) {
     content.style.opacity = '0';
     program.style.height = rect.height - 32 + 'px';
     content.style.transition = 'all 0.3s ease-out';
-    program.style.transition = 'all 0.3s ease-out';
+    // program.style.transition = 'all 0.01s ease-out';
     container?.appendChild(mac_panel_overlay);
 
     requestAnimationFrame(() => {
