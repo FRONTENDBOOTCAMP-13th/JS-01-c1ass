@@ -4,7 +4,6 @@
   --font-sans: 'Pretendard Variable';
 }
 
-
 /* doodi-game: 두더지 등장하는 애니메이션 */
 @keyframes moleBounce {
   0% {
@@ -89,7 +88,6 @@
   background-repeat: no-repeat;
 }
 
-
 @layer components {
   /* 맥패널css */
   .mac-panel-overlay {
@@ -161,3 +159,5 @@
     transform: rotateY(180deg);
   }
 }
+
+/* doodi-game: 두더지 등장하는 애니메이션 */
