@@ -9,6 +9,16 @@
   </head>
   <body>
     <main class="bg-[url('../../public/asserts/card/img/card-bg.svg')] bg-center w-full h-screen flex">
+      <!-- 컬렉션 모달 -->
+      <div id="collection-modal" class="fixed inset-0 justify-center items-center bg-white/50 hidden">
+        <div class="bg-white p-6 w-[70%] h-[70%] overflow-y-auto rounded-2xl shadow-2xl border-1 border-gray-200">
+          <div class="flex justify-between items-center mb-5">
+            <h2 class="text-xl font-bold">내 컬렉션</h2>
+            <button id="close-modal" class="text-gray-600 hover:text-black text-xl font-black cursor-pointer">&times;</button>
+          </div>
+          <div id="collection-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 font-semibold"></div>
+        </div>
+      </div>
       <section class="w-full h-full flex-[7] flex justify-center items-center">
         <div id="card-container" class="flex justify-center items-center gap-4"></div>
       </section>
