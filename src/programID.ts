@@ -16,16 +16,14 @@ const card: program = {
   fileURL: '/src/pages/card.html',
 };
 const arrow: program = {
-  pid: 'arrow',
-  imageURL: '/asserts/mac/arrow.png',
-  fileURL: '#void', // 수정
+  pid: 'arrow-dodge',
+  imageURL: '/asserts/mac/arrow-dodge.png',
+  fileURL: '/src/pages/arrow-dodge-game.html',
 };
 programIDSet.add(doodi.pid);
 programIDSet.add(card.pid);
 programIDSet.add(arrow.pid);
-programIDSet.add(card.pid);
 programID.push(doodi);
 programID.push(card);
 programID.push(arrow);
-programID.push(card);
 export { programIDSet, programID };
