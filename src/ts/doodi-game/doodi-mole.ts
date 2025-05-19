@@ -7,7 +7,7 @@ let previousIndex = -1;
 let previousRow = -1;
 let previousCol = -1;
 
-const startSound = new Audio('/public/asserts/doodi-game/etc/start.aac');
+const startSound = new Audio('/asserts/doodi-game/etc/start.aac');
 startSound.volume = 0.8;
 
 // 같은 행에서 두더지가 나오지 않도록
@@ -91,7 +91,7 @@ export function showMole() {
   const isYellow = Math.random() < 0.8;
 
   const moleImg = document.createElement('img');
-  moleImg.src = isYellow ? '/public/asserts/doodi-game/dooka_hole.webp' : '/public/asserts/doodi-game/doodi_hole.webp';
+  moleImg.src = isYellow ? '/asserts/doodi-game/dooka_hole.webp' : '/asserts/doodi-game/doodi_hole.webp';
   moleImg.alt = isYellow ? 'Yellow Mole' : 'Red Mole';
   moleImg.className = 'w-full h-full object-cover';
 
@@ -207,7 +207,7 @@ document.querySelectorAll('.mole-btn').forEach(el => {
 
 // hitSound() 연속 재생 위한 오디오 생성 함수
 function playHitSound() {
-  const sound = new Audio('/public/asserts/doodi-game/etc/beep.aac');
+  const sound = new Audio('/asserts/doodi-game/etc/beep.aac');
   sound.volume = 0.07;
   sound.play().catch(console.error);
 }

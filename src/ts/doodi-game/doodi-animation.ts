@@ -1,7 +1,7 @@
 // 커서 바꾸는 함수
 
-const cursorImgSrc = '/public/asserts/doodi-game/etc/toy_hammer.png';
-const cursorClickImgSrc = '/public/asserts/doodi-game/etc/toy_hammer-hurt.png';
+const cursorImgSrc = '/asserts/doodi-game/etc/toy_hammer.png';
+const cursorClickImgSrc = '/asserts/doodi-game/etc/toy_hammer-hurt.png';
 
 // 이미지 요소 만들기
 const fakeCursor = document.createElement('img');
