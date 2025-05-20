@@ -52,6 +52,36 @@ const cardItems: Item[] = [
 // document.addEventListener('click', () => {
 //   window.parent.postMessage('iframeClicked', 'card');
 // });
+
+// 이미지 미리 불러오기
+const preloadImages = () => {
+  cardItems.forEach(item => {
+    const img = new Image();
+    img.src = item.images;
+  });
+
+  const cardBack = new Image();
+  cardBack.src = '/asserts/card/img/card-back.svg';
+};
+
+// 오디오 미리 불러오기
+const preloadAudio = () => {
+  const audioSet = new Set<string>(); // 중복 방지용
+
+  cardItems.forEach(item => {
+    if (item.audio && !audioSet.has(item.audio)) {
+      const audio = new Audio();
+      audio.src = item.audio + '.mp3';
+      audio.load();
+      audioSet.add(item.audio);
+    }
+  });
+};
+
+// 실행
+preloadImages();
+preloadAudio();
+
 // 초기 로드 시 localStorage에서 티켓 수량 불러오기
 const ticketQuantity = document.querySelector('#ticket-quantity');
 if (ticketQuantity) {
@@ -253,3 +283,49 @@ collectionModal?.addEventListener('click', event => {
     collectionModal.classList.add('hidden');
   }
 });
+
+// 로딩창 요소
+const loadingScreen = document.getElementById('loading-screen');
+
+// 이미지 로딩을 Promise로 감싸기
+function loadImage(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => resolve();
+    img.onerror = () => reject(new Error(`Image load error: ${src}`));
+  });
+}
+
+// 오디오 로딩을 Promise로 감싸기
+function loadAudio(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const audio = new Audio();
+    audio.src = src + '.mp3';
+    audio.oncanplaythrough = () => resolve();
+    audio.onerror = () => reject(new Error(`Audio load error: ${src}`));
+    audio.load();
+  });
+}
+
+// 모든 이미지, 오디오 미리 불러오기 함수
+async function preloadAssets() {
+  try {
+    const imagePromises = cardItems.map(item => loadImage(item.images));
+    const audioPromises = cardItems.filter(item => item.audio).map(item => loadAudio(item.audio!));
+
+    // 로딩창 보이기
+    loadingScreen?.classList.remove('hidden');
+
+    // 모두 기다리기
+    await Promise.all([...imagePromises, ...audioPromises]);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    // 로딩창 숨기기
+    loadingScreen?.classList.add('hidden');
+  }
+}
+
+// 호출
+preloadAssets();
