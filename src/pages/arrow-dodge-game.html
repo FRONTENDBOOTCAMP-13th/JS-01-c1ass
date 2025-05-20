@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>극한의 화살 피하기!</title>
+    <link rel="stylesheet" href="/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/arrow-dodge-game.ts"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="m-0 flex flex-col justify-center items-center h-screen bg-[#111] text-[#fff] font-['Pretendard_Variable',_sans-serif] select-none overflow-hidden">
+    <div id="game-container" class="relative shadow-[0_0_30px_rgba(0,255,255,0.5)] rounded-[5px]">
+      <div id="ui-container" class="w-full flex justify-between py-2.5 px-0 box-border bg-black">
+        <div id="scoreBoard" class="text-[1.8em] text-[#ffd700]">점수: 0</div>
+        <div id="difficultyLevel" class="text-[1.2em] text-[#ff6b6b]">난이도: 1</div>
+      </div>
+      <canvas id="gameCanvas" class="border-2 border-[#00ffff] bg-[#001f3f] block"></canvas>
+      <div id="startScreen" class="message-overlay absolute inset-0 bg-[rgba(0,0,0,0.8)] flex flex-col justify-center items-center text-center z-[10]">
+        <h1 class="text-[3em] mb-[15px] text-[#ff4136]">화살 피하기!</h1>
+        <p class="text-[1.2em] mb-5">키보드 방향키 또는 WASD로 이동</p>
+        <button id="startButton" class="py-[10px] px-[20px] text-[1em] text-white bg-[#0074d9] border-none rounded-[5px] cursor-pointer hover:bg-[#0056b3] transition-colors duration-200">게임 시작</button>
+      </div>
+      <div id="gameOverMessage" class="message-overlay absolute inset-0 bg-[rgba(0,0,0,0.8)] flex flex-col justify-center items-center text-center z-[10] opacity-0 pointer-events-none">
+        <h1 class="text-[3em] mb-[15px] text-[#ff4136]">게임 오버!</h1>
+        <p class="text-[1.2em] mb-5">최종 점수: <span id="finalScore">0</span></p>
+        <button id="restartButton" class="py-[10px] px-[20px] text-[1em] text-white bg-[#0074d9] border-none rounded-[5px] cursor-pointer hover:bg-[#0056b3] transition-colors duration-200">다시 시작</button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -14,48 +14,53 @@ interface CollectionItem {
   images: string;
 }
 
+const cardImgPath: string = '/asserts/card/img';
+const cardAudioPath: string = '/asserts/card/audio';
+
 // 카드 오브젝트
 const cardItems: Item[] = [
-  { name: '활', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/bow.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '검', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/sword.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '방패', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/shield.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '창', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/spear.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '거미', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/spider.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '모닝스타', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/morning-star.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '지팡이', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/cane.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '들개', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/dog.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '유령', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/ghost.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '쥐', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/rat.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '마법소녀 뾰로롱', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/wand.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '똥! ㅋㅋ', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/poo.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '고블린', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/goblin.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '달팽이', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/snail.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '버섯', rarity: 'N', rate: 70, images: '../../public/asserts/card/img/n/mushroom.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '드래곤', rarity: 'R', rate: 15, images: '../../public/asserts/card/img/r/dragon.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '유니콘', rarity: 'R', rate: 15, images: '../../public/asserts/card/img/r/unicorn.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '사신', rarity: 'R', rate: 15, images: '../../public/asserts/card/img/r/reaper.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '곰', rarity: 'R', rate: 15, images: '../../public/asserts/card/img/r/bear.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '오크', rarity: 'R', rate: 15, images: '../../public/asserts/card/img/r/ork.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '공듀', rarity: 'SR', rate: 10, images: '../../public/asserts/card/img/sr/princess.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '베리 하츄핑', rarity: 'SR', rate: 10, images: '../../public/asserts/card/img/sr/ping.svg', audio: '../../public/asserts/card/audio/ping' },
-  { name: '신데렐라', rarity: 'SR', rate: 10, images: '../../public/asserts/card/img/sr/cinderella.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '엘사', rarity: 'SR', rate: 10, images: '../../public/asserts/card/img/sr/elsa.svg', audio: '../../public/asserts/card/audio/card-draw' },
-  { name: '봄바르디로 크로코딜로', rarity: 'SSR', rate: 5, images: '../../public/asserts/card/img/ssr/croco.svg', audio: '../../public/asserts/card/audio/croco' },
-  { name: '트랄랄레로 트랄랄라', rarity: 'SSR', rate: 5, images: '../../public/asserts/card/img/ssr/trala.svg', audio: '../../public/asserts/card/audio/trala' },
-  { name: '퉁 퉁 퉁 퉁 퉁 퉁 퉁 퉁 퉁 사후르', rarity: 'SSR', rate: 5, images: '../../public/asserts/card/img/ssr/tung.svg', audio: '../../public/asserts/card/audio/tung' },
-  { name: '브르르 브르르 파타핌', rarity: 'SSR', rate: 5, images: '../../public/asserts/card/img/ssr/brr.svg', audio: '../../public/asserts/card/audio/brr' },
-  { name: '침판지니 바나니니', rarity: 'SSR', rate: 5, images: '../../public/asserts/card/img/ssr/banana.svg', audio: '../../public/asserts/card/audio/banana' },
+  { name: '활', rarity: 'N', rate: 70, images: `${cardImgPath}/n/bow.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '검', rarity: 'N', rate: 70, images: `${cardImgPath}/n/sword.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '방패', rarity: 'N', rate: 70, images: `${cardImgPath}/n/shield.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '창', rarity: 'N', rate: 70, images: `${cardImgPath}/n/spear.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '거미', rarity: 'N', rate: 70, images: `${cardImgPath}/n/spider.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '모닝스타', rarity: 'N', rate: 70, images: `${cardImgPath}/n/morning-star.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '지팡이', rarity: 'N', rate: 70, images: `${cardImgPath}/n/cane.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '들개', rarity: 'N', rate: 70, images: `${cardImgPath}/n/dog.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '유령', rarity: 'N', rate: 70, images: `${cardImgPath}/n/ghost.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '쥐', rarity: 'N', rate: 70, images: `${cardImgPath}/n/rat.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '마법소녀 뾰로롱', rarity: 'N', rate: 70, images: `${cardImgPath}/n/wand.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '똥! ㅋㅋ', rarity: 'N', rate: 70, images: `${cardImgPath}/n/poo.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '고블린', rarity: 'N', rate: 70, images: `${cardImgPath}/n/goblin.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '달팽이', rarity: 'N', rate: 70, images: `${cardImgPath}/n/snail.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '버섯', rarity: 'N', rate: 70, images: `${cardImgPath}/n/mushroom.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '드래곤', rarity: 'R', rate: 15, images: `${cardImgPath}/r/dragon.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '유니콘', rarity: 'R', rate: 15, images: `${cardImgPath}/r/unicorn.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '사신', rarity: 'R', rate: 15, images: `${cardImgPath}/r/reaper.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '곰', rarity: 'R', rate: 15, images: `${cardImgPath}/r/bear.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '오크', rarity: 'R', rate: 15, images: `${cardImgPath}/r/ork.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '공듀', rarity: 'SR', rate: 10, images: `${cardImgPath}/sr/princess.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '베리 하츄핑', rarity: 'SR', rate: 10, images: `${cardImgPath}/sr/ping.svg`, audio: `${cardAudioPath}/ping` },
+  { name: '신데렐라', rarity: 'SR', rate: 10, images: `${cardImgPath}/sr/cinderella.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '엘사', rarity: 'SR', rate: 10, images: `${cardImgPath}/sr/elsa.svg`, audio: `${cardAudioPath}/card-draw` },
+  { name: '봄바르디로 크로코딜로', rarity: 'SSR', rate: 5, images: `${cardImgPath}/ssr/croco.svg`, audio: `${cardAudioPath}/croco` },
+  { name: '트랄랄레로 트랄랄라', rarity: 'SSR', rate: 5, images: `${cardImgPath}/ssr/trala.svg`, audio: `${cardAudioPath}/trala` },
+  { name: '퉁 퉁 퉁 퉁 퉁 퉁 퉁 퉁 퉁 사후르', rarity: 'SSR', rate: 5, images: `${cardImgPath}/ssr/tung.svg`, audio: `${cardAudioPath}/tung` },
+  { name: '브르르 브르르 파타핌', rarity: 'SSR', rate: 5, images: `${cardImgPath}/ssr/brr.svg`, audio: `${cardAudioPath}/brr` },
+  { name: '침판지니 바나니니', rarity: 'SSR', rate: 5, images: `${cardImgPath}/ssr/banana.svg`, audio: `${cardAudioPath}/banana` },
 ];
-
+// document.addEventListener('click', () => {
+//   window.parent.postMessage('iframeClicked', 'card');
+// });
 // 초기 로드 시 localStorage에서 티켓 수량 불러오기
-let ticketQuantity = document.querySelector('#ticket-quantity');
+const ticketQuantity = document.querySelector('#ticket-quantity');
 if (ticketQuantity) {
   const savedTicket = localStorage.getItem('ticket');
   ticketQuantity.textContent = savedTicket ?? '10';
 }
 
-let clickCount = document.querySelector('#click-count');
-let getTicketButton = document.querySelector('#get-ticket-button');
+const clickCount = document.querySelector('#click-count');
+const getTicketButton = document.querySelector('#get-ticket-button');
 
 if (clickCount && getTicketButton && ticketQuantity) {
   const savedClick = localStorage.getItem('clickCount');
@@ -116,10 +121,27 @@ drawButton?.addEventListener('click', () => {
 
     card.innerHTML = `
       <div class="card-inner w-full h-full">
-        <img src="/asserts/card/img/card-back.svg" class="card-back w-full h-full object-cover rounded-lg" />
+        <img src="/asserts/card/img/card-back.svg" tabindex="0" class="card-back w-full h-full object-cover rounded-lg" />
         <img src="${item.images}" class="card-front w-full h-full object-cover rounded-lg" />
       </div>
     `;
+
+    const cardBack = card.querySelector('.card-back') as HTMLElement;
+
+    // 마우스 클릭으로 뒤집기
+    card.addEventListener('click', () => {
+      card.classList.add('flipped');
+      handleCardClick(card, item);
+    });
+
+    // 키보드 Enter/Space로 뒤집기
+    cardBack?.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault(); // 스페이스바의 기본 스크롤 방지
+        card.classList.add('flipped');
+        handleCardClick(card, item);
+      }
+    });
 
     card.addEventListener('click', () => {
       card.classList.add('flipped');
@@ -190,9 +212,14 @@ function handleCardClick(card: HTMLElement, item: Item) {
 
 // 컬렉션 보기 버튼 처리
 const viewCollectionButton = document.querySelector('#view-collection');
+const collectionModal = document.getElementById('collection-modal');
+const closeModalButton = document.getElementById('close-modal');
+const collectionGrid = document.getElementById('collection-grid');
 
 viewCollectionButton?.addEventListener('click', () => {
-  const list = collection
+  if (!collectionGrid || !collectionModal) return;
+
+  collectionGrid.innerHTML = collection
     .map(item => {
       let borderClass = '';
       if (item.rarity === 'N') borderClass = 'border-[#9D7E69] border-4';
@@ -209,21 +236,20 @@ viewCollectionButton?.addEventListener('click', () => {
     })
     .join('');
 
-  // 컬렉션 모달
-  const modal = document.createElement('div');
-  modal.className = 'close-modal fixed inset-0 flex justify-center items-center bg-white/50';
-  modal.innerHTML = `
-    <div class="bg-white p-6 w-[70%] h-[70%] overflow-y-auto rounded-2xl shadow-2xl border-1 border-gray-200">
-      <div class="flex justify-between items-center">
-        <h2 class="text-xl font-bold mb-5">내 컬렉션</h2>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">${list}</div>
-    </div>
-  `;
+  collectionModal?.classList.remove('hidden');
+  collectionModal?.classList.add('flex');
+});
 
-  document.body.appendChild(modal);
+closeModalButton?.addEventListener('click', () => {
+  collectionModal?.classList.remove('flex');
+  collectionModal?.classList.add('hidden');
+});
 
-  document.querySelector('.close-modal')?.addEventListener('click', () => {
-    modal.remove();
-  });
+// 바깥 영역 클릭 시 모달 닫기
+collectionModal?.addEventListener('click', event => {
+  // 클릭한 대상이 모달 그 자체(배경)일 때만 닫기
+  if (event.target === collectionModal) {
+    collectionModal.classList.remove('flex');
+    collectionModal.classList.add('hidden');
+  }
 });

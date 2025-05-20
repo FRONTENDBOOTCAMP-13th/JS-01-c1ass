@@ -1,17 +1,17 @@
 // clock-widget 요소
-const clock_widget_arr = document.querySelectorAll('.clock-widget-component');
+// const clock_widget_arr = document.querySelectorAll('.clock-widget-component');
 
 // clock-widget의 시침, 분침, 초침 요소를 담을 배열
-const hour_niddle_arr: Array<HTMLElement> = [];
-const minute_niddle_arr: Array<HTMLElement> = [];
-const second_niddle_arr: Array<HTMLElement> = [];
+// const hour_niddle_arr: Array<HTMLElement> = [];
+// const minute_niddle_arr: Array<HTMLElement> = [];
+// const second_niddle_arr: Array<HTMLElement> = [];
 
 // clock-widget의 시침, 분침, 초침 요소를 push
-Array.from(clock_widget_arr).forEach(element => {
-  hour_niddle_arr.push(element.querySelector('.hour-niddle-div') as HTMLElement);
-  minute_niddle_arr.push(element.querySelector('.minute-niddle-div') as HTMLElement);
-  second_niddle_arr.push(element.querySelector('.second-niddle-div') as HTMLElement);
-});
+// Array.from(clock_widget_arr).forEach(element => {
+//   hour_niddle_arr.push(element.querySelector('.hour-niddle-div') as HTMLElement);
+//   minute_niddle_arr.push(element.querySelector('.minute-niddle-div') as HTMLElement);
+//   second_niddle_arr.push(element.querySelector('.second-niddle-div') as HTMLElement);
+// });
 
 // rotateNiddle 초기 호출
 rotateNiddle();
@@ -30,6 +30,11 @@ function rotateNiddle() {
 
 // 시침 돌리는 함수
 function rotateHourNiddle(time: number): void {
+  const clock_widget_arr = document.querySelectorAll('.clock-widget-component');
+  const hour_niddle_arr: Array<HTMLElement> = [];
+  Array.from(clock_widget_arr).forEach(element => {
+    hour_niddle_arr.push(element.querySelector('.hour-niddle-div') as HTMLElement);
+  });
   Array.from(hour_niddle_arr).forEach(element => {
     element!.style.rotate = (time / 120).toString() + 'deg';
   });
@@ -37,6 +42,11 @@ function rotateHourNiddle(time: number): void {
 
 // 분침 돌리는 함수
 function rotateMinuteNiddle(time: number): void {
+  const clock_widget_arr = document.querySelectorAll('.clock-widget-component');
+  const minute_niddle_arr: Array<HTMLElement> = [];
+  Array.from(clock_widget_arr).forEach(element => {
+    minute_niddle_arr.push(element.querySelector('.minute-niddle-div') as HTMLElement);
+  });
   Array.from(minute_niddle_arr).forEach(element => {
     element!.style.rotate = (time / 10).toString() + 'deg';
   });
@@ -44,6 +54,11 @@ function rotateMinuteNiddle(time: number): void {
 
 // 초침 돌리는 함수
 function rotateSecondNiddle(time: number): void {
+  const clock_widget_arr = document.querySelectorAll('.clock-widget-component');
+  const second_niddle_arr: Array<HTMLElement> = [];
+  Array.from(clock_widget_arr).forEach(element => {
+    second_niddle_arr.push(element.querySelector('.second-niddle-div') as HTMLElement);
+  });
   Array.from(second_niddle_arr).forEach(element => {
     element!.style.rotate = (time * 6).toString() + 'deg';
   });

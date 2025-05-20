@@ -1,13 +1,13 @@
 // 두더지 생성 및 제거 함수(효과음), 게임 시작 함수, 레벨 조절 함수, 게임 스타트 구현
 
-import { isGameActive, addTime, minusTime, startTimer, reTimerBar } from './doodi-timer';
+import { isGameActive, minusTime, startTimer, reTimerBar } from './doodi-timer';
 
 const holes = document.querySelectorAll<HTMLDivElement>('.hole');
 let previousIndex = -1;
 let previousRow = -1;
 let previousCol = -1;
 
-const startSound = new Audio('../../../public/asserts/doodi-game/etc/start.aac');
+const startSound = new Audio('/asserts/doodi-game/etc/start.aac');
 startSound.volume = 0.8;
 
 // 같은 행에서 두더지가 나오지 않도록
@@ -49,15 +49,37 @@ export function readyStart() {
 
 export let moleTimeoutId: ReturnType<typeof setTimeout>;
 
+// 특정 구멍(hole)에 두더지가 이미 있는지 확인하는 함수
+function isMolePresent(index: number): boolean {
+  const hole = holes[index];
+  if (!hole) return false;
+  return hole.querySelector('.mole') !== null; // mole 클래스가 있으면 이미 두더지 있음
+}
+
 // 두더지 생성 및 삭제 함수 (애니메이션, 효과음) + 포인트 증감 함수
 export function showMole() {
   if (!isGameActive()) return;
 
   const candidateIndices = Array.from(holes.entries())
-    .filter(([index]) => index !== previousIndex && getRow(index) !== previousRow && getCol(index) !== previousCol)
+    // 이전 위치, 행, 열 조건 + 두더지 중복 생성 방지 조건 추가
+    .filter(
+      ([index]) => index !== previousIndex && getRow(index) !== previousRow && getCol(index) !== previousCol && !isMolePresent(index), // 이미 두더지 있는 곳은 제외
+    )
     .map(([index]) => index);
 
-  const finalIndices = candidateIndices.length > 0 ? candidateIndices : [...holes.keys()];
+  // 만약 후보가 없다면(모두 두더지가 있으면) 전체 구멍 중 두더지 없는 곳만 다시 필터
+  let finalIndices = candidateIndices;
+  if (finalIndices.length === 0) {
+    finalIndices = Array.from(holes.entries())
+      .filter(([index]) => !isMolePresent(index))
+      .map(([index]) => index);
+  }
+
+  // 만약 그래도 후보가 없다면(전부 두더지 있으면) 아무거나 뽑음 (안 좋은 상황이지만 fallback)
+  if (finalIndices.length === 0) {
+    finalIndices = [...holes.keys()];
+  }
+
   const randomIndex = finalIndices[Math.floor(Math.random() * finalIndices.length)];
   const currentRow = getRow(randomIndex);
   const currentCol = getCol(randomIndex);
@@ -69,7 +91,7 @@ export function showMole() {
   const isYellow = Math.random() < 0.8;
 
   const moleImg = document.createElement('img');
-  moleImg.src = isYellow ? '../../../public/asserts/doodi-game/dooka_hole.webp' : '../../../public/asserts/doodi-game/doodi_hole.webp';
+  moleImg.src = isYellow ? '/asserts/doodi-game/dooka_hole.webp' : '/asserts/doodi-game/doodi_hole.webp';
   moleImg.alt = isYellow ? 'Yellow Mole' : 'Red Mole';
   moleImg.className = 'w-full h-full object-cover';
 
@@ -103,8 +125,6 @@ export function showMole() {
 
       if (isYellow) {
         currentScore += 100;
-        currentTime += 1;
-        addTime(1);
       } else {
         currentScore -= 100;
         currentTime -= 1;
@@ -159,7 +179,7 @@ function getMoleDelay(score: number): number {
   if (score >= 400) {
     return 1500;
   }
-  return 2500; // 기본 값
+  return 2000; // 기본 값
 }
 
 // 게임설명(howto) 페이지 인터랙션: bounce 애니메이션 & audio 이펙트
@@ -187,7 +207,7 @@ document.querySelectorAll('.mole-btn').forEach(el => {
 
 // hitSound() 연속 재생 위한 오디오 생성 함수
 function playHitSound() {
-  const sound = new Audio('../../../public/asserts/doodi-game/etc/beep.aac');
+  const sound = new Audio('/asserts/doodi-game/etc/beep.aac');
   sound.volume = 0.07;
   sound.play().catch(console.error);
 }
