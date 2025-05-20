@@ -13,6 +13,7 @@ cursorDefault.style.position = 'fixed';
 cursorDefault.style.width = '50px';
 cursorDefault.style.pointerEvents = 'none';
 cursorDefault.style.zIndex = '999';
+cursorDefault.style.userSelect = 'none';
 
 const cursorClick = document.createElement('img');
 cursorClick.src = cursorClickImgSrc;
@@ -21,6 +22,7 @@ cursorClick.style.position = 'fixed';
 cursorClick.style.width = '60px';
 cursorClick.style.pointerEvents = 'none';
 cursorClick.style.zIndex = '999';
+cursorClick.style.userSelect = 'none';
 cursorClick.style.opacity = '0'; // 기본은 숨김
 
 // 둘 다 body에 추가
