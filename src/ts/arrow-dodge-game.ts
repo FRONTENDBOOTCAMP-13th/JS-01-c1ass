@@ -1,6 +1,3 @@
-console.log('극한의 화살 피하기 TypeScript 로직 시작');
-
-// 타입 정의
 interface Player {
   x: number;
   y: number;
@@ -24,8 +21,6 @@ interface KeysPressed {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOMContentLoaded: 게임 설정 및 초기화 시작');
-
   // --- HTML 요소 가져오기 ---
   const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement | null;
   const scoreBoard = document.getElementById('scoreBoard') as HTMLDivElement | null;
@@ -41,17 +36,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // --- 필수 요소 확인 ---
   if (!canvas || !scoreBoard || !difficultyLevelEl || !uiContainer || !gameContainer || !startScreenEl || !startButton || !gameOverMessageEl || !finalScoreEl || !restartButton) {
-    console.error('CRITICAL ERROR: 필수 HTML 요소 중 하나 이상을 찾을 수 없습니다. HTML ID를 확인하세요.');
-    alert('게임 실행에 필요한 중요 HTML 요소를 찾을 수 없습니다! 개발자 콘솔을 확인해주세요.');
     return;
   }
   const ctx = canvas.getContext('2d');
   if (!ctx) {
-    console.error('CRITICAL ERROR: 2D 렌더링 컨텍스트를 가져올 수 없습니다.');
-    alert('게임 실행 오류: 캔버스 컨텍스트를 가져올 수 없습니다!');
     return;
   }
-  console.log('모든 필수 HTML 요소 정상적으로 찾음.');
 
   // --- 게임 상수 및 설정 ---
   const BASE_CANVAS_WIDTH: number = 1120;
@@ -127,7 +117,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
       gameContainer!.style.width = `${currentCanvasWidth}px`;
       uiContainer!.style.width = `${currentCanvasWidth}px`;
-      console.log(`캔버스 크기 재설정: ${canvas!.width}x${canvas!.height}`);
 
       if (gameStarted && !gameOver) {
         initGame();
@@ -139,7 +128,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // --- 게임 초기화 ---
   function initGame(): void {
-    console.log('initGame: 게임 초기화 및 시작');
     player = {
       // 플레이어 객체 새로 생성 또는 값 재할당
       x: currentCanvasWidth / 2 - PLAYER_WIDTH / 2,
@@ -166,10 +154,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (gameLoopId) {
       cancelAnimationFrame(gameLoopId);
-      console.log('이전 게임 루프 취소');
     }
     gameLoopId = requestAnimationFrame(gameLoop);
-    console.log('initGame: 새 게임 루프 시작됨. ID:', gameLoopId);
   }
 
   // --- UI 업데이트 ---
@@ -184,7 +170,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (projectileSpawnInterval > 15) projectileSpawnInterval -= 7; // 생성 간격 감소폭 조절
     if (maxProjectiles < 25) maxProjectiles += 1;
     updateDifficultyDisplay();
-    console.log(`난이도 ${difficultyLevel} 상승! 속도기반: ${projectileBaseSpeed.toFixed(1)}, 생성간격: ${projectileSpawnInterval}, 최대 발사체: ${maxProjectiles}`);
   }
 
   // --- 키보드 입력 ---
@@ -243,7 +228,7 @@ window.addEventListener('DOMContentLoaded', () => {
         y = 0;
         vx = 0;
         vy = 0;
-        console.warn('Invalid side in spawnProjectile');
+
         break;
     }
 
@@ -292,7 +277,7 @@ window.addEventListener('DOMContentLoaded', () => {
         gameStarted = false;
         finalScoreEl!.textContent = score.toString();
         showElement(gameOverMessageEl!);
-        console.log('GAME OVER: 발사체 충돌!');
+
         break;
       }
 
@@ -349,8 +334,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!gameStarted && !gameOver) {
       draw();
     } else if (gameOver) {
-      console.log('Game Over 상태. 루프 중단됨.');
-
       return;
     } else if (gameStarted && !gameOver) {
       update();
@@ -369,14 +352,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // --- 이벤트 리스너 연결 ---
   startButton!.addEventListener('click', () => {
-    console.log('Start button clicked.');
     if (!gameStarted) {
       initGame();
     }
   });
   restartButton!.addEventListener('click', () => {
-    console.log('Restart button clicked.');
-    // gameOver 상태이거나, 어떤 이유로든 gameStarted가 false가 되었을 때 재시작
     if (gameOver || !gameStarted) {
       initGame();
     }
@@ -389,6 +369,5 @@ window.addEventListener('DOMContentLoaded', () => {
   showElement(startScreenEl!);
   hideElement(gameOverMessageEl!);
 
-  console.log('모든 함수 정의 완료. 시작 버튼 대기 중.');
   gameLoopId = requestAnimationFrame(gameLoop);
 });
