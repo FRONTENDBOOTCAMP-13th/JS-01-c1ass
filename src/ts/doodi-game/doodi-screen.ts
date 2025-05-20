@@ -65,7 +65,7 @@ function resetGameState() {
   }
 
   // 2) 타이머 초기화
-  const initialTime = 20;
+  const initialTime = 40;
   setTime(initialTime);
   const timerTag = document.getElementById('timer') as HTMLElement;
   if (timerTag) {
