@@ -1,9 +1,14 @@
 const programIDSet = new Set();
 const programID: Array<program> = new Array<program>();
+const widgetIDSet = new Set();
+const widgetID: Array<widget> = new Array<widget>();
 interface program {
   pid: string;
   imageURL: string;
   fileURL: string;
+}
+interface widget {
+  wid: string;
 }
 const doodi: program = {
   pid: 'doodi',
@@ -33,4 +38,23 @@ programID.forEach(e => {
   programIDSet.add(e.pid);
 });
 
-export { programIDSet, programID };
+const clock: widget = {
+  wid: 'clock-widget',
+};
+const weather: widget = {
+  wid: 'weather-widget',
+};
+const memo: widget = {
+  wid: 'memo-widget',
+};
+const calendar: widget = {
+  wid: 'calendar-widget',
+};
+widgetID.push(clock);
+widgetID.push(weather);
+widgetID.push(memo);
+widgetID.push(calendar);
+widgetID.forEach(e => {
+  widgetIDSet.add(e.wid);
+});
+export { programIDSet, programID, widgetIDSet, widgetID };
