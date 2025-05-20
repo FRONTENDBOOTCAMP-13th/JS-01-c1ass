@@ -1,3 +1,36 @@
+// 로드되어야 할 이미지들
+const imageUrls: string[] = ['/asserts/socks-game/label_404.png', '/asserts/socks-game/logo_sockast.png', '/asserts/socks-game/story_eng.png', '/asserts/socks-game/postBox.png', '/asserts/socks-game/check.svg', '/asserts/socks-game/paper-sound.aac', '/asserts/socks-game/paper1.png', '/asserts/socks-game/paper2.png', '/asserts/socks-game/paper3.png', '/asserts/socks-game/paper_package.png', '/asserts/socks-game/socks-list/socks1.png', '/asserts/socks-game/socks-list/socks2.png', '/asserts/socks-game/socks-list/socks3.png', '/asserts/socks-game/socks-list/socks4.png', '/asserts/socks-game/socks-list/socks5.png', '/asserts/socks-game/socks-list/socks6.png', '/asserts/socks-game/socks-list/socks7.png', '/asserts/socks-game/socks-list/socks8.png', '/asserts/socks-game/socks-list/socks9.png', '/asserts/socks-game/socks-list/socks10.png', '/asserts/socks-game/socks-list/socks11.png', '/asserts/socks-game/socks-list/socks12.png', '/asserts/socks-game/socks-list/socks13.png', '/asserts/socks-game/socks-list/socks14.png', '/asserts/socks-game/socks-list/socks15.png', '/asserts/socks-game/socks-list/socks16.png', '/asserts/socks-game/socks-list/socks17.png', '/asserts/socks-game/socks-list/socks18.png', '/asserts/socks-game/socks-list/socks19.png', '/asserts/socks-game/socks-list/socks20.png', '/asserts/socks-game/socks-list/socks21.png', '/asserts/socks-game/socks-list/socks22.png', '/asserts/socks-game/socks-list/socks23.png', '/asserts/socks-game/socks-list/socks24.png', '/asserts/socks-game/socks-list/socks25.png'];
+
+// 이미지 프리로드 함수
+function preloadImages(urls: string[]): Promise<void[]> {
+  return Promise.all(
+    urls.map(url => {
+      return new Promise<void>(resolve => {
+        const img = new Image();
+        img.onload = () => resolve();
+        img.onerror = () => resolve(); // 실패해도 통과
+        img.src = url;
+      });
+    }),
+  );
+}
+
+// 로딩 후 화면전환
+window.addEventListener('DOMContentLoaded', async () => {
+  const loader = document.getElementById('loading-screen');
+  await preloadImages(imageUrls);
+  console.log('이미지 로드 중...');
+
+  // 이미지 다 로딩되면 로딩 화면 제거
+  if (loader) {
+    loader.remove();
+    console.log('로딩에서 벗어남.');
+  }
+
+  // 이제 안전하게 img들을 createElement로 추가해도 렉 없이 바로 뜸!
+});
+
+// 랜덤뽑기
 const drawElement = document.getElementById('draw') as HTMLDivElement;
 const drawContent = document.getElementById('draw-content') as HTMLDivElement;
 const paperSound = new Audio('/asserts/socks-game/paper-sound.aac');
@@ -135,11 +168,3 @@ document.addEventListener('click', event => {
   // 이 외의 영역 클릭 시 draw 숨김
   draw.classList.add('hidden');
 });
-
-// 이미지 프리로드
-function preloadImages(urls: string[]) {
-  urls.forEach(url => {
-    const img = new Image();
-    img.src = url;
-  });
-}
