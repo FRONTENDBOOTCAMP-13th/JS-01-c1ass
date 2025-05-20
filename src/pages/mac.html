@@ -26,8 +26,10 @@
     <script type="module" src="/src/ts/mac-setting.ts"></script>
     <title>Mac</title>
   </head>
-  <body class="font-sans overflow-hidden no-scroll flex justify-center items-center pt-10 select-none">
-    <div class="mac">
+  <body class="font-sans overflow-hidden no-scroll grid grid-cols-[1fr_calc(1200px_+_80px)_1fr] grid-rows-1 h-screen select-none">
+    <div class="mac-entire-bg bg-yellow-300 col-start-1 col-end-4 row-start-1 row-end-2"></div>
+    <div class="mac-left-bg bg-red-300 col-start-1 col-end-2 row-start-1 row-end-2"></div>
+    <div class="mac mt-10 col-start-2 col-end-3 row-start-1 row-end-2">
       <div class="shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
         <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] dark:bg-[url(/public/asserts/mac/mac-screen-base-dark-background-img.png)] bg-cover rounded-[15px]">
           <!-- top-bar -->
@@ -119,5 +121,6 @@
         <img class="h-10 cursor-pointer" src="/public/asserts/mac/apple-logo.webp" alt="" />
       </div>
     </div>
+    <div class="mac-right-bg bg-blue-300 col-start-3 col-end-4 row-start-1 row-end-2"></div>
   </body>
 </html>
