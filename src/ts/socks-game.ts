@@ -14,7 +14,10 @@ const socksItems = [
   { img: '/asserts/socks-game/socks-list/socks7.png', title: '더운데 벗긴 싫어서\n과감히 발등에 구멍 뚫어버린 양말.', anal: '뭐 하나 마음에 안 들긴 하는데,\n 그렇다고 새로 시작하긴 귀찮을 지도.', purchase: 'https://www.ebay.com/itm/356689822053?_trkparms=amclksrc%3DITM%26aid%3D1110006%26algo%3DHOMESPLICE.SIM%26ao%3D1%26asc%3D286129%2C286025%2C286089%26meid%3D9268a3ec88ce4746917cc1c16f8d58ac%26pid%3D101224%26rk%3D1%26rkt%3D5%26sd%3D225500596973%26itm%3D356689822053%26pmt%3D0%26noa%3D1%26pg%3D2332490%26algv%3DDefaultOrganicWebV9BertRefreshRankerWithCassiniEmbRecall%26brand%3DUnbranded&_trksid=p2332490.c101224.m-1' },
   { img: '/asserts/socks-game/socks-list/socks8.png', title: '샌들은 신고 싶은데\n발이 못생겼을 때 신는 양말.', anal: '하고 시픈 마음과 하기 싫은 마음이\n한짝씩 섞여 있는 하루.', purchase: 'https://www.amazon.in/Fascigirl-Women-Simulated-Cotton-Casual/dp/B07VDKQ7VV' },
   { img: '/asserts/socks-game/socks-list/socks9.png', title: '아빠가 해외여행 가서 웃기다며 사 온 양말.', anal: '웃기려고 한 건 맞는데\n진심처럼 받아들여질 수 있는 하루.\n선을 지키는게 필요함!', purchase: 'https://www.amazon.in/Fascigirl-Women-Simulated-Cotton-Casual/dp/B07VDKQ7VV' },
-  { img: '/asserts/socks-game/socks-list/socks10.png', title: '나 대신 멍 때려주는 문어 양말', anal: '생각이 많은 날.\n표정관리까진 안 될 수 있음.', purchase: 'https://sumally.com/' },
+  { img: '/asserts/socks-game/socks-list/socks10.png', title: '나 대신 멍 때려주는 문어 양말.', anal: '생각이 많은 날.\n표정관리까진 안 될 수 있음.', purchase: 'https://sumally.com/' },
+  { img: '/asserts/socks-game/socks-list/socks11.png', title: '한 번 신으면 빨아도\n계속 찾게 되는 애착 별 양말.', anal: '선택을 해야 하는 날인데\n결국 익숙한 걸 찾게 될지도 몰라.', purchase: 'https://www.ae.com/us/en/c/women/accessories-socks/socks/cat6180024?redirectedFrom=plp' },
+  { img: '/asserts/socks-game/socks-list/socks12.png', title: '초딩때 책 빌렸다가 반납 못 했는데\n결국 제출 못한 연체카드 양말.', anal: '별 뜻 없이 한 말이나 행동이\n괜히 마음에 남을 수도 있어.\n너무 깊게 생각하지 말고 웃어 넘겨도 좋아.', purchase: 'https://product.kyobobook.co.kr/detail/S000201281176' },
+  { img: '/asserts/socks-game/socks-list/socks13png', title: '초딩때 책 빌렸다가 반납 못 했는데\n결국 제출 못한 연체카드 양말.', anal: '별 뜻 없이 한 말이나 행동이\n괜히 마음에 남을 수도 있어.\n너무 깊게 생각하지 말고 웃어 넘겨도 좋아.', purchase: 'https://product.kyobobook.co.kr/detail/S000201281176' },
 ];
 const allImagesToPreload = [...bgImages, ...socksItems.map(sock => sock.img)];
 preloadImages(allImagesToPreload);
