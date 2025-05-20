@@ -9,6 +9,8 @@ export default defineConfig({
         mac: 'src/pages/mac.html',
         card: 'src/pages/card.html',
         'doodi-game': 'src/pages/doodi-game.html',
+        'arrow-dodge-game': 'src/pages/arrow-dodge-game.html',
+        'socks-game': 'src/pages/socks-game.html',
 
         'calendar-widget': 'src/components/calendar-widget.html',
         'clock-widget': 'src/components/clock-widget.html',
