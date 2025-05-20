@@ -20,10 +20,17 @@ const arrow: program = {
   imageURL: '/asserts/mac/arrow-dodge.png',
   fileURL: '/src/pages/arrow-dodge-game.html',
 };
-programIDSet.add(doodi.pid);
-programIDSet.add(card.pid);
-programIDSet.add(arrow.pid);
+const socks: program = {
+  pid: 'sockast',
+  imageURL: '/asserts/mac/socks.png',
+  fileURL: '/src/pages/socks-game.html',
+};
 programID.push(doodi);
 programID.push(card);
 programID.push(arrow);
+programID.push(socks);
+programID.forEach(e => {
+  programIDSet.add(e.pid);
+});
+
 export { programIDSet, programID };
