@@ -47,12 +47,24 @@ const weather: widget = {
 const memo: widget = {
   wid: 'memo-widget',
 };
+const memo1: widget = {
+  wid: 'memo-widget1',
+};
+const memo2: widget = {
+  wid: 'memo-widget2',
+};
+const memo3: widget = {
+  wid: 'memo-widget3',
+};
 const calendar: widget = {
   wid: 'calendar-widget',
 };
 widgetID.push(clock);
 widgetID.push(weather);
 widgetID.push(memo);
+widgetID.push(memo1);
+widgetID.push(memo2);
+widgetID.push(memo3);
 widgetID.push(calendar);
 widgetID.forEach(e => {
   widgetIDSet.add(e.wid);
