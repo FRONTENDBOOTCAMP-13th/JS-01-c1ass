@@ -20,8 +20,6 @@ export function setTime(value: number) {
 
 // 타임오버 이미지 표시 함수
 function showGameOverImage() {
-  console.log('showGameOverImage 실행');
-
   const gameOverImg = document.getElementById('game-over') as HTMLImageElement;
   if (gameOverImg) {
     gameOverImg.classList.remove('hidden');
@@ -69,7 +67,6 @@ function animateTimerBar() {
 
 // 타이머(숫자) 시작
 export function startTimer() {
-  console.log('startTimer 실행');
   const timerTag = document.getElementById('timer');
   timerTag!.innerText = time.toString();
 
@@ -100,5 +97,4 @@ export function reTimerBar() {
     timerBar.style.height = `${percent}%`;
     timerBar.style.top = `${100 - percent}%`;
   }
-  console.log(`타이머 바 초기화: ${timerBar?.style.height}`);
 }

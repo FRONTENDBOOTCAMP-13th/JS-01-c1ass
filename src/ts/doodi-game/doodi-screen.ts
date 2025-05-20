@@ -3,12 +3,6 @@
 import { setTime, isGameActive, setGameActive, reTimerBar } from './doodi-timer';
 import { readyStart, moleTimeoutId } from './doodi-mole';
 
-// video 2배속 재생
-const video = document.getElementById('myVideo') as HTMLVideoElement | null;
-if (video) {
-  video.playbackRate = 2.0;
-}
-
 // 모든 화면 div 가져오기
 const screens = document.querySelectorAll<HTMLElement>('.screen');
 
@@ -57,8 +51,6 @@ showScreen(currentIndex);
 
 // 게임 상태 초기화
 function resetGameState() {
-  console.log('게임 상태 초기화 시작: resetGameState()');
-
   // 1) 게임 활성화 상태 재설정
   setGameActive(true);
   if (isGameActive()) {
@@ -115,6 +107,5 @@ function home() {
 document.getElementById('home')?.addEventListener('click', () => {
   home();
   resetGameState();
-  console.log('move to home');
   effectPopSound();
 });
