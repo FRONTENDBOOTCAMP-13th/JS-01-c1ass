@@ -12,6 +12,11 @@
     <script type="module" src="/src/ts/mac-panel-container.ts"></script>
     <script type="module" src="/src/ts/mac-panel-manager.ts"></script>
     <script type="module" src="/src/ts/widget-move.ts"></script>
+    <script type="module" src="/src/ts/widget-maneger.ts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.17/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.17/index.global.min.js"></script>
+    <script type="module" src="/src/ts/widget-manager.ts"></script>
     <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
     <!-- scroll 막는 ts -->
@@ -56,7 +61,7 @@
               <img draggable="false" class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
             </div>
             <!-- 달력 위젯 -->
-            <div draggable="true" class="w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col" data-col="1" data-row="1">
+            <div draggable="true" class="calendar-widget w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col" data-col="1" data-row="1">
               <div class="day-name dark:text-white text-[1rem] font-semibold h-[1.25rem]"></div>
               <div class="day-number mt-0 p-0 dark:text-white text-6xl font-bold h-[3.4375rem]"></div>
             </div>

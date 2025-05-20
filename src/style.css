@@ -167,7 +167,15 @@
   .outcover {
     @apply invisible;
   }
-
+  .calendar-widget {
+    @apply w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col;
+    .day-name {
+      @apply dark:text-white text-[1rem] font-semibold h-[1.25rem];
+    }
+    .day-number {
+      @apply mt-0 p-0 dark:text-white text-6xl font-bold h-[3.4375rem];
+    }
+  }
   /* 카드게임 css */
   .card {
     perspective: 1000px;

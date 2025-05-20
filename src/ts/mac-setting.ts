@@ -1,7 +1,13 @@
 import { default as size_arr } from './mac-screen-size.ts';
 import { iconBar } from './icon-bar.ts';
 import { insertIcon } from './mac-panel-manager.ts';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { insertWidget } from './mac-panel-manager.ts';
 import { programIDSet, programID } from '../programID.ts';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { widgetIDSet, widgetID } from '../programID.ts';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { widgetManager } from './widget-manager.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // import { panelContainer } from './mac-panel-container.ts';
 
@@ -14,8 +20,10 @@ const blank_widget_arr = document.querySelectorAll('.blank-widget');
 const icon_color_arr = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#E3BAFF', '#FFCCE5', '#CCE5FF', '#D5FFCC', '#FFF0BA', '#FFCBA4', '#CBA4FF'];
 
 let iconCounter = 0;
+// let widgetCounter = 0;
 
 setInitIcon();
+// setInitWidget();
 addSelect();
 paintBlankWidgets();
 addBlankWidgetToggle();
@@ -35,6 +43,17 @@ function setInitIcon() {
     }
   });
 }
+
+// function setInitWidget() {
+//   widgetID.forEach((_, i) => {
+//     if (widgetIDSet.has(widgetID[i].wid)) {
+//       widgetCounter++;
+//       console.log(widgetCounter);
+//       const tmpWidget = widgetManager.createWidget(widgetID[i].wid);
+//       insertWidget(tmpWidget);
+//     }
+//   });
+// }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // function showID() {
