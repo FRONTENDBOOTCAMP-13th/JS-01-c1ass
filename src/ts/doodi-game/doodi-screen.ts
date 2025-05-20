@@ -3,12 +3,6 @@
 import { setTime, isGameActive, setGameActive, reTimerBar } from './doodi-timer';
 import { readyStart, moleTimeoutId } from './doodi-mole';
 
-// video 2배속 재생
-const video = document.getElementById('myVideo') as HTMLVideoElement | null;
-if (video) {
-  video.playbackRate = 2.0;
-}
-
 // 모든 화면 div 가져오기
 const screens = document.querySelectorAll<HTMLElement>('.screen');
 
