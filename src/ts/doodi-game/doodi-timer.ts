@@ -1,7 +1,6 @@
 // 타이머 및 타임 오버 함수
 export let time = 40;
 let timerInterval: number;
-let barTimerInterval: number;
 export let gameActive = true;
 
 const overSound = new Audio('/asserts/doodi-game/etc/start.aac');
@@ -91,16 +90,6 @@ export function startTimer() {
       lastTime = Date.now(); // 매초마다 기준점 갱신
     }
   }, 1000);
-
-  // 🟩 그 후에 인터벌로 계속 갱신
-  barTimerInterval = setInterval(() => {
-    const timerBar = document.getElementById('timer-bar') as HTMLDivElement;
-    if (timerBar) {
-      const percent = (time / 40) * 100;
-      timerBar.style.height = `${percent}%`;
-      timerBar.style.top = `${100 - percent}%`;
-    }
-  }, 500);
 }
 
 // 타이머 바 초기화
