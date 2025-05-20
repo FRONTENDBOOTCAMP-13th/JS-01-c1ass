@@ -1,35 +1,50 @@
 // 커서 바꾸는 함수
-
 const cursorImgSrc = '/asserts/doodi-game/etc/toy_hammer.png';
 const cursorClickImgSrc = '/asserts/doodi-game/etc/toy_hammer-hurt.png';
-
-// 이미지 요소 만들기
-const fakeCursor = document.createElement('img');
-fakeCursor.src = cursorImgSrc;
-fakeCursor.alt = '커서 이미지';
-fakeCursor.style.position = 'fixed';
-fakeCursor.style.width = '50px';
-fakeCursor.style.pointerEvents = 'none';
-fakeCursor.style.zIndex = '9999';
-document.body.appendChild(fakeCursor);
 
 // 기본 커서 숨기기
 document.body.style.cursor = 'none';
 
+// 커서 이미지 두 개 만들기
+const cursorDefault = document.createElement('img');
+cursorDefault.src = cursorImgSrc;
+cursorDefault.alt = '기본 커서';
+cursorDefault.style.position = 'fixed';
+cursorDefault.style.width = '50px';
+cursorDefault.style.pointerEvents = 'none';
+cursorDefault.style.zIndex = '999';
+
+const cursorClick = document.createElement('img');
+cursorClick.src = cursorClickImgSrc;
+cursorClick.alt = '클릭 커서';
+cursorClick.style.position = 'fixed';
+cursorClick.style.width = '60px';
+cursorClick.style.pointerEvents = 'none';
+cursorClick.style.zIndex = '999';
+cursorClick.style.opacity = '0'; // 기본은 숨김
+
+// 둘 다 body에 추가
+document.body.appendChild(cursorDefault);
+document.body.appendChild(cursorClick);
+
 // 커서 따라다니기
 document.addEventListener('mousemove', e => {
-  fakeCursor.style.left = `${e.clientX - 25}px`;
-  fakeCursor.style.top = `${e.clientY - 25}px`;
+  const x = e.clientX - 25;
+  const y = e.clientY - 25;
+  cursorDefault.style.left = `${x}px`;
+  cursorDefault.style.top = `${y}px`;
+  cursorClick.style.left = `${x}px`;
+  cursorClick.style.top = `${y}px`;
 });
 
-// 눌렀을 때 이미지 변경
+// 클릭 시 보이기 전환
 document.addEventListener('mousedown', () => {
-  fakeCursor.src = cursorClickImgSrc;
-  fakeCursor.style.width = '60px';
+  cursorDefault.style.opacity = '0';
+  cursorClick.style.opacity = '1';
 });
 
-// 뗐을 때 이미지 복원
+// 클릭 해제 시 복원
 document.addEventListener('mouseup', () => {
-  fakeCursor.src = cursorImgSrc;
-  fakeCursor.style.width = '50px';
+  cursorDefault.style.opacity = '1';
+  cursorClick.style.opacity = '0';
 });
