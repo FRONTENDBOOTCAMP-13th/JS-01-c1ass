@@ -10,6 +10,9 @@ let previousCol = -1;
 const startSound = new Audio('/asserts/doodi-game/etc/start.aac');
 startSound.volume = 0.8;
 
+const sound = new Audio('/asserts/doodi-game/etc/beep.aac');
+sound.volume = 0.07;
+
 // 같은 행에서 두더지가 나오지 않도록
 function getRow(index: number) {
   return Math.floor(index / 4); // 4행 기준
@@ -206,7 +209,7 @@ document.querySelectorAll('.mole-btn').forEach(el => {
 
 // hitSound() 연속 재생 위한 오디오 생성 함수
 function playHitSound() {
-  const sound = new Audio('/asserts/doodi-game/etc/beep.aac');
-  sound.volume = 0.07;
+  sound.pause();
+  sound.currentTime = 0;
   sound.play().catch(console.error);
 }
