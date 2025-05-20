@@ -1,1 +1,213 @@
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Pretendard Variable', 'sans-serif';
+}
+
+/* doodi-game: 두더지 등장하는 애니메이션 */
+@keyframes moleBounce {
+  0% {
+    scale: 1 1;
+  }
+  30% {
+    scale: 1 1.3; /* Y축만 늘어남 */
+  }
+  100% {
+    scale: 1 1;
+  }
+}
+
+.mole-bounce {
+  animation: moleBounce 300ms ease-out;
+  transform-origin: bottom center;
+}
+
+/* doodi-game: 두더지 들어가는 애니메이션 */
+@keyframes moleShrink {
+  0% {
+    scale: 1 1;
+    opacity: 1;
+  }
+  100% {
+    scale: 1 0;
+    opacity: 0;
+  }
+}
+
+.mole-shrink {
+  animation: moleShrink 100ms ease-in forwards;
+  transform-origin: center bottom;
+}
+
+/* doodi-game: 기본 바운스 애니메이션 */
+@keyframes littleBounce {
+  0% {
+    scale: 1 1;
+  }
+  30% {
+    scale: 1 1.05; /* Y축만 늘어남 */
+  }
+  100% {
+    scale: 1 1;
+  }
+}
+
+.little-bounce {
+  animation: littleBounce 300ms ease-out;
+  transform-origin: bottom center;
+}
+
+/* doodi-game: 떠오르는 애니메이션 */
+.floating-image {
+  width: 60px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+@keyframes floatFade {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-80px); /* 위로 */
+    opacity: 0;
+  }
+}
+
+.float-fade {
+  animation: floatFade 0.7s ease-out;
+}
+
+/* socks-game: 종이 흔드는 애니메이션 */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-5px);
+  }
+  20% {
+    transform: translateX(5px);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(5px);
+  }
+  70% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  90% {
+    transform: translateX(-5px);
+  }
+}
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@layer components {
+  /* 맥패널css */
+  .mac-panel-overlay {
+    @apply pointer-events-auto z-101;
+    .mac-panel-content {
+      @apply bg-white rounded-2xl shadow-2xl w-2xl absolute h-108;
+      .mac-panel-header {
+        @apply grid grid-cols-3 items-center h-8 rounded-t-2xl bg-white dark:bg-[#4A4C4E];
+        .mac-panel-header-left {
+          @apply flex justify-start ml-2 space-x-1;
+          .close-mac-panel {
+            @apply w-4 h-4 bg-[#FF5F5B] rounded-full;
+          }
+          .minimize-mac-panel {
+            @apply w-4 h-4 bg-[#FEC331] rounded-full;
+          }
+          .full-mac-panel {
+            @apply w-4 h-4 bg-[#27CE48] rounded-full;
+          }
+        }
+        .mac-panel-title {
+          @apply text-center text-[#A4A6A8] text-sm;
+        }
+        .mac-panel-header-right {
+          @apply block;
+        }
+      }
+      .mac-panel-program {
+        @apply p-4 bg-gray-100 rounded-b-2xl h-[calc(100%_-_32px)];
+        .mac-panel-cover {
+          @apply absolute w-full h-[calc(100%_-_32px)] left-0 bottom-0;
+        }
+      }
+    }
+  }
+  .icon {
+    @apply flex flex-col items-center justify-center w-[70px] h-[70px] rounded-[23px] shadow-md bg-white cursor-pointer relative opacity-100;
+    .icon-cover {
+      @apply w-full h-full bg-black rounded-[23px] opacity-0 hover:opacity-15 transition-opacity hover:transition-opacity;
+    }
+  }
+  .icon.active {
+    @apply after:content-["."] after:text-[36px] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-6;
+  }
+  .oncover {
+    @apply visible;
+  }
+  .outcover {
+    @apply invisible;
+  }
+
+  /* 카드게임 css */
+  .card {
+    perspective: 1000px;
+  }
+
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  .card.flipped .card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-front,
+  .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-front {
+    transform: rotateY(180deg);
+  }
+
+  /* 위젯 드래그 애니메이션 */
+  .drop-animation {
+    animation: dropScale 0.3s ease forwards;
+  }
+
+  @keyframes dropScale {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}

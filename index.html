@@ -1,14 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body class="bg-black">
-    <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
-    <h1>hi</h1>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <title>Index</title>
+  </head>
+  <body class="flex items-center justify-center h-screen gap-10 text-white bg-pink-300 text">
+    <div class="w-1/3">
+      <h1 class="text-3xl font-bold text-center text-black">Components</h1>
+      <ul class="flex flex-col gap-4 mt-6">
+        <li class="text-xl bg-red-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/clock-widget.html">clock-widget</a>
+        </li>
+        <li class="text-xl bg-orange-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/icon-bar.html">icon-bar</a>
+        </li>
+        <li class="text-xl text-black bg-yellow-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/weather-widget.html">weather-widget</a>
+        </li>
+        <li class="text-xl bg-green-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/calendar-widget.html">calendar-widget</a>
+        </li>
+        <li class="text-xl bg-blue-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/mac-panel.html">mac-panel</a>
+        </li>
+        <li class="text-xl bg-indigo-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/icon.html">icon</a>
+        </li>
+        <li class="text-xl bg-purple-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/top-bar.html">top-bar</a>
+        </li>
+        <li class="text-xl bg-purple-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/components/memo-widget.html">memo-widget</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-1/3">
+      <h1 class="text-3xl font-bold text-center text-black">Pages</h1>
+      <ul class="flex flex-col gap-4 mt-6">
+        <li class="text-xl bg-red-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/pages/mac.html">mac</a>
+        </li>
+        <li class="text-xl bg-orange-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/pages/doodi-all.html">doodi-game</a>
+        </li>
+        <li class="text-xl text-black bg-yellow-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/pages/card.html">card</a>
+        </li>
+        <li class="text-xl bg-green-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/pages/arrow-dodge-game.html">arrow-dodge-game</a>
+        </li>
+        <li class="text-xl bg-blue-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/pages/socks-game.html">sockast</a>
+        </li>
+        <li class="text-xl bg-indigo-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/pages/dummy.md">dummy</a>
+        </li>
+        <li class="text-xl bg-purple-400 rounded-2xl">
+          <a class="block px-5 py-2" href="/src/pages/notfound.html">notfound</a>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

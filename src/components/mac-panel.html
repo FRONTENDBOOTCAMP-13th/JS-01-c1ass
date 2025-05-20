@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mac-panel-component</title>
+    <script type="module" src="/src/main.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+  </head>
+  <body>
+    <!-- 테스트 버튼 -->
+    <!-- <button id="open-mac-panel" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-700 transition">Launch demo</button> -->
+
+    <!-- 맥패널 Light 모드 -->
+    <div id="mac-panel-overlay">
+      <div id="mac-panel-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl">
+        <div class="mac-panel-header grid grid-cols-3 items-center h-8 rounded-t-2xl">
+          <!-- 좌측 버튼 -->
+          <div class="flex justify-start ml-2 space-x-1">
+            <button class="w-4 h-4 bg-[#FF5F5B] rounded-full"></button>
+            <button class="w-4 h-4 bg-[#FEC331] rounded-full"></button>
+            <button class="w-4 h-4 bg-[#27CE48] rounded-full"></button>
+          </div>
+          <!-- 가운데 텍스트 -->
+          <h2 class="text-center text-[#A4A6A8] text-sm">app-name</h2>
+          <!-- 우측 빈 공간 -->
+          <div></div>
+        </div>
+        <!-- 맥패널 콘텐츠 부분 -->
+        <div class="mac-panel-content p-4 bg-gray-100 rounded-b-2xl h-100"></div>
+      </div>
+    </div>
+
+    <!-- 맥패널 Dark 모드 -->
+    <div id="mac-panel-overlay">
+      <div id="mac-panel-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl">
+        <div class="mac-panel-header grid grid-cols-3 items-center h-8 rounded-t-2xl bg-[#4A4C4E]">
+          <!-- 좌측 버튼 -->
+          <div class="flex justify-start ml-2 space-x-1">
+            <button class="w-4 h-4 bg-[#FF5F5B] rounded-full"></button>
+            <button class="w-4 h-4 bg-[#FEC331] rounded-full"></button>
+            <button class="w-4 h-4 bg-[#27CE48] rounded-full"></button>
+          </div>
+          <!-- 가운데 텍스트 -->
+          <h2 class="text-center text-[#A4A6A8] text-sm">app-name</h2>
+          <!-- 우측 빈 공간 -->
+          <div></div>
+        </div>
+        <!-- 맥패널 콘텐츠 부분 -->
+        <div class="mac-panel-content p-4 bg-gray-100 rounded-b-2xl h-100"></div>
+      </div>
+    </div>
+  </body>
+</html>

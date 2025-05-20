@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/clock-widget.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <title>clock-widget-component</title>
+  </head>
+  <body class="flex items-center justify-center h-screen gap-20">
+    <!-- light mode일 때 디자인 -->
+    <div class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] grid grid-cols-1 grid-rows-1">
+      <img class="col-start-1 row-start-1 place-self-center" src="/public/asserts/clock-widget/pan.svg" alt="" />
+      <div class="relative w-full h-full col-start-1 row-start-1 second-niddle-div place-self-center">
+        <img class="absolute top-[8px] left-[49.2px]" src="/public/asserts/clock-widget/second-niddle.svg" alt="" />
+      </div>
+      <div class="relative w-full h-full col-start-1 row-start-1 minute-niddle-div place-self-center">
+        <img class="absolute top-[11px] left-[48.7px]" src="/public/asserts/clock-widget/minute-niddle.svg" alt="" />
+      </div>
+      <div class="relative w-full h-full col-start-1 row-start-1 hour-niddle-div place-self-center">
+        <img class="absolute top-[27px] left-[48.2px]" src="/public/asserts/clock-widget/hour-niddle.svg" alt="" />
+      </div>
+      <img class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
+    </div>
+    <!-- dark mode일 때 디자인 -->
+    <div class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1">
+      <img class="col-start-1 row-start-1 place-self-center" src="/public/asserts/clock-widget/pan.svg" alt="" />
+      <div class="relative w-full h-full col-start-1 row-start-1 second-niddle-div place-self-center">
+        <img class="absolute top-[8px] left-[49.2px]" src="/public/asserts/clock-widget/second-niddle.svg" alt="" />
+      </div>
+      <div class="relative w-full h-full col-start-1 row-start-1 minute-niddle-div place-self-center">
+        <img class="absolute top-[11px] left-[48.7px]" src="/public/asserts/clock-widget/minute-niddle.svg" alt="" />
+      </div>
+      <div class="relative w-full h-full col-start-1 row-start-1 hour-niddle-div place-self-center">
+        <img class="absolute top-[27px] left-[48.2px]" src="/public/asserts/clock-widget/hour-niddle.svg" alt="" />
+      </div>
+      <img class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
+    </div>
+    <!-- light-dark mode 구현 -->
+    <!-- 컴포넌트로 쓸 때는 아래 마크업으로 사용 -->
+    <div class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] dark:bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1">
+      <img class="col-start-1 row-start-1 place-self-center" src="/public/asserts/clock-widget/pan.svg" alt="" />
+      <div class="relative w-full h-full col-start-1 row-start-1 second-niddle-div place-self-center">
+        <img class="absolute top-[8px] left-[49.2px]" src="/public/asserts/clock-widget/second-niddle.svg" alt="" />
+      </div>
+      <div class="relative w-full h-full col-start-1 row-start-1 minute-niddle-div place-self-center">
+        <img class="absolute top-[11px] left-[48.7px]" src="/public/asserts/clock-widget/minute-niddle.svg" alt="" />
+      </div>
+      <div class="relative w-full h-full col-start-1 row-start-1 hour-niddle-div place-self-center">
+        <img class="absolute top-[27px] left-[48.2px]" src="/public/asserts/clock-widget/hour-niddle.svg" alt="" />
+      </div>
+      <img class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
+    </div>
+  </body>
+</html>

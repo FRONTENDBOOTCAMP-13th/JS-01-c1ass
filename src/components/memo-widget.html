@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/ts/calendar-widget.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <title>Memo-widget</title>
+  </head>
+  <body class="flex items-center justify-center h-screen gap-5">
+    <!-- 메모 위젯 (라이트모드) -->
+    <div class="w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white">
+      <!-- 헤더(yellow) -->
+      <div class="flex w-full h-7 bg-gradient-to-b from-[#FFE855] to-[#FFB115] rounded-t-[1.4375rem] px-[1.125rem] items-center">
+        <button type="button" class="flex items-center cursor-pointer gap-1.5 pt-[.0313rem] active:opacity-50">
+          <img src="../../public/asserts/memo-widget/folder.svg" width="12" height="12" class="pb-[.0313rem]" alt="폴더 모양 아이콘" />
+          <span class="text-[.75rem] text-white font-normal">메모</span>
+        </button>
+      </div>
+
+      <!-- 점선 -->
+      <div class="mt-0.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="1" viewBox="0 0 220 1" fill="none">
+          <path d="M0.504578 0.5H219.495" stroke="black" stroke-opacity="0.5" stroke-linejoin="round" stroke-dasharray="0.5 1.5" />
+        </svg>
+      </div>
+
+      <!-- 메모 list -->
+      <div class="grid grid-rows-3 divide-y-[.0187rem] divide-black/50 text-[.625rem]">
+        <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">몽매한 풀잎은 그 봄을 기억한다</button></div>
+        <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">html</button></div>
+        <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">javascript</button></div>
+      </div>
+    </div>
+
+    <!-- 메모 위젯 (라이트/다크 구현) -->
+    <div class="w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white dark:bg-[#1B1B1D] dark:text-white">
+      <!-- 헤더(yellow) -->
+      <div class="flex w-full h-7 bg-gradient-to-b from-[#FFE855] to-[#FFB115] rounded-t-[1.4375rem] px-[1.125rem] items-center">
+        <button type="button" class="flex items-center cursor-pointer gap-1.5 pt-[.0313rem] active:opacity-50">
+          <img src="../../public/asserts/memo-widget/folder.svg" width="12" height="12" class="pb-[.0313rem]" alt="폴더 모양 아이콘" />
+          <span class="text-[.75rem] text-white font-normal">메모</span>
+        </button>
+      </div>
+
+      <!-- 점선 -->
+      <div class="mt-0.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="1" viewBox="0 0 220 1" fill="none">
+          <path d="M0.504578 0.5H219.495" stroke="currentColor" stroke-opacity="0.5" stroke-linejoin="round" stroke-dasharray="0.5 1.5" />
+        </svg>
+      </div>
+
+      <!-- 메모 list -->
+      <div class="grid grid-rows-3 divide-y-[.0187rem] divide-black/50 dark:divide-white/50 text-[.625rem]">
+        <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">몽매한 풀잎은 그 봄을 기억한다</button></div>
+        <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">html</button></div>
+        <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">javascript</button></div>
+      </div>
+    </div>
+  </body>
+</html>
