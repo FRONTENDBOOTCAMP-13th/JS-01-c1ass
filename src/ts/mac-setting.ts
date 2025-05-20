@@ -27,7 +27,7 @@ addRemoveIconBtn();
 // body?.addEventListener('click', showID);
 
 function setInitIcon() {
-  programID.forEach((e, i) => {
+  programID.forEach((_, i) => {
     if (programIDSet.has(programID[i].pid)) {
       iconCounter++;
       const tmpicon = iconBar.createIcon(0, programID[i].pid);
@@ -76,6 +76,7 @@ function addSelect() {
 
     mac_screen.style.width = size_arr[index][0].toString() + 'px';
     mac_screen.style.height = size_arr[index][1].toString() + 'px';
+    body!.style.gridTemplateColumns = `1fr calc(${size_arr[index][0].toString()}px + 80px) 1fr`;
     mac_bottom.style.height = (Math.sqrt(size_arr[index][0]) * 3).toString() + 'px';
   });
 }
