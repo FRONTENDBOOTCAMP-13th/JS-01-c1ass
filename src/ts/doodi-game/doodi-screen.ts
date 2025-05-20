@@ -51,8 +51,6 @@ showScreen(currentIndex);
 
 // 게임 상태 초기화
 function resetGameState() {
-  console.log('게임 상태 초기화 시작: resetGameState()');
-
   // 1) 게임 활성화 상태 재설정
   setGameActive(true);
   if (isGameActive()) {
@@ -109,6 +107,5 @@ function home() {
 document.getElementById('home')?.addEventListener('click', () => {
   home();
   resetGameState();
-  console.log('move to home');
   effectPopSound();
 });

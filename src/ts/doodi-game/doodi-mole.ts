@@ -22,7 +22,6 @@ function getCol(index: number) {
 
 // 게임 시작 함수
 export function startGame() {
-  console.log('startGame 실행');
   setTimeout(() => {
     showMole(); // 두더지 생성 및 삭제
     startTimer(); // 타이머 시작
