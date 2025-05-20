@@ -11,9 +11,22 @@
     <script type="module" src="/src/ts/doodi-game/doodi-animation.ts"></script>
     <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <script type="module">
+      import { startPreload } from '/src/ts/doodi-game/doodi-load.ts';
+
+      window.addEventListener('DOMContentLoaded', () => {
+        startPreload();
+      });
+    </script>
+
     <title>Doodi-game</title>
   </head>
   <body class="flex items-center justify-center h-screen">
+    <!-- 1. 로딩 화면 -->
+    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-white z-50">
+      <p class="text-xl font-bold animate-pulse">로딩 중...</p>
+    </div>
+
     <!-- 1. screen: cover -->
     <div id="cover" class="screen w-[43.75rem] h-[31.25rem] relative bg-[#FDFAF1] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center items-center flex flex-col select-none">
       <!-- logo -->
