@@ -5,11 +5,16 @@ paperSound.volume = 0.5;
 
 const bgImages = ['/asserts/socks-game/paper1.png', '/asserts/socks-game/paper2.png', '/asserts/socks-game/paper3.png', '/asserts/socks-game/paper_package.png'];
 const socksItems = [
-  { img: '/asserts/socks-game/socks-list/socks1.png', title: '어릴 적 악몽 괴물과 똑닮아\n 집구석에 쳐박아놓은 눈알양말.', anal: '괜히 누가 날 지켜보는 기분.\n신경이 곤두설지도?', purchase: 'https://startknitting.org/booties/very-hungry-caterpillar-socks-knitting-patterns/' },
-  { img: '/asserts/socks-game/socks-list/socks2.png', title: '방귀를 참다가 양말까지 내려가서\n 부풀어버린 양말.', anal: '사소한 걸 참고 억지로 눌러 담지 말기.\n결국 이상한 데서 터집니다?', purchase: 'https://no6store.com/collections/accessories-socks-and-tights' },
-  { img: '/asserts/socks-game/socks-list/socks3.png', title: '풍자용으로 샀는데 자서전이 되어버린 양말.', anal: '괜히 나만 어색한 느낌?\n신경 안 쓰려해도 오늘따라 나만 동떨어진다 느낄 수 있음', purchase: 'https://www.lotteon.com/p/product/LO2435542782?sitmNo=LO2435542782_2435542783&mall_no=1&dp_infw_cd=SCH%5E%5E%ED%8A%B8%EB%9F%BC%ED%94%84%EC%96%91%EB%A7%90&areaCode=SCH' },
-  { img: '/asserts/socks-game/socks-list/socks4.png', title: '털을 달면 귀여울거라 생각했지만\n 큰 오산이었던 양말.', anal: '계획한 느낌은 아닌데 괜히 기억에 남는 하루가 될 지도!\n오늘만 P로 살아보는 건 어떤가용?', purchase: 'https://wear.jp/item/3687866/' },
-  { img: '/asserts/socks-game/socks-list/socks5.png', title: '털을 달면 귀여울거라 생각했지만\n 큰 오산이었던 양말.', anal: '계획한 느낌은 아닌데 괜히 기억에 남는 하루가 될 지도!\n오늘만 P로 살아보는 건 어떤가용?', purchase: 'https://wear.jp/item/3687866/' },
+  { img: '/asserts/socks-game/socks-list/socks1.png', title: '어릴 적 악몽 괴물과 똑닮아\n집구석에 쳐박아놓은 눈알양말.', anal: '괜히 누가 날 지켜보는 기분이 들 수도.\n어. 뒤에 뭐가 움직였는데?', purchase: 'https://startknitting.org/booties/very-hungry-caterpillar-socks-knitting-patterns/' },
+  { img: '/asserts/socks-game/socks-list/socks2.png', title: '방귀를 참다가 양말까지 내려가서\n부풀어버린 양말.', anal: '사소한 걸 참고 억지로 눌러 담지 말기.\n결국 이상한 데서 터집니다?', purchase: 'https://no6store.com/collections/accessories-socks-and-tights' },
+  { img: '/asserts/socks-game/socks-list/socks3.png', title: '풍자용으로 샀는데 자서전이 되어버린 양말.', anal: '괜히 나만 어색한 느낌?\n신경 안 쓰려해도 오늘따라 나만 동떨어진다 느낄 수 있음.', purchase: 'https://www.lotteon.com/p/product/LO2435542782?sitmNo=LO2435542782_2435542783&mall_no=1&dp_infw_cd=SCH%5E%5E%ED%8A%B8%EB%9F%BC%ED%94%84%EC%96%91%EB%A7%90&areaCode=SCH' },
+  { img: '/asserts/socks-game/socks-list/socks4.png', title: '털을 달면 귀여울거라 생각했지만\n이런걸 기대하진 않았어 양말.', anal: '계획한 느낌은 아닌데 괜히 기억에 남는 하루가 될 지도!\n오늘만 P로 살아보는 건 어떤가용?', purchase: 'https://wear.jp/item/3687866/' },
+  { img: '/asserts/socks-game/socks-list/socks5.png', title: '할머니의 보물창고에서 발견했는데,\n50년 전엔 꽤 비쌌을 것 같은 골동품 양말.', anal: '스쳐갈 것들 속에서\n묘하게 가치 있는 걸 발견할지도!', purchase: 'https://no6store.com/collections/accessories-socks-and-tights' },
+  { img: '/asserts/socks-game/socks-list/socks6.png', title: '발레리나가 꿈이었을 수도 있잖아 양말.', anal: '평소와 같은 하루를 보내다\n나도 모르는 사이 시선집중 될 수도?', purchase: 'https://no6store.com/collections/accessories-socks-and-tights' },
+  { img: '/asserts/socks-game/socks-list/socks7.png', title: '더운데 벗긴 싫어서\n과감히 발등에 구멍 뚫어버린 양말.', anal: '뭐 하나 마음에 안 들긴 하는데,\n 그렇다고 새로 시작하긴 귀찮을 지도.', purchase: 'https://www.ebay.com/itm/356689822053?_trkparms=amclksrc%3DITM%26aid%3D1110006%26algo%3DHOMESPLICE.SIM%26ao%3D1%26asc%3D286129%2C286025%2C286089%26meid%3D9268a3ec88ce4746917cc1c16f8d58ac%26pid%3D101224%26rk%3D1%26rkt%3D5%26sd%3D225500596973%26itm%3D356689822053%26pmt%3D0%26noa%3D1%26pg%3D2332490%26algv%3DDefaultOrganicWebV9BertRefreshRankerWithCassiniEmbRecall%26brand%3DUnbranded&_trksid=p2332490.c101224.m-1' },
+  { img: '/asserts/socks-game/socks-list/socks8.png', title: '샌들은 신고 싶은데\n발이 못생겼을 때 신는 양말.', anal: '하고 시픈 마음과 하기 싫은 마음이\n한짝씩 섞여 있는 하루.', purchase: 'https://www.amazon.in/Fascigirl-Women-Simulated-Cotton-Casual/dp/B07VDKQ7VV' },
+  { img: '/asserts/socks-game/socks-list/socks9.png', title: '아빠가 해외여행 가서 웃기다며 사 온 양말.', anal: '웃기려고 한 건 맞는데\n진심처럼 받아들여질 수 있는 하루.\n선을 지키는게 필요함!', purchase: 'https://www.amazon.in/Fascigirl-Women-Simulated-Cotton-Casual/dp/B07VDKQ7VV' },
+  { img: '/asserts/socks-game/socks-list/socks10.png', title: '나 대신 멍 때려주는 문어 양말', anal: '생각이 많은 날.\n표정관리까진 안 될 수 있음.', purchase: 'https://sumally.com/' },
 ];
 const allImagesToPreload = [...bgImages, ...socksItems.map(sock => sock.img)];
 preloadImages(allImagesToPreload);
