@@ -8,7 +8,7 @@ export default defineConfig({
         index: 'index.html', // 기본 index.html
         mac: 'src/pages/mac.html',
         card: 'src/pages/card.html',
-        'doodi-game': 'src/pages/doodi-game.html',
+        'doodi-game': 'src/pages/doodi-all.html',
         'arrow-dodge-game': 'src/pages/arrow-dodge-game.html',
         'socks-game': 'src/pages/socks-game.html',
 
@@ -20,10 +20,8 @@ export default defineConfig({
         'memo-widget': 'src/components/memo-widget.html',
         'top-bar': 'src/components/top-bar.html',
         'weather-widget': 'src/components/weather-widget.html',
-        'doodi-all': 'src/components/doodi-game/doodi-all.html',
         'doodi-character': 'src/components/doodi-game/doodi-character.html',
         'doodi-gamepage': 'src/components/doodi-game/doodi-gamepage.html',
-        'doodi-interface': 'src/components/doodi-game/doodi-interface.html',
 
         notfound: 'src/pages/notfound.html',
       },
