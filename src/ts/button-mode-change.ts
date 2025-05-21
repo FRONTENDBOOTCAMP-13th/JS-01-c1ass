@@ -20,8 +20,11 @@ applyTheme(savedTheme);
 
 toggleButton?.addEventListener('click', () => {
   const current = localStorage.getItem('theme');
-  // console.log('📦 현재 저장된 theme:', current ?? '(없음)');
-  // console.log('🖥️ 시스템 모드:', isSystemDark() ? 'dark' : 'light');
+
+  // 👉 애니메이션 초기화
+  toggleButton.classList.remove('wiggle');
+  void toggleButton.offsetWidth; // ← reflow 강제 발생 (핵심!)
+  toggleButton.classList.add('wiggle');
 
   if (!current) {
     const forced = isSystemDark() ? 'light' : 'dark';
