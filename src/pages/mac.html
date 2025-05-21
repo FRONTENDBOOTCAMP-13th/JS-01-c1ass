@@ -31,10 +31,10 @@
     <title>Mac</title>
   </head>
   <body class="font-sans overflow-hidden no-scroll grid grid-cols-[1fr_calc(1200px_+_80px)_1fr] grid-rows-1 h-screen select-none">
-    <div class="mac-entire-bg bg-yellow-300 col-start-1 col-end-4 row-start-1 row-end-2"></div>
-    <div class="mac-left-bg bg-red-300 col-start-1 col-end-2 row-start-1 row-end-2"></div>
+    <div class="mac-entire-bg bg-[url('../../public/asserts/mac/background-web/002.jpg')] bg-cover col-start-1 col-end-4 row-start-1 row-end-2"></div>
+    <div class="mac-left-bg bg-red-300/0 col-start-1 col-end-2 row-start-1 row-end-2"></div>
     <div class="mac mt-10 col-start-2 col-end-3 row-start-1 row-end-2">
-      <div class="shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
+      <div class="shadow-[0_0_100px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
         <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] dark:bg-[url(/public/asserts/mac/mac-screen-base-dark-background-img.png)] bg-cover rounded-[15px]">
           <!-- top-bar -->
           <div class="w-full flex justify-between items-center py-0.5 bg-[rgba(223,223,223,0.20)] dark:bg-[rgba(109,109,109,0.5)] shadow-2xl">
@@ -139,11 +139,14 @@
       <div class="mac-bottom h-25 object-contain bg-linear-[45deg,_#959595_0%,_#ffffff_100%] rounded-b-[35px] flex justify-center items-center shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)]">
         <img class="h-10 cursor-pointer" src="/public/asserts/mac/apple-logo.webp" alt="" />
       </div>
+      <div><img class="" src="../../public/asserts/mac/support.png" alt="모니터 지지대 이미지" /></div>
+      <div><img class="" src="../../public/asserts/mac/pedestal_white.png" alt="모니터 받침대 이미지" /></div>
     </div>
     <div class="mac-right-bg bg-blue-300 col-start-3 col-end-4 row-start-1 row-end-2 relative p-4">
       <div id="clickablePostIt"
     class="post-it absolute top-6 right-6 w-[150px] h-[150px] bg-[#ffffe0] p-2 shadow-[5px_5px_7px_rgba(0,0,0,0.3)] text-center break-words transition-transform duration-300 ease-in-out cursor-pointer select-none text-sm leading-[1.4]">
     <p class="m-0">기능</p>
   </div>
+</div>
   </body>
 </html>
