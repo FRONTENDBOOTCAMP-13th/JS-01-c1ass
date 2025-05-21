@@ -49,7 +49,6 @@ memoWidgetHeader?.addEventListener('click', () => {
   const memoEl = container!.querySelector('.mac-panel[data-id="memo-widget"] .mac-panel-program') as HTMLElement;
   memoEl.classList.add('allow-scroll');
   const memoHd = container!.querySelector(`.mac-panel[data-id="memo-widget"] .mac-panel-header`) as HTMLElement;
-  console.log(memoHd);
   memoHd.classList.add('bg-gradient-to-b', 'from-[#FFE855]', 'to-[#FFB115]');
   const memoTitle = container!.querySelector(`.mac-panel[data-id="memo-widget"] .mac-panel-title`) as HTMLElement;
   memoTitle.classList.add('text-white');

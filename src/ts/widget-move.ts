@@ -24,7 +24,6 @@ function updateWidgetPosition(element: HTMLElement, col: number, row: number) {
   if (colSpan === '2') {
     const widgetWidth = parseInt(colSpan) * (container.getBoundingClientRect().width / 9);
     const isGrabbedRight = dragStartOffset.x > widgetWidth / 2;
-    console.log('currentcol: ', col);
     if (!isGrabbedRight) {
       // 왼쪽을 잡은 경우: 오른쪽 끝에 놓을 때만 1을 뺌
       const isAtRightEdge = col > 10 - parseInt(colSpan);
@@ -113,11 +112,11 @@ if (container) {
     e.preventDefault();
     if (!draggedElement) return;
 
-    const position = getGridPosition(e);
-    if (position) {
-      // 현재 드래그 중인 위치 표시 가능
-      console.log(`Grid position: ${position.col}, ${position.row}`);
-    }
+    // const position = getGridPosition(e);
+    // if (position) {
+    //   // 현재 드래그 중인 위치 표시 가능
+    //   // console.log(`Grid position: ${position.col}, ${position.row}`);
+    // }
   });
 
   container.addEventListener('drop', (e: DragEvent) => {

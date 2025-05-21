@@ -68,7 +68,10 @@ function setInitIcon() {
 //     content!.textContent = (e as HTMLDivElement).dataset.id!;
 //   });
 // }
-
+document.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+  // openModal();
+});
 function addSelect() {
   const select = document.createElement('select');
   select.classList.add('mac-screen-size');
