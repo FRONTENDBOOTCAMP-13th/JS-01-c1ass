@@ -36,6 +36,13 @@ calendarWidget?.addEventListener('click', () => {
     },
   });
   calendar.render();
+  const may26 = document.querySelector('[data-date="2025-05-26"] .fc-daygrid-day-events') as HTMLElement;
+  const may27 = document.querySelector('[data-date="2025-05-27"] .fc-daygrid-day-events') as HTMLElement;
+  may26.textContent = '♥휴강♥';
+  may27.textContent = '♥리액트♥';
+  may26.style.textAlign = 'center';
+  may27.style.textAlign = 'center';
+
   const resz = new ResizeObserver(() => {
     calendar.updateSize();
   });
@@ -76,7 +83,7 @@ memoWidgetHeader?.addEventListener('click', () => {
   const memo_sidebar_ul = document.createElement('ul');
   memo_sidebar_ul.classList.add('memo-sidebar-ul');
   const memo_sidebar_footer = document.createElement('div');
-  memo_sidebar_footer.classList.add('memo-sedebar-footer');
+  memo_sidebar_footer.classList.add('memo-sidebar-footer');
   const memo_main = document.createElement('div');
   memo_main.classList.add('memo-main');
   const memo_main_title = document.createElement('input');
@@ -85,6 +92,12 @@ memoWidgetHeader?.addEventListener('click', () => {
   memo_main_title.value = '';
   const memo_main_content = document.createElement('textarea');
   memo_main_content.classList.add('memo-main-content');
+  const memo_save_btn_container = document.createElement('div');
+  memo_save_btn_container.classList.add('memo-save-btn-container');
+  const memo_save_btn = document.createElement('button');
+  memo_save_btn.classList.add('memo-save-btn');
+  memo_save_btn.type = 'button';
+  memo_save_btn.textContent = '완료';
 
   let memoCnt = 0;
   for (let i = 0; i < localStorage.length; i++) {
@@ -123,6 +136,8 @@ memoWidgetHeader?.addEventListener('click', () => {
   memo_container.appendChild(memo_main);
   memo_main.appendChild(memo_main_title);
   memo_main.appendChild(memo_main_content);
+  memo_main.appendChild(memo_save_btn_container);
+  memo_save_btn_container.appendChild(memo_save_btn);
 
   memo_sidebar_title.textContent = '메모';
   memo_searchbar.placeholder = '검색';
