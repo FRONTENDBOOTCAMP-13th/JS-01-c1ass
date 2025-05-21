@@ -99,7 +99,7 @@ function showWeather1(weather_info: weatherInfo) {
     weather_location_en!.textContent = weather_info.weather_location_en;
     const status = weather_info.weather_status;
     weather_status!.textContent = weather_status_list[status][0];
-    weather_status_img!.src = `/public/asserts/weather-widget/${weather_status_list[status][1]}.svg`;
+    weather_status_img!.src = `/asserts/weather-widget/${weather_status_list[status][1]}.svg`;
   });
 }
 

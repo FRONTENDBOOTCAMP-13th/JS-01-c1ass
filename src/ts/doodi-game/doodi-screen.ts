@@ -40,9 +40,11 @@ function handleNavigation(event: Event): void {
 
 // 효과음 (pop) : 버튼 클릭 효과음
 export function effectPopSound() {
-  const popSound = new Audio('../../../public/asserts/doodi-game/etc/effect_pop.mp3');
+  const popSound = new Audio('/asserts/doodi-game/etc/effect_pop.mp3');
   popSound.volume = 0.1;
-  popSound.play();
+  popSound.play().catch(err => {
+    console.warn('오디오 실행 실패:', err);
+  });
 }
 
 // 모든 before/after 버튼에 이벤트 연결
