@@ -22,7 +22,7 @@ function preloadResource(url: string): Promise<void> {
 }
 
 export async function startPreload() {
-  const loading = document.getElementById('loading-screen');
+  const loading = document.getElementById('loading');
   const mainScreen = document.getElementById('cover'); // 초기 화면 또는 게임 시작 화면
 
   try {
