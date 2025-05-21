@@ -325,4 +325,22 @@
       }
     }
   }
+  .clock-container {
+    @apply grid grid-cols-2 grid-rows-[50px_1fr] w-full h-full bg-[#d9d9d9]  text-black dark:text-white;
+    .stopwatch-label {
+      @apply col-start-1 col-end-2 row-start-1 row-end-2 bg-gray-100 dark:bg-black hover:bg-white dark:hover:bg-[#555555] has-[input:checked]:bg-[#d9d9d9] dark:has-[input:checked]:text-black text-center;
+      .stopwatch-radio {
+        @apply appearance-none;
+      }
+    }
+    .timer-label {
+      @apply col-start-2 col-end-3 row-start-1 row-end-2 bg-gray-100 dark:bg-black hover:bg-white dark:hover:bg-[#555555] has-[input:checked]:bg-[#d9d9d9] dark:has-[input:checked]:text-black text-center;
+      .timer-radio {
+        @apply appearance-none;
+      }
+    }
+    .clock-panel {
+      @apply col-start-1 col-end-3 row-start-2 row-end-3;
+    }
+  }
 }

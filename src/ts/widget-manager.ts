@@ -14,6 +14,7 @@ if (!localStorage.getItem('memo-item3')) localStorage.setItem('memo-item3', '메
 const container = document.querySelector('#mac-panel-container');
 const calendarWidget = document.querySelector('.calendar-widget');
 const memoWidget = document.querySelector('.memo-widget');
+const clockWidget = document.querySelector('.clock-widget-component');
 calendarWidget?.addEventListener('click', () => {
   if (container!.querySelector('.mac-panel[data-id="calendar-widget"] .mac-panel-program')) return;
   const tmppanel = panelContainer.createMacPanel('calendar-widget', 1);
@@ -61,6 +62,68 @@ Array.from(memoWidgetItems!).forEach((e, i) => {
     createMemoPanel(i + 1);
   });
 });
+
+clockWidget?.addEventListener('click', () => {
+  if (container!.querySelector('.mac-panel[data-id="clock-widget"] .mac-panel-program')) return;
+  const tmppanel = panelContainer.createMacPanel('clock-widget', 1);
+  container?.appendChild(tmppanel);
+  const clockProgram = container!.querySelector('.mac-panel[data-id="clock-widget"] .mac-panel-program') as HTMLElement;
+  clockProgram.classList.add('dark:bg-[#000000]');
+
+  const clock_container_div = document.createElement('div');
+  clock_container_div.classList.add('clock-container');
+  const stopwatch_label = document.createElement('label');
+  stopwatch_label.classList.add('stopwatch-label');
+  const stopwatch_radio = document.createElement('input');
+  stopwatch_radio.classList.add('stopwatch-radio');
+  stopwatch_radio.type = 'radio';
+  stopwatch_radio.name = 'clocktype';
+  stopwatch_radio.value = 'stopwatch';
+  stopwatch_radio.checked = true;
+  const stopwatch_text = document.createTextNode('스톱워치');
+  const timer_label = document.createElement('label');
+  timer_label.classList.add('timer-label');
+  const timer_radio = document.createElement('input');
+  timer_radio.classList.add('timer-radio');
+  timer_radio.type = 'radio';
+  timer_radio.name = 'clocktype';
+  timer_radio.value = 'timer';
+  const timer_text = document.createTextNode('타이머');
+  clock_container_div.appendChild(stopwatch_label);
+  clock_container_div.appendChild(timer_label);
+  stopwatch_label.appendChild(stopwatch_radio);
+  stopwatch_label.appendChild(stopwatch_text);
+  timer_label.appendChild(timer_radio);
+  timer_label.appendChild(timer_text);
+
+  const clock_panel = document.createElement('div');
+  clock_panel.classList.add('clock-panel');
+  clock_panel.appendChild(makeStopwatch());
+  clock_container_div.appendChild(clock_panel);
+
+  clockProgram.appendChild(clock_container_div);
+
+  stopwatch_radio.addEventListener('change', () => {
+    if (stopwatch_radio.checked) {
+      clock_panel.appendChild(makeStopwatch());
+    }
+  });
+  timer_radio.addEventListener('change', () => {
+    if (timer_radio.checked) {
+      clock_panel.appendChild(makeTimer());
+    }
+  });
+
+  function makeStopwatch(): HTMLDivElement {
+    // stopwatch 기능을 담고 있는 div를 반환하면 패널로 들어감
+    return document.createElement('div');
+  }
+  function makeTimer(): HTMLDivElement {
+    // timer 기능을 담고 있는 div를 반환하면 패널로 들어감
+    return document.createElement('div');
+  }
+});
+
 interface WidgetManager {
   // createWidget(id: string): HTMLElement;
   isWidget(id: string): boolean;
@@ -68,6 +131,7 @@ interface WidgetManager {
   switchWidgetToProgram(id: string): HTMLElement | undefined;
   makeCalendar(): HTMLElement | undefined;
   makeMemo(): HTMLElement | undefined;
+  makeClock(): HTMLElement | undefined;
 }
 
 const widgetManager: WidgetManager = {
@@ -92,11 +156,15 @@ const widgetManager: WidgetManager = {
   switchWidgetToProgram(id: string): HTMLElement | undefined {
     if (id === 'calendar-widget') return this.makeCalendar();
     if (id === 'memo-widget') return this.makeMemo();
+    if (id === 'clock-widget') return this.makeClock();
   },
   makeCalendar(): HTMLElement | undefined {
     return;
   },
   makeMemo(): HTMLElement | undefined {
+    return;
+  },
+  makeClock(): HTMLElement | undefined {
     return;
   },
 };
