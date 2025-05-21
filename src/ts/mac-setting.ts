@@ -12,6 +12,7 @@ import { widgetManager } from './widget-manager.ts';
 // import { panelContainer } from './mac-panel-container.ts';
 
 const body = document.querySelector('body');
+const screen_overlay = document.querySelector('#screen-overlay');
 const mac = document.querySelector('.mac') as HTMLDivElement;
 const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
 const mac_bottom = document.querySelector('.mac-bottom') as HTMLDivElement;
@@ -31,8 +32,33 @@ addBlankWidgetToggle();
 addBodyDragToggle();
 addCreateIconBtn();
 addRemoveIconBtn();
+hiddenScreenOverlay();
 
 // body?.addEventListener('click', showID);
+
+function hiddenScreenOverlay() {
+  const btn = document.createElement('button');
+  btn.style.position = 'absolute';
+  btn.style.top = '210px';
+  btn.style.left = '10px';
+  btn.style.border = '1px solid black';
+  btn.style.paddingInline = '4px';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#d9d9d9';
+  btn.setAttribute('type', 'button');
+  btn.textContent = '맥 커버 제거';
+
+  body?.insertBefore(btn, body.firstChild);
+  btn.addEventListener('click', () => {
+    if (screen_overlay!.classList.contains('hidden')) {
+      screen_overlay!.classList.remove('hidden');
+      btn.textContent = '맥 커버 추가';
+    } else {
+      screen_overlay!.classList.add('hidden');
+      btn.textContent = '맥 커버 제거';
+    }
+  });
+}
 
 function setInitIcon() {
   programID.forEach((_, i) => {
@@ -68,10 +94,10 @@ function setInitIcon() {
 //     content!.textContent = (e as HTMLDivElement).dataset.id!;
 //   });
 // }
-document.addEventListener('contextmenu', function (e) {
-  e.preventDefault();
-  // openModal();
-});
+// document.addEventListener('contextmenu', function (e) {
+//   e.preventDefault();
+//   // openModal();
+// });
 function addSelect() {
   const select = document.createElement('select');
   select.classList.add('mac-screen-size');
