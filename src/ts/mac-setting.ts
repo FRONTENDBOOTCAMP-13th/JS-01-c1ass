@@ -24,6 +24,7 @@ let iconCounter = 0;
 // let widgetCounter = 0;
 
 setInitIcon();
+iconBar.insertAddIconBtn();
 // setInitWidget();
 addSelect();
 paintBlankWidgets();
