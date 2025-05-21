@@ -266,4 +266,11 @@
       transform: scale(1);
     }
   }
+
+  .context-menu {
+    @apply min-w-[140px] text-black dark:text-white dark:border-0 bg-[rgba(111,111,111,0.2)] dark:bg-[rgba(109,109,109,0.5)] rounded-[7px];
+    .context-menu-item {
+      @apply min-h-[22px] m-1 px-[15px] align-middle hover:text-white hover:bg-[#5682E2] hover:rounded-[5px];
+    }
+  }
 }
