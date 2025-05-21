@@ -7,7 +7,14 @@
     <script type="module" src="/src/ts/socks-game.ts"></script>
     <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
-    <title>sockast</title>
+    <script type="module">
+      import { startPreloadSocks } from '/src/ts/socks-game.ts';
+
+      window.addEventListener('DOMContentLoaded', () => {
+        startPreloadSocks();
+      });
+    </script>
+    <title>Sockast</title>
   </head>
   <body class="flex items-center justify-center bg-[url('/public/asserts/socks-game/check.svg')] bg-cover h-screen">
     <!-- 로딩 화면 -->
