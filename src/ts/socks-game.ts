@@ -1,34 +1,54 @@
 // 로드되어야 할 이미지들
 const imageUrls: string[] = ['/asserts/socks-game/label_404.png', '/asserts/socks-game/logo_sockast.png', '/asserts/socks-game/story_eng.png', '/asserts/socks-game/postBox.png', '/asserts/socks-game/check.svg', '/asserts/socks-game/paper-sound.aac', '/asserts/socks-game/paper1.png', '/asserts/socks-game/paper2.png', '/asserts/socks-game/paper3.png', '/asserts/socks-game/paper_package.png', '/asserts/socks-game/socks-list/socks1.png', '/asserts/socks-game/socks-list/socks2.png', '/asserts/socks-game/socks-list/socks3.png', '/asserts/socks-game/socks-list/socks4.png', '/asserts/socks-game/socks-list/socks5.png', '/asserts/socks-game/socks-list/socks6.png', '/asserts/socks-game/socks-list/socks7.png', '/asserts/socks-game/socks-list/socks8.png', '/asserts/socks-game/socks-list/socks9.png', '/asserts/socks-game/socks-list/socks10.png', '/asserts/socks-game/socks-list/socks11.png', '/asserts/socks-game/socks-list/socks12.png', '/asserts/socks-game/socks-list/socks13.png', '/asserts/socks-game/socks-list/socks14.png', '/asserts/socks-game/socks-list/socks15.png', '/asserts/socks-game/socks-list/socks16.png', '/asserts/socks-game/socks-list/socks17.png', '/asserts/socks-game/socks-list/socks18.png', '/asserts/socks-game/socks-list/socks19.png', '/asserts/socks-game/socks-list/socks20.png', '/asserts/socks-game/socks-list/socks21.png', '/asserts/socks-game/socks-list/socks22.png', '/asserts/socks-game/socks-list/socks23.png', '/asserts/socks-game/socks-list/socks24.png', '/asserts/socks-game/socks-list/socks25.png'];
 
-// 이미지 프리로드 함수
-function preloadImages(urls: string[]): Promise<void[]> {
-  return Promise.all(
-    urls.map(url => {
-      return new Promise<void>(resolve => {
-        const img = new Image();
-        img.onload = () => resolve();
-        img.onerror = () => resolve(); // 실패해도 통과
-        img.src = url;
-      });
-    }),
-  );
+// 리소스별 로딩 처리
+function preloadResourceSocks(url: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const ext = url.split('.').pop()?.toLowerCase();
+    if (!ext) return resolve();
+
+    if (['png', 'jpg', 'jpeg', 'gif', 'svg'].includes(ext)) {
+      const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => reject(new Error(`Image load error: ${url}`));
+      img.src = url;
+    } else if (['mp3', 'aac'].includes(ext)) {
+      const audio = new Audio();
+      audio.src = url;
+      audio.oncanplaythrough = () => resolve();
+      audio.onerror = () => reject(new Error(`Audio load error: ${url}`));
+      audio.load();
+    } else if (['mp4', 'webm'].includes(ext)) {
+      const video = document.createElement('video');
+      video.src = url;
+      video.onloadeddata = () => resolve();
+      video.onerror = () => reject(new Error(`Video load error: ${url}`));
+    } else {
+      resolve(); // 기타 확장자 무시
+    }
+  });
 }
 
-// 로딩 후 화면전환
-window.addEventListener('DOMContentLoaded', async () => {
-  const loader = document.getElementById('loading-screen');
-  await preloadImages(imageUrls);
-  console.log('이미지 로드 중...');
+// 프리로드 실행
+export async function startPreloadSocks() {
+  const loading = document.getElementById('loading-screen');
+  const mainScreen = document.getElementById('cover'); // 게임 시작 화면
 
-  // 이미지 다 로딩되면 로딩 화면 제거
-  if (loader) {
-    loader.remove();
-    console.log('로딩에서 벗어남.');
+  try {
+    // 로딩 시작 시 보여주기
+    loading?.classList.remove('hidden');
+
+    // 모든 리소스 로딩
+    await Promise.all(imageUrls.map(preloadResourceSocks));
+
+    // 완료 후 전환
+    loading?.remove();
+    mainScreen?.classList.remove('hidden');
+  } catch (err) {
+    console.error('리소스 로딩 실패:', err);
+    if (loading) loading.innerHTML = '<p class="text-red-500">로딩 실패 😢</p>';
   }
-
-  // 이제 안전하게 img들을 createElement로 추가해도 렉 없이 바로 뜸!
-});
+}
 
 // 랜덤뽑기
 const drawElement = document.getElementById('draw') as HTMLDivElement;
@@ -64,8 +84,6 @@ const socksItems = [
   { img: '/asserts/socks-game/socks-list/socks24.png', title: '귀엽도록 의도했는데\n불쾌한 골짜기가 돼버린 젖소양말.', anal: '내가 봐도 이상한 건 알겠는데\n괜히 그 이상한 거 하나에 꽂히는 날.', purchase: 'https://www.amazon.com/K-Bell-Socks-Womens-Multi/dp/B0053O3GEK/ref=sr_1_39?s=apparel&ie=UTF8&qid=1332286993&sr=1-39' },
   { img: '/asserts/socks-game/socks-list/socks25.png', title: '체리 냄새가 날 것 같은데\n딸기 냄새가 나는 양말', anal: '누군가는 실수라 부를지 몰라도\n오히려 마음에 드는 결과를 불러올지도 몰라!', purchase: 'https://kr.shein.com/2%EC%BC%A4%EB%A0%88-%EA%B3%A0%ED%92%88%EC%A7%88-%EC%9C%A0%EB%8B%88%EC%84%B9%EC%8A%A4-%EC%9E%AC%EB%AF%B8%EC%9E%88%EB%8A%94-%EC%B2%B4%EB%A6%AC-%ED%8C%A8%ED%84%B4-%EC%96%91%EB%A7%90,-%ED%8E%B8%EC%95%88%ED%95%98%EA%B3%A0-%EB%B6%80%EB%93%9C%EB%9F%AC%EC%9A%B4-%EB%94%94%EC%9E%90%EC%9D%B8-p-71750047.html?mallCode=1' },
 ];
-const allImagesToPreload = [...bgImages, ...socksItems.map(sock => sock.img)];
-preloadImages(allImagesToPreload);
 
 // ✅ 이미 보여준 양말 인덱스 추적용 배열
 let usedSocks: number[] = [];
