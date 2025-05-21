@@ -4,6 +4,8 @@
   --font-sans: 'Pretendard Variable', 'sans-serif';
 }
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 /* doodi-game: 두더지 등장하는 애니메이션 */
 @keyframes moleBounce {
   0% {
@@ -163,6 +165,34 @@
   50% {
     transform: translateY(-12px);
   }
+}
+
+/* mac-widget: hover 속성 */
+.widget:hover {
+  transform: scale(1.05);
+  transition: transform 0.4s cubic-bezier(0, 0.65, 0.76, 1);
+}
+
+/* mac: button-mode-change 모드 전환 애니메이션 */
+@keyframes rotate-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(1deg);
+  }
+}
+
+.wiggle {
+  animation: rotate-wiggle 0.4s ease-in-out;
+  transform-origin: left bottom;
 }
 
 @layer components {

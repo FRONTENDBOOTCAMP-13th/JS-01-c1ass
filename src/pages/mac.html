@@ -16,6 +16,7 @@
     <script type="module" src="/src/ts/mac-power-button.ts"></script>
     <script type="module" src="/src/ts/context-menu.ts"></script>
     <script type="module" src="/src/ts/icon-move.ts"></script>
+    <script type="module" src="/src/ts/button-mode-change.ts"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.17/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.17/index.global.min.js"></script>
@@ -32,7 +33,11 @@
   </head>
   <body class="font-sans overflow-hidden no-scroll grid grid-cols-[1fr_calc(1200px_+_80px)_1fr] grid-rows-1 h-screen select-none">
     <div class="mac-entire-bg bg-[url('/public/asserts/mac/background-web/bg-white.webp')] dark:bg-[url('/public/asserts/mac/background-web/bg-black.webp')] bg-cover col-start-1 col-end-4 row-start-1 row-end-2"></div>
-    <div class="mac-left-bg bg-red-300/0 col-start-1 col-end-2 row-start-1 row-end-2"></div>
+    <div class="mac-left-bg col-start-1 col-end-2 row-start-1 row-end-2">
+      <!-- 라이트모드/다크모드 수동변환 버튼 -->
+      <button id="theme-toggle" type="button" aria-label="다크모드/라이트모드 토글" class="hover:opacity-80 mt-35 cursor-pointer -translate-x-15"><img id="theme-icon" src="/public/asserts/mac/stand_longer.webp" alt="다크모드/라이트모드 전환 아이콘" /></button>
+      <button id="system-reset" class="ml-2 px-3 py-2 absolute left-0 translate-y-10 rounded bg-blue-100 dark:bg-blue-800 cursor-pointer">시스템 모드로 복귀</button>
+    </div>
     <div class="mac mt-10 col-start-2 col-end-3 row-start-1 row-end-2">
       <div class="shadow-[0_0_100px_0_rgba(0,0,0,0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] dark:bg-linear-[-45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
         <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] dark:bg-[url(/public/asserts/mac/mac-screen-base-dark-background-img.png)] bg-cover rounded-[15px]">
@@ -67,7 +72,7 @@
           <!-- widget-container -->
           <div id="widget-container" class="grid grid-rows-[repeat(4,_100px)] my-auto grid-cols-[repeat(9,_100px)] gap-5">
             <!-- 시계 위젯 -->
-            <div draggable="true" class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] dark:bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1" data-col="1" data-row="1">
+            <div draggable="true" class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] dark:bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1 widget" data-col="1" data-row="1">
               <img class="col-start-1 row-start-1 place-self-center" src="/public/asserts/clock-widget/pan.svg" alt="" />
               <div class="relative w-full h-full col-start-1 row-start-1 second-niddle-div place-self-center">
                 <img draggable="false" class="absolute top-[8px] left-[49.2px]" src="/public/asserts/clock-widget/second-niddle.svg" alt="" />
@@ -81,12 +86,12 @@
               <img draggable="false" class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
             </div>
             <!-- 달력 위젯 -->
-            <div draggable="true" class="calendar-widget w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col" data-col="1" data-row="1">
+            <div draggable="true" class="calendar-widget w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col widget" data-col="1" data-row="1">
               <div class="day-name dark:text-white text-[1rem] font-semibold h-[1.25rem]"></div>
               <div class="day-number mt-0 p-0 dark:text-white text-6xl font-bold h-[3.4375rem]"></div>
             </div>
             <!-- 날씨 위젯 -->
-            <div draggable="true" class="overflow-hidden text-white weather-widget1 w-55 h-25 py-4 pl-[10px] pr-[17px] bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center" data-col="2" data-row="1">
+            <div draggable="true" class="overflow-hidden text-white weather-widget1 w-55 h-25 py-4 pl-[10px] pr-[17px] bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center widget" data-col="2" data-row="1">
               <img draggable="false" class="object-contain h-full weather-status-img" src="/public/asserts/weather-widget/clear.svg" alt="" />
               <div class="flex flex-col items-end gap-1">
                 <div class="leading-[32px] temperature text-[32px] after:content-['°C']">26</div>
@@ -95,7 +100,7 @@
               </div>
             </div>
             <!-- 메모 위젯 -->
-            <div draggable="true" class="memo-widget w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white dark:bg-gradient-to-b dark:text-white dark:from-[#000000] dark:to-[#000000]">
+            <div draggable="true" class="memo-widget w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white dark:bg-gradient-to-b dark:text-white dark:from-[#000000] dark:to-[#000000] widget">
               <!-- 헤더(yellow) -->
               <div class="memo-widget-header flex w-full h-7 bg-gradient-to-b from-[#FFE855] to-[#FFB115] rounded-t-[1.4375rem] px-[1.125rem] items-center">
                 <button type="button" class="flex items-center cursor-pointer gap-1.5 pt-[.0313rem] active:opacity-50">
