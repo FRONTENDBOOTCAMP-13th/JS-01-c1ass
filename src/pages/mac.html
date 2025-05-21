@@ -33,16 +33,31 @@
       <div class="shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
         <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] dark:bg-[url(/public/asserts/mac/mac-screen-base-dark-background-img.png)] bg-cover rounded-[15px]">
           <!-- top-bar -->
-          <div class="w-full flex justify-between items-center bg-[rgba(109,109,109,0.70)] shadow-2xl">
+          <div class="w-full flex justify-between items-center py-0.5 bg-[rgba(223,223,223,0.20)] dark:bg-[rgba(109,109,109,0.5)] shadow-2xl">
             <div class="ml-3">
-              <img src="../../public/asserts/top-bar/apple-logo-white.svg" alt="애플로고" />
+              <picture>
+                <source srcset="../../public/asserts/top-bar/apple-logo-white.svg" media="(prefers-color-scheme: dark)" />
+                <img src="../../public/asserts/top-bar/apple-logo-black.svg" alt="로고" />
+              </picture>
             </div>
-            <div class="inline-flex mr-3">
-              <img class="mr-3" src="../../public/asserts/top-bar/battery-white.svg" alt="배터리" />
-              <img class="mr-3" src="../../public/asserts/top-bar/wifi-white.svg" alt="와이파이" />
-              <img class="mr-3" src="../../public/asserts/top-bar/search-white.svg" alt="검색" />
-              <img class="mr-3" src="../../public/asserts/top-bar/toggle-white.svg" alt="토글" />
-              <span class="current-date text-xs text-white"></span>
+            <div class="inline-flex items-center mr-3">
+              <picture>
+                <source srcset="../../public/asserts/top-bar/battery-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/battery-black.svg" alt="배터리" />
+              </picture>
+              <picture>
+                <source srcset="../../public/asserts/top-bar/wifi-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/wifi-black.svg" alt="와이파이" />
+              </picture>
+              <picture>
+                <source srcset="../../public/asserts/top-bar/search-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/search-black.svg" alt="검색" />
+              </picture>
+              <picture>
+                <source srcset="../../public/asserts/top-bar/toggle-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/toggle-black.svg" alt="토글" />
+              </picture>
+              <span class="current-date text-xs dark:text-white"></span>
             </div>
           </div>
           <!-- widget-container -->
