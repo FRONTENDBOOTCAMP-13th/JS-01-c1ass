@@ -158,12 +158,6 @@ drawButton?.addEventListener('click', () => {
 
     const cardBack = card.querySelector('.card-back') as HTMLElement;
 
-    // 마우스 클릭으로 뒤집기
-    card.addEventListener('click', () => {
-      card.classList.add('flipped');
-      handleCardClick(card, item);
-    });
-
     // 키보드 Enter/Space로 뒤집기
     cardBack?.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -226,12 +220,6 @@ function handleCardClick(card: HTMLElement, item: Item) {
 
   if (card.dataset.played === 'true') return;
 
-  if (item.audio) {
-    const audio = new Audio(item.audio + '.mp3');
-    audio.play().catch(err => console.error('오디오 재생 실패:', err));
-    card.dataset.played = 'true';
-  }
-
   // 이미 존재하는지 체크 후 없으면 추가
   const exists = collection.some(col => col.name === item.name);
   if (!exists) {
@@ -285,7 +273,7 @@ collectionModal?.addEventListener('click', event => {
 });
 
 // 로딩창 요소
-const loadingScreen = document.getElementById('loading-screen');
+const cardLoadingScreen = document.getElementById('card-loading-screen');
 
 // 이미지 로딩을 Promise로 감싸기
 function loadImage(src: string): Promise<void> {
@@ -315,7 +303,7 @@ async function preloadAssets() {
     const audioPromises = cardItems.filter(item => item.audio).map(item => loadAudio(item.audio!));
 
     // 로딩창 보이기
-    loadingScreen?.classList.remove('hidden');
+    cardLoadingScreen?.classList.remove('hidden');
 
     // 모두 기다리기
     await Promise.all([...imagePromises, ...audioPromises]);
@@ -323,9 +311,10 @@ async function preloadAssets() {
     console.error(error);
   } finally {
     // 로딩창 숨기기
-    loadingScreen?.classList.add('hidden');
+    cardLoadingScreen?.classList.add('hidden');
   }
 }
 
-// 호출
-preloadAssets();
+document.addEventListener('DOMContentLoaded', () => {
+  preloadAssets(); // 호출
+});
