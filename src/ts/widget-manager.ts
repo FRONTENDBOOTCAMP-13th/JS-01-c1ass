@@ -15,6 +15,7 @@ const container = document.querySelector('#mac-panel-container');
 const calendarWidget = document.querySelector('.calendar-widget');
 const memoWidget = document.querySelector('.memo-widget');
 calendarWidget?.addEventListener('click', () => {
+  if (container!.querySelector('.mac-panel[data-id="calendar-widget"] .mac-panel-program')) return;
   const tmppanel = panelContainer.createMacPanel('calendar-widget', 1);
   container?.appendChild(tmppanel);
 
@@ -43,20 +44,89 @@ calendarWidget?.addEventListener('click', () => {
 
 const memoWidgetHeader = memoWidget?.querySelector('.memo-widget-header');
 memoWidgetHeader?.addEventListener('click', () => {
+  if (container!.querySelector('.mac-panel[data-id="memo-widget"] .mac-panel-program')) return;
   const tmppanel = panelContainer.createMacPanel('memo-widget', 1);
   container?.appendChild(tmppanel);
 
   const memoEl = container!.querySelector('.mac-panel[data-id="memo-widget"] .mac-panel-program') as HTMLElement;
+  console.log(memoEl);
   memoEl.classList.add('allow-scroll');
+  memoEl.classList.add('dark:bg-[#000000]');
   const memoHd = container!.querySelector(`.mac-panel[data-id="memo-widget"] .mac-panel-header`) as HTMLElement;
   memoHd.classList.add('bg-gradient-to-b', 'from-[#FFE855]', 'to-[#FFB115]');
   const memoTitle = container!.querySelector(`.mac-panel[data-id="memo-widget"] .mac-panel-title`) as HTMLElement;
   memoTitle.classList.add('text-white');
-  let rst = '';
-  rst += localStorage.getItem('memo-title1') + '\n';
-  rst += localStorage.getItem('memo-title2') + '\n';
-  rst += localStorage.getItem('memo-title3') + '\n';
-  memoEl.innerText = rst;
+
+  const memo_container = document.createElement('div');
+  memo_container.classList.add('memo-container');
+  const memo_sidebar_container = document.createElement('div');
+  memo_sidebar_container.classList.add('memo-sidebar-container');
+  const memo_sidebar = document.createElement('div');
+  memo_sidebar.classList.add('memo-sidebar');
+  const memo_sidebar_header = document.createElement('div');
+  memo_sidebar_header.classList.add('memo-sidebar-header');
+  const memo_sidebar_title = document.createElement('div');
+  memo_sidebar_title.classList.add('memo-sidebar-title');
+  const memo_add_btn = document.createElement('button');
+  memo_add_btn.classList.add('memo-add-btn');
+  memo_add_btn.type = 'button';
+  const memo_searchbar = document.createElement('input');
+  memo_searchbar.classList.add('memo-searchbar');
+  memo_searchbar.type = 'search';
+  const memo_sidebar_ul = document.createElement('ul');
+  memo_sidebar_ul.classList.add('memo-sidebar-ul');
+  const memo_sidebar_footer = document.createElement('div');
+  memo_sidebar_footer.classList.add('memo-sedebar-footer');
+  const memo_main = document.createElement('div');
+  memo_main.classList.add('memo-main');
+  const memo_main_title = document.createElement('input');
+  memo_main_title.classList.add('memo-main-title');
+  memo_main_title.type = 'text';
+  memo_main_title.value = '';
+  const memo_main_content = document.createElement('textarea');
+  memo_main_content.classList.add('memo-main-content');
+
+  let memoCnt = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key) {
+      if (key.startsWith('memo-title')) {
+        memoCnt++;
+        const idx = key.slice('memo-title'.length);
+        const memo_sidebar_li = document.createElement('li');
+        memo_sidebar_li.classList.add('memo-sidebar-li');
+        const memo_item_title = document.createElement('div');
+        memo_item_title.classList.add('memo-item-title');
+        const memo_item_content = document.createElement('div');
+        memo_item_content.classList.add('memo-item-content');
+        memo_sidebar_ul.appendChild(memo_sidebar_li);
+        memo_sidebar_li.appendChild(memo_item_title);
+        memo_sidebar_li.appendChild(memo_item_content);
+        memo_item_title.textContent = localStorage.getItem(`memo-title${idx}`);
+        memo_item_content.textContent = localStorage.getItem(`memo-item${idx}`);
+        memo_sidebar_li.addEventListener('click', () => {
+          memo_main_title.value = localStorage.getItem(`memo-title${idx}`) || '';
+          memo_main_content.textContent = localStorage.getItem(`memo-item${idx}`) || '';
+        });
+      }
+    }
+  }
+  memoEl.appendChild(memo_container);
+  memo_container.appendChild(memo_sidebar_container);
+  memo_sidebar_container.appendChild(memo_sidebar);
+  memo_sidebar.appendChild(memo_sidebar_header);
+  memo_sidebar_header.appendChild(memo_sidebar_title);
+  memo_sidebar_header.appendChild(memo_add_btn);
+  memo_sidebar.appendChild(memo_searchbar);
+  memo_sidebar.appendChild(memo_sidebar_ul);
+  memo_sidebar_container.appendChild(memo_sidebar_footer);
+  memo_container.appendChild(memo_main);
+  memo_main.appendChild(memo_main_title);
+  memo_main.appendChild(memo_main_content);
+
+  memo_sidebar_title.textContent = '메모';
+  memo_searchbar.placeholder = '검색';
+  memo_sidebar_footer.textContent = `${memoCnt}개의 메모`;
 });
 const memoWidgetItems = memoWidget?.querySelectorAll('.memo-widget-item');
 Array.from(memoWidgetItems!).forEach((e, i) => {
