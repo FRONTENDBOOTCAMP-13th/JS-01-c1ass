@@ -98,7 +98,7 @@ export function showMole() {
   moleImg.className = 'w-full h-full object-cover';
 
   const mole = document.createElement('div');
-  mole.className = `mole absolute w-19 h-19 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/5 active:scale-[120%] mole-bounce`;
+  mole.className = `mole absolute sm:w-19 sm:h-19 md:w-22 md:h-22 sm:top-1/2 md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/5 active:scale-[120%] mole-bounce`;
   mole.appendChild(moleImg);
 
   mole.addEventListener('click', () => {

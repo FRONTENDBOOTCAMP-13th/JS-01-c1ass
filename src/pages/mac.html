@@ -14,9 +14,13 @@
     <script type="module" src="/src/ts/widget-move.ts"></script>
     <script type="module" src="/src/ts/widget-manager.ts"></script>
     <script type="module" src="/src/ts/mac-power-button.ts"></script>
+    <script type="module" src="/src/ts/context-menu.ts"></script>
+    <script type="module" src="/src/ts/icon-move.ts"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.17/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.17/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
     <script type="module" src="/src/ts/widget-manager.ts"></script>
     <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
@@ -33,16 +37,31 @@
       <div class="shadow-[0_0_100px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] dark:bg-linear-[-45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
         <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] dark:bg-[url(/public/asserts/mac/mac-screen-base-dark-background-img.png)] bg-cover rounded-[15px]">
           <!-- top-bar -->
-          <div class="w-full flex justify-between items-center bg-[rgba(109,109,109,0.70)] shadow-2xl py-0.5">
+          <div class="w-full flex justify-between items-center py-0.5 bg-[rgba(223,223,223,0.20)] dark:bg-[rgba(109,109,109,0.5)] shadow-2xl py-0.5">
             <div class="ml-3">
-              <img src="../../public/asserts/top-bar/apple-logo-white.svg" alt="애플로고" />
+              <picture>
+                <source srcset="../../public/asserts/top-bar/apple-logo-white.svg" media="(prefers-color-scheme: dark)" />
+                <img src="../../public/asserts/top-bar/apple-logo-black.svg" alt="로고" />
+              </picture>
             </div>
-            <div class="inline-flex mr-3">
-              <img class="mr-3" src="../../public/asserts/top-bar/battery-white.svg" alt="배터리" />
-              <img class="mr-3" src="../../public/asserts/top-bar/wifi-white.svg" alt="와이파이" />
-              <img class="mr-3" src="../../public/asserts/top-bar/search-white.svg" alt="검색" />
-              <img class="mr-3" src="../../public/asserts/top-bar/toggle-white.svg" alt="토글" />
-              <span class="current-date text-xs text-white"></span>
+            <div class="inline-flex items-center mr-3">
+              <picture>
+                <source srcset="../../public/asserts/top-bar/battery-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/battery-black.svg" alt="배터리" />
+              </picture>
+              <picture>
+                <source srcset="../../public/asserts/top-bar/wifi-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/wifi-black.svg" alt="와이파이" />
+              </picture>
+              <picture>
+                <source srcset="../../public/asserts/top-bar/search-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/search-black.svg" alt="검색" />
+              </picture>
+              <picture>
+                <source srcset="../../public/asserts/top-bar/toggle-white.svg" media="(prefers-color-scheme: dark)" />
+                <img class="mr-3" src="../../public/asserts/top-bar/toggle-black.svg" alt="토글" />
+              </picture>
+              <span class="current-date text-xs dark:text-white"></span>
             </div>
           </div>
           <!-- widget-container -->
@@ -125,6 +144,11 @@
       <div><img class="dark:hidden" src="/public/asserts/mac/pedestal_white.webp" alt="모니터 받침대 이미지 (라이트모드)" /></div>
       <div><img class="hidden dark:block" src="/public/asserts/mac/pedestal_black.webp" alt="모니터 받침대 이미지 (다크보드)" /></div>
     </div>
-    <div class="mac-right-bg bg-blue-300/0 col-start-3 col-end-4 row-start-1 row-end-2"></div>
+    <div class="mac-right-bg bg-blue-300 col-start-3 col-end-4 row-start-1 row-end-2 relative p-4">
+      <div id="clickablePostIt"
+    class="post-it absolute top-6 right-6 w-[150px] h-[150px] bg-[#ffffe0] p-2 shadow-[5px_5px_7px_rgba(0,0,0,0.3)] text-center break-words transition-transform duration-300 ease-in-out cursor-pointer select-none text-sm leading-[1.4]">
+    <p class="m-0">기능</p>
+  </div>
+</div>
   </body>
 </html>
