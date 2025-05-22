@@ -374,4 +374,12 @@
       @apply col-start-1 col-end-3 row-start-2 row-end-3;
     }
   }
+  .add-icon-inner-program {
+    @apply flex flex-col h-full justify-center gap-10;
+    /* .add-icon-input-container {
+    } */
+    .add-icon-input {
+      @apply text-[#202022] bg-[#E4E3E9] dark:bg-[#1C1C1E] p-1 text-[20px] rounded-[5px] w-full h-10;
+    }
+  }
 }
