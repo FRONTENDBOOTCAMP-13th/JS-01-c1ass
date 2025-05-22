@@ -22,6 +22,8 @@ export default defineConfig({
         'weather-widget': 'src/components/weather-widget.html',
         'doodi-character': 'src/components/doodi-game/doodi-character.html',
         'doodi-gamepage': 'src/components/doodi-game/doodi-gamepage.html',
+        'context-menu': 'src/components/context-menu.html',
+        'memo-program': 'src/components/memo-program.html',
 
         notfound: 'src/pages/notfound.html',
       },

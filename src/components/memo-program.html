@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.ts"></script>
+    <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <title>memo-program</title>
+  </head>
+  <body class="flex justify-center items-center h-screen w-screen">
+    <div class="wrap w-[672px] h-[400px] p-4 border-2">
+      <div class="memo-container w-full h-full min-h-0 grid grid-cols-[135px_1fr] grid-rows-1">
+        <div class="memo-sidebar-container bg-[#F3F2F8] dark:bg-[#000000] dark:border-r-1 dark:border-[#8B8A90] h-full min-h-0 pb-10 relative">
+          <div class="memo-sidebar bg-[#F3F2F8] dark:bg-[#000000] flex flex-col gap-2 px-2 pt-3 h-full min-h-0">
+            <div class="memo-sidebar-header font-bold grid grid-cols-1 grid-rows-1 h-[25px]">
+              <div class="memo-sidebar-title dark:text-white col-start-1 col-span-1 row-start-1 row-span-1 self-end">메모</div>
+              <button type="button" class="memo-add-btn hover:translate-y-[2px] rounded-[1px] hover:shadow-[inset_0_10px_0_rgba(0.0.0.0.1)] w-[15px] h-[15px] col-span-1 col-start-1 row-start-1 row-span-1 justify-self-end bg-contain bg-no-repeat bg-center bg-[url(/public/asserts/mac/add-memo-icon.svg)]"></button>
+            </div>
+            <input type="search" placeholder="검색" class="memo-searchbar text-[#8B8A90] bg-[#E4E3E9] dark:bg-[#1C1C1E] p-1 text-[8px] rounded-[5px] w-full" />
+            <ul class="memo-sidebar-ul rounded-[5px] overflow-y-auto">
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모1</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모1내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모2</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모2내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모3</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모3내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모4</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모4내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모5</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모5내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모6</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모6내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모7</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모7내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모8</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모8내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모9</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모9내용입니다</div>
+              </li>
+              <li class="memo-sidebar-li bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C]">
+                <div class="memo-item-title text-[12px] font-bold">메모10</div>
+                <div class="memo-item-content text-[#8B8A90] text-[7px] truncate">메모10내용입니다</div>
+              </li>
+            </ul>
+          </div>
+          <div class="memo-sidebar-footer dark:text-white bg-[#f7f7f7] dark:bg-[#313133] text-[10px] text-center h-8 pb-4 mt-3 absolute bottom-0 w-full">10개의 메모</div>
+        </div>
+        <div class="memo-main grid grid-rows-[30px_1fr] dark:bg-[#000000] p-3">
+          <input type="text" value="메모1" class="memo-main-title outline-0 bg-white dark:bg-[#000000] dark:text-white border-b-2 pl-2 font-bold" />
+          <textarea class="memo-main-content p-2 outline-0 bg-white dark:bg-[#000000] dark:text-white resize-none"></textarea>
+          <div class="memo-save-btn-container flex justify-end">
+            <button type="button" class="memo-save-btn text-[#E2BE4C] p-3 hover:text-black dark:hover:text-white">완료</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -7,19 +7,33 @@
     <script type="module" src="/src/ts/socks-game.ts"></script>
     <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
-    <title>sockast</title>
+    <script type="module">
+      import { startPreloadSocks } from '/src/ts/socks-game.ts';
+
+      window.addEventListener('DOMContentLoaded', () => {
+        startPreloadSocks();
+      });
+    </script>
+    <title>Sockast</title>
   </head>
   <body class="flex items-center justify-center bg-[url('/public/asserts/socks-game/check.svg')] bg-cover h-screen">
+    <!-- 로딩 화면 -->
+    <div id="loading-screen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <!-- sockast -->
     <div class="text-center items-center flex flex-col">
-      <img src="/public/asserts/socks-game/label_404.png" width="100" class="" alt="404 라벨 이미지" />
-      <img src="/public/asserts/socks-game/logo_sockast.png" width="350" class="mt-10" alt="Sockast 로고 이미지" />
-      <img src="/public/asserts/socks-game/story_eng.png" width="600" class="mt-10" alt="오프닝 글귀" />
-      <button id="post-box" type="button" class="cursor-pointer hover:drop-shadow-[0_0_10px] mt-18"><img src="/public/asserts/socks-game/postBox.png" width="400" alt="우체통 입구 이미지 (버튼)" /></button>
+      <img src="/public/asserts/socks-game/label_404.png" class="sm:w-[4rem] sm:h-[1.9375rem] md:w-[5.8125rem] md:h-[2.8125rem] md:mt-5" alt="404 라벨 이미지" />
+      <img src="/public/asserts/socks-game/logo_sockast.png" class="sm:w-[12rem] sm:h-[3.9375rem] md:w-[21.875rem] md:h-[7.1875rem] sm:mt-5 md:mt-8" alt="Sockast 로고 이미지" />
+      <img src="/public/asserts/socks-game/story_eng.png" class="sm:w-[70%] md:w-[50%] sm:mt-3 md:mt-5" alt="오프닝 글귀" />
+      <button id="post-box" type="button" class="sm:w-[40%] cursor-pointer hover:drop-shadow-[0_0_10px] sm:mt-6 md:mt-8"><img src="/public/asserts/socks-game/postBox.png" alt="우체통 입구 이미지 (버튼)" /></button>
       <div id="draw" class="hidden">
-        <div id="draw-content" class="w-[40.625rem] h-[31.25rem] bg-cover bg-center absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center">
-          <div id="img" class="w-[25rem] h-[14.375rem]"></div>
-          <span id="title" class="w-[25rem] text-[1.125rem] font-mono font-bold whitespace-pre-line rounded-2xl p-2 text-[#382316] mt-1"></span>
-          <span id="anal" class="w-[25rem] font-serif text-[.875rem] text-white whitespace-pre-line mt-2"></span>
+        <div id="draw-content" class="sm:w-[23.125rem] sm:h-[18.75rem] md:w-[34.375rem] md:h-[26.25rem] bg-cover bg-center absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center">
+          <div id="img" class="w-full sm:h-[8.125rem] md:h-[12.5rem]"></div>
+          <span id="title" class="sm:w-full sm:text-[1rem] md:text-[1.125rem] font-mono font-bold whitespace-pre-line rounded-2xl p-2 text-[#382316] sm:mt-1"></span>
+          <span id="anal" class="sm:w-full sm:text-[.75rem] md:text-sm font-serif text-white whitespace-pre-line sm:mt-1"></span>
         </div>
       </div>
     </div>

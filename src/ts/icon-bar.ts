@@ -1,4 +1,5 @@
 import { programIDSet, programID } from '../programID.ts';
+import { insertIcon } from './mac-panel-manager.ts';
 const icon_bar = document.querySelector('#icon-bar');
 
 interface Iconbar {
@@ -6,6 +7,7 @@ interface Iconbar {
   setIconStatus(id: string, status: number): void;
   removeIcon(id: string): void;
   getIconStatus(id: string): number | undefined;
+  insertAddIconBtn(): void;
 }
 
 const iconBar: Iconbar = {
@@ -18,10 +20,11 @@ const iconBar: Iconbar = {
           break;
         }
       }
-    } else iconLi.style.backgroundImage = `url('/asserts/mac/notfound.png')`;
+    } else if (id === 'add-icon') iconLi.style.backgroundImage = "url('/asserts/mac/add-icon.svg')";
+    else iconLi.style.backgroundImage = `url('/asserts/mac/notfound.png')`;
     iconLi.style.backgroundRepeat = 'no-repeat';
     iconLi.style.backgroundPosition = 'center';
-    iconLi.style.backgroundSize = 'cover';
+    if (id !== 'add-icon') iconLi.style.backgroundSize = 'cover';
     iconLi.classList.add('icon');
     iconLi.dataset.status = status.toString();
     iconLi.dataset.id = id;
@@ -56,6 +59,11 @@ const iconBar: Iconbar = {
       return Number((iconElement as HTMLElement).dataset.status);
     }
     return undefined;
+  },
+  insertAddIconBtn(): void {
+    const tmpicon = iconBar.createIcon(0, 'add-icon');
+    insertIcon(tmpicon);
+    icon_bar!.appendChild(tmpicon);
   },
 };
 

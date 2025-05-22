@@ -12,37 +12,69 @@
     <script type="module" src="/src/ts/mac-panel-container.ts"></script>
     <script type="module" src="/src/ts/mac-panel-manager.ts"></script>
     <script type="module" src="/src/ts/widget-move.ts"></script>
+    <script type="module" src="/src/ts/widget-manager.ts"></script>
+    <script type="module" src="/src/ts/mac-power-button.ts"></script>
+    <script type="module" src="/src/ts/context-menu.ts"></script>
+    <script type="module" src="/src/ts/icon-move.ts"></script>
+    <script type="module" src="/src/ts/button-mode-change.ts"></script>
+    <script type="module" src="/src/ts/bg-selector.ts"></script>
+    <script type="module" src="/src/ts/clock-stopWatch.ts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.17/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.17/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script type="module" src="/src/ts/widget-manager.ts"></script>
     <link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable.css" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/public/fonts/pretendard/woff2/PretendardVariable.woff2" />
+    <link rel="icon" href="/public/asserts/mac/apple-logo-bite-b.webp" type="image/webp" />
     <!-- scroll 막는 ts -->
     <script type="module" src="/src/ts/mac-no-scroll.ts"></script>
     <!-- dev할 때만 쓰일 여러 가지 기능을 넣은 ts -->
     <script type="module" src="/src/ts/mac-setting.ts"></script>
-    <title>Mac</title>
+    <title>iPocket</title>
   </head>
   <body class="font-sans overflow-hidden no-scroll grid grid-cols-[1fr_calc(1200px_+_80px)_1fr] grid-rows-1 h-screen select-none">
-    <div class="mac-entire-bg bg-yellow-300 col-start-1 col-end-4 row-start-1 row-end-2"></div>
-    <div class="mac-left-bg bg-red-300 col-start-1 col-end-2 row-start-1 row-end-2"></div>
+    <div class="mac-entire-bg bg-[url('/public/asserts/mac/background-web/bg-white.webp')] dark:bg-[url('/public/asserts/mac/background-web/bg-black.webp')] bg-cover col-start-1 col-end-4 row-start-1 row-end-2"></div>
+    <div class="mac-left-bg col-start-1 col-end-2 row-start-1 row-end-2">
+      <!-- 라이트모드/다크모드 수동변환 버튼 -->
+      <button id="theme-toggle" type="button" aria-label="다크모드/라이트모드 토글" class="hover:opacity-80 mt-35 cursor-pointer -translate-x-15"><img id="theme-icon" src="/public/asserts/mac/stand_longer.webp" alt="다크모드/라이트모드 전환 아이콘" /></button>
+      <button id="system-reset" class="ml-2 px-3 py-2 absolute left-0 translate-y-10 rounded bg-blue-100 dark:bg-blue-800 cursor-pointer">시스템 모드로 복귀</button>
+    </div>
     <div class="mac mt-10 col-start-2 col-end-3 row-start-1 row-end-2">
-      <div class="shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
-        <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] bg-cover rounded-[15px]">
+      <div class="shadow-[0_0_100px_0_rgba(0,0,0,0.50)] mac-border p-10 bg-linear-[45deg,_#000000_50%,_#3a3a3a_50%] dark:bg-linear-[-45deg,_#000000_50%,_#3a3a3a_50%] rounded-t-[35px] flex justify-center items-center">
+        <div class="relative mac-screen flex flex-col items-center justify-between overflow-hidden w-[1200px] h-[675px] bg-[url(/public/asserts/mac/mac-screen-base-background-img.png)] dark:bg-[url(/public/asserts/mac/mac-screen-base-dark-background-img.png)] bg-cover rounded-[15px]">
           <!-- top-bar -->
-          <div class="w-full flex justify-between items-center bg-[rgba(109,109,109,0.70)] shadow-2xl">
-            <div class="ml-3">
-              <img src="../../public/asserts/top-bar/apple-logo-white.svg" alt="애플로고" />
+          <div class="w-full flex justify-between items-center py-0.5 bg-[rgba(223,223,223,0.20)] dark:bg-[rgba(109,109,109,0.5)] shadow-2xl">
+            <div class="ml-3 pb-0.5">
+              <picture>
+                <img src="../../public/asserts/mac/apple-logo-bite-w.webp" class="hidden dark:block" width="9" alt="사과 로고" />
+                <img src="../../public/asserts/mac/apple-logo-bite-b.webp" class="dark:hidden" width="9" alt="사과 로고" />
+              </picture>
             </div>
-            <div class="inline-flex mr-3">
-              <img class="mr-3" src="../../public/asserts/top-bar/battery-white.svg" alt="배터리" />
-              <img class="mr-3" src="../../public/asserts/top-bar/wifi-white.svg" alt="와이파이" />
-              <img class="mr-3" src="../../public/asserts/top-bar/search-white.svg" alt="검색" />
-              <img class="mr-3" src="../../public/asserts/top-bar/toggle-white.svg" alt="토글" />
-              <span class="current-date text-xs text-white"></span>
+            <div class="inline-flex items-center mr-3">
+              <picture>
+                <img src="../../public/asserts/top-bar/battery-white.svg" class="hidden dark:block mr-3" alt="배터리" />
+                <img src="../../public/asserts/top-bar/battery-black.svg" class="dark:hidden mr-3" alt="배터리" />
+              </picture>
+              <picture>
+                <img src="../../public/asserts/top-bar/wifi-white.svg" class="hidden dark:block mr-3" alt="와이파이" />
+                <img src="../../public/asserts/top-bar/wifi-black.svg" class="dark:hidden mr-3" alt="와이파이" />
+              </picture>
+              <picture>
+                <img src="../../public/asserts/top-bar/search-white.svg" class="hidden dark:block mr-3" alt="검색" />
+                <img src="../../public/asserts/top-bar/search-black.svg" class="dark:hidden mr-3" alt="검색" />
+              </picture>
+              <picture>
+                <img src="../../public/asserts/top-bar/toggle-white.svg" class="hidden dark:block mr-3" alt="토글" />
+                <img src="../../public/asserts/top-bar/toggle-black.svg" class="dark:hidden mr-3" alt="토글" />
+              </picture>
+              <span class="current-date text-xs dark:text-white"></span>
             </div>
           </div>
           <!-- widget-container -->
           <div id="widget-container" class="grid grid-rows-[repeat(4,_100px)] my-auto grid-cols-[repeat(9,_100px)] gap-5">
             <!-- 시계 위젯 -->
-            <div draggable="true" class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] dark:bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1" data-col="1" data-row="1">
+            <div draggable="true" class="clock-widget-component shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] w-25 h-25 rounded-[23px] bg-linear-[180deg,_#fff_0%,_#DDD_30.77%] dark:bg-linear-[180deg,_#282828_0%,_#484848_100%] grid grid-cols-1 grid-rows-1 widget" data-col="1" data-row="1">
               <img class="col-start-1 row-start-1 place-self-center" src="/public/asserts/clock-widget/pan.svg" alt="" />
               <div class="relative w-full h-full col-start-1 row-start-1 second-niddle-div place-self-center">
                 <img draggable="false" class="absolute top-[8px] left-[49.2px]" src="/public/asserts/clock-widget/second-niddle.svg" alt="" />
@@ -56,12 +88,12 @@
               <img draggable="false" class="col-start-1 row-start-1 z-1 place-self-center" src="/public/asserts/clock-widget/center.svg" alt="" />
             </div>
             <!-- 달력 위젯 -->
-            <div draggable="true" class="w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col" data-col="1" data-row="1">
+            <div draggable="true" class="calendar-widget w-[6.25rem] h-[6.25rem] bg-gradient-to-b from-white to-[#DDDDDD] dark:from-[#282828] dark:to-[#484848] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] p-6 text-center justify-center items-center flex flex-col widget" data-col="1" data-row="1">
               <div class="day-name dark:text-white text-[1rem] font-semibold h-[1.25rem]"></div>
               <div class="day-number mt-0 p-0 dark:text-white text-6xl font-bold h-[3.4375rem]"></div>
             </div>
             <!-- 날씨 위젯 -->
-            <div draggable="true" class="overflow-hidden text-white weather-widget1 w-55 h-25 py-4 pl-[10px] pr-[17px] bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center" data-col="2" data-row="1">
+            <div draggable="true" class="overflow-hidden text-white weather-widget1 w-55 h-25 py-4 pl-[10px] pr-[17px] bg-linear-[180deg,_#104E8B_0%,_#4A86C2_100%] shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)] rounded-[23px] flex justify-between items-center widget" data-col="2" data-row="1">
               <img draggable="false" class="object-contain h-full weather-status-img" src="/public/asserts/weather-widget/clear.svg" alt="" />
               <div class="flex flex-col items-end gap-1">
                 <div class="leading-[32px] temperature text-[32px] after:content-['°C']">26</div>
@@ -70,9 +102,9 @@
               </div>
             </div>
             <!-- 메모 위젯 -->
-            <div draggable="true" class="w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white dark:bg-gradient-to-b dark:text-white dark:from-[#000000] dark:to-[#000000]">
+            <div draggable="true" class="memo-widget w-[13.75rem] h-[6.25rem] rounded-[1.4375rem] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-white dark:bg-gradient-to-b dark:text-white dark:from-[#000000] dark:to-[#000000] widget">
               <!-- 헤더(yellow) -->
-              <div class="flex w-full h-7 bg-gradient-to-b from-[#FFE855] to-[#FFB115] rounded-t-[1.4375rem] px-[1.125rem] items-center">
+              <div class="memo-widget-header flex w-full h-7 bg-gradient-to-b from-[#FFE855] to-[#FFB115] rounded-t-[1.4375rem] px-[1.125rem] items-center">
                 <button type="button" class="flex items-center cursor-pointer gap-1.5 pt-[.0313rem] active:opacity-50">
                   <img draggable="false" src="../../public/asserts/memo-widget/folder.svg" width="12" height="12" class="pb-[.0313rem]" alt="폴더 모양 아이콘" />
                   <span class="text-[.75rem] text-white font-normal">메모</span>
@@ -88,22 +120,39 @@
 
               <!-- 메모 list -->
               <div class="grid grid-rows-3 divide-y-[.0187rem] divide-black/50 dark:divide-white/50 text-[.625rem]">
-                <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">몽매한 풀잎은 그 봄을 기억한다</button></div>
-                <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">html</button></div>
-                <div><button type="button" class="px-[1.125rem] py-[.1875rem] text-left active:opacity-50 cursor-pointer">javascript</button></div>
+                <div><button type="button" class="memo-widget-item px-[1.125rem] my-[.1875rem] text-left active:opacity-50 cursor-pointer w-full">몽매한 풀잎은 그 봄을 기억한다</button></div>
+                <div><button type="button" class="memo-widget-item px-[1.125rem] my-[.1875rem] text-left active:opacity-50 cursor-pointer w-full">html</button></div>
+                <div><button type="button" class="memo-widget-item px-[1.125rem] my-[.1875rem] text-left active:opacity-50 cursor-pointer w-full">javascript</button></div>
               </div>
             </div>
           </div>
+
           <!-- mac-panel-container -->
           <ul id="mac-panel-container" class="pointer-events-none absolute z-100 bottom-0 w-full h-[calc(100%_-_19px)]"></ul>
+
           <!-- icon-bar -->
-          <ul id="icon-bar" class="flex gap-4 items-center justify-around p-4 h-[102px] bg-[rgba(109,109,109,0.7)] rounded-[23px] mb-3 shadow-md"></ul>
+          <ul id="icon-bar" class="flex gap-4 items-center justify-around p-4 h-[102px] bg-[rgba(223,223,223,0.2)] dark:bg-[rgba(109,109,109,0.5)] rounded-[23px] mb-3 shadow-md"></ul>
+
+          <!-- mac-power-button -->
+          <!-- 화면 덮는 오버레이 -->
+          <div id="screen-overlay" class="absolute inset-0 bg-black z-[99999] flex items-center justify-center transition-opacity duration-700 overflow-hidden">
+            <!-- 텍스트 박스 (위치 고정) -->
+            <div class="relative w-full h-[3rem] overflow-hidden flex justify-center items-center">
+              <p id="screen-overlay-hello" class="text-white text-3xl absolute opacity-0 bottom-[-15%] transition-all duration-700 ease-in-out">안녕하세요</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="mac-bottom h-25 object-contain bg-linear-[45deg,_#959595_0%,_#ffffff_100%] rounded-b-[35px] flex justify-center items-center shadow-[0_0_15px_0_rgba(0,_0,_0,_0.50)]">
-        <img class="h-10" src="/public/asserts/mac/apple-logo.webp" alt="" />
+      <div class="mac-bottom h-25 object-contain bg-linear-[45deg,_#959595_0%,_#ffffff_100%] dark:bg-linear-[-45deg,_#454545_0%,_#989898_100%] rounded-b-[35px] flex justify-center items-center shadow-[0_0_100px_0_rgba(0,0,0,0.50)] pb-1.5">
+        <img class="h-10 cursor-pointer" src="/public/asserts/mac/apple-logo-bite-b.webp" alt="전원 버튼 (사과 모양)" />
+      </div>
+      <div><img class="dark:hidden" src="/public/asserts/mac/support-pedestal-white.webp" alt="모니터 지지대 이미지 (라이트모드)" /></div>
+      <div><img class="hidden dark:block" src="/public/asserts/mac/support-pedestal-black.webp" alt="모니터 지지대 이미지 (다크모드)" /></div>
+    </div>
+    <div class="mac-right-bg bg-blue-300/0 col-start-3 col-end-4 row-start-1 row-end-2 relative p-4">
+      <div id="clickablePostIt" class="post-it absolute top-6 right-6 w-[150px] h-[150px] bg-[#ffffe0] p-2 shadow-[5px_5px_7px_rgba(0,0,0,0.3)] text-center break-words transition-transform duration-300 ease-in-out cursor-pointer select-none text-sm leading-[1.4]">
+        <p class="m-0">기능</p>
       </div>
     </div>
-    <div class="mac-right-bg bg-blue-300 col-start-3 col-end-4 row-start-1 row-end-2"></div>
   </body>
 </html>

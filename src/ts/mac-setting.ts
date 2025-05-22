@@ -1,40 +1,82 @@
-import { default as size_arr } from './mac-screen-size.ts';
+// import { default as size_arr } from './mac-screen-size.ts';
 import { iconBar } from './icon-bar.ts';
 import { insertIcon } from './mac-panel-manager.ts';
+// import { insertWidget } from './mac-panel-manager.ts';
 import { programIDSet, programID } from '../programID.ts';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// import { widgetIDSet, widgetID } from '../programID.ts';
+// import { widgetManager } from './widget-manager.ts';
 // import { panelContainer } from './mac-panel-container.ts';
 
-const body = document.querySelector('body');
-const mac = document.querySelector('.mac') as HTMLDivElement;
-const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
-const mac_bottom = document.querySelector('.mac-bottom') as HTMLDivElement;
-const blank_widget_arr = document.querySelectorAll('.blank-widget');
-// const icon_bar = document.querySelector('#icon-bar');
-const icon_color_arr = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#E3BAFF', '#FFCCE5', '#CCE5FF', '#D5FFCC', '#FFF0BA', '#FFCBA4', '#CBA4FF'];
+// const body = document.querySelector('body');
+// const screen_overlay = document.querySelector('#screen-overlay');
+// const mac = document.querySelector('.mac') as HTMLDivElement;
+// const mac_screen = document.querySelector('.mac-screen') as HTMLDivElement;
+// const mac_bottom = document.querySelector('.mac-bottom') as HTMLDivElement;
+// const blank_widget_arr = document.querySelectorAll('.blank-widget');
+// // const icon_bar = document.querySelector('#icon-bar');
+// const icon_color_arr = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#E3BAFF', '#FFCCE5', '#CCE5FF', '#D5FFCC', '#FFF0BA', '#FFCBA4', '#CBA4FF'];
 
-let iconCounter = 0;
+// let iconCounter = 0;
+// let widgetCounter = 0;
 
 setInitIcon();
-addSelect();
-paintBlankWidgets();
-addBlankWidgetToggle();
+iconBar.insertAddIconBtn();
+// setInitWidget();
+// addSelect();
+// paintBlankWidgets();
+// addBlankWidgetToggle();
 // paintIconColorful();
-addBodyDragToggle();
-addCreateIconBtn();
-addRemoveIconBtn();
+// addBodyDragToggle();
+// addCreateIconBtn();
+// addRemoveIconBtn();
+// hiddenScreenOverlay();
 
 // body?.addEventListener('click', showID);
+
+// function hiddenScreenOverlay() {
+//   const btn = document.createElement('button');
+//   btn.style.position = 'absolute';
+//   btn.style.top = '210px';
+//   btn.style.left = '10px';
+//   btn.style.border = '1px solid black';
+//   btn.style.paddingInline = '4px';
+//   btn.style.borderRadius = '8px';
+//   btn.style.backgroundColor = '#d9d9d9';
+//   btn.setAttribute('type', 'button');
+//   btn.textContent = '맥 커버 제거';
+
+//   body?.insertBefore(btn, body.firstChild);
+//   btn.addEventListener('click', () => {
+//     if (screen_overlay!.classList.contains('hidden')) {
+//       screen_overlay!.classList.remove('hidden');
+//       btn.textContent = '맥 커버 추가';
+//     } else {
+//       screen_overlay!.classList.add('hidden');
+//       btn.textContent = '맥 커버 제거';
+//     }
+//   });
+// }
 
 function setInitIcon() {
   programID.forEach((_, i) => {
     if (programIDSet.has(programID[i].pid)) {
-      iconCounter++;
+      // iconCounter++;
       const tmpicon = iconBar.createIcon(0, programID[i].pid);
       insertIcon(tmpicon);
     }
   });
 }
+
+// function setInitWidget() {
+//   widgetID.forEach((_, i) => {
+//     if (widgetIDSet.has(widgetID[i].wid)) {
+//       widgetCounter++;
+//       console.log(widgetCounter);
+//       const tmpWidget = widgetManager.createWidget(widgetID[i].wid);
+//       insertWidget(tmpWidget);
+//     }
+//   });
+// }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // function showID() {
@@ -49,69 +91,72 @@ function setInitIcon() {
 //     content!.textContent = (e as HTMLDivElement).dataset.id!;
 //   });
 // }
+// document.addEventListener('contextmenu', function (e) {
+//   e.preventDefault();
+//   // openModal();
+// });
+// function addSelect() {
+//   const select = document.createElement('select');
+//   select.classList.add('mac-screen-size');
+//   select.style.position = 'absolute';
+//   select.style.top = '10px';
+//   select.style.left = '10px';
+//   select.style.border = '1px solid black';
+//   size_arr.forEach((e: number[], i: number) => {
+//     const option = document.createElement('option');
+//     if (e[0] === 1200) {
+//       option.setAttribute('selected', 'true');
+//       mac_bottom.style.height = (Math.sqrt(size_arr[i][0]) * 3).toString() + 'px';
+//     }
+//     const str = `${e[0]}px ${e[1]}px`;
+//     option.setAttribute('value', `${i}`);
+//     option.textContent = str;
+//     select.appendChild(option);
+//   });
+//   body?.insertBefore(select, mac as HTMLDivElement);
+//   select.addEventListener('change', (e: Event) => {
+//     const target = e.target as HTMLSelectElement;
+//     const selectedIndex = target.value;
+//     const index = parseInt(selectedIndex);
 
-function addSelect() {
-  const select = document.createElement('select');
-  select.classList.add('mac-screen-size');
-  select.style.position = 'absolute';
-  select.style.top = '10px';
-  select.style.left = '10px';
-  select.style.border = '1px solid black';
-  size_arr.forEach((e: number[], i: number) => {
-    const option = document.createElement('option');
-    if (e[0] === 1200) {
-      option.setAttribute('selected', 'true');
-      mac_bottom.style.height = (Math.sqrt(size_arr[i][0]) * 3).toString() + 'px';
-    }
-    const str = `${e[0]}px ${e[1]}px`;
-    option.setAttribute('value', `${i}`);
-    option.textContent = str;
-    select.appendChild(option);
-  });
-  body?.insertBefore(select, mac as HTMLDivElement);
-  select.addEventListener('change', (e: Event) => {
-    const target = e.target as HTMLSelectElement;
-    const selectedIndex = target.value;
-    const index = parseInt(selectedIndex);
+//     mac_screen.style.width = size_arr[index][0].toString() + 'px';
+//     mac_screen.style.height = size_arr[index][1].toString() + 'px';
+//     body!.style.gridTemplateColumns = `1fr calc(${size_arr[index][0].toString()}px + 80px) 1fr`;
+//     mac_bottom.style.height = (Math.sqrt(size_arr[index][0]) * 3).toString() + 'px';
+//   });
+// }
 
-    mac_screen.style.width = size_arr[index][0].toString() + 'px';
-    mac_screen.style.height = size_arr[index][1].toString() + 'px';
-    body!.style.gridTemplateColumns = `1fr calc(${size_arr[index][0].toString()}px + 80px) 1fr`;
-    mac_bottom.style.height = (Math.sqrt(size_arr[index][0]) * 3).toString() + 'px';
-  });
-}
+// function paintBlankWidgets() {
+//   Array.from(blank_widget_arr).forEach(e => {
+//     (e as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.3)';
+//   });
+// }
 
-function paintBlankWidgets() {
-  Array.from(blank_widget_arr).forEach(e => {
-    (e as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.3)';
-  });
-}
+// function addBlankWidgetToggle() {
+//   const btn = document.createElement('button');
+//   btn.style.position = 'absolute';
+//   btn.style.top = '50px';
+//   btn.style.left = '10px';
+//   btn.style.border = '1px solid black';
+//   btn.style.paddingInline = '4px';
+//   btn.style.borderRadius = '8px';
+//   btn.style.backgroundColor = '#d9d9d9';
+//   btn.setAttribute('type', 'button');
+//   btn.textContent = '그리드 격자 제거';
 
-function addBlankWidgetToggle() {
-  const btn = document.createElement('button');
-  btn.style.position = 'absolute';
-  btn.style.top = '50px';
-  btn.style.left = '10px';
-  btn.style.border = '1px solid black';
-  btn.style.paddingInline = '4px';
-  btn.style.borderRadius = '8px';
-  btn.style.backgroundColor = '#d9d9d9';
-  btn.setAttribute('type', 'button');
-  btn.textContent = '그리드 격자 제거';
-
-  body?.insertBefore(btn, body.firstChild);
-  btn.addEventListener('click', () => {
-    Array.from(blank_widget_arr).forEach(e => {
-      if ((e as HTMLDivElement).style.backgroundColor) {
-        (e as HTMLDivElement).style.backgroundColor = '';
-        btn.textContent = '그리드 격자 추가';
-      } else {
-        (e as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.3)';
-        btn.textContent = '그리드 격자 제거';
-      }
-    });
-  });
-}
+//   body?.insertBefore(btn, body.firstChild);
+//   btn.addEventListener('click', () => {
+//     Array.from(blank_widget_arr).forEach(e => {
+//       if ((e as HTMLDivElement).style.backgroundColor) {
+//         (e as HTMLDivElement).style.backgroundColor = '';
+//         btn.textContent = '그리드 격자 추가';
+//       } else {
+//         (e as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.3)';
+//         btn.textContent = '그리드 격자 제거';
+//       }
+//     });
+//   });
+// }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // function paintIconColorful() {
 //   const icon_arr = icon_bar!.querySelectorAll('.icon');
@@ -120,68 +165,175 @@ function addBlankWidgetToggle() {
 //   });
 // }
 
-function addBodyDragToggle() {
-  const btn = document.createElement('button');
-  btn.style.position = 'absolute';
-  btn.style.top = '90px';
-  btn.style.left = '10px';
-  btn.style.border = '1px solid black';
-  btn.style.paddingInline = '4px';
-  btn.style.borderRadius = '8px';
-  btn.style.backgroundColor = '#d9d9d9';
-  btn.setAttribute('type', 'button');
-  btn.textContent = '드래그 기능 추가';
+// function addBodyDragToggle() {
+//   const btn = document.createElement('button');
+//   btn.style.position = 'absolute';
+//   btn.style.top = '90px';
+//   btn.style.left = '10px';
+//   btn.style.border = '1px solid black';
+//   btn.style.paddingInline = '4px';
+//   btn.style.borderRadius = '8px';
+//   btn.style.backgroundColor = '#d9d9d9';
+//   btn.setAttribute('type', 'button');
+//   btn.textContent = '드래그 기능 추가';
 
-  body?.insertBefore(btn, body.firstChild);
-  btn.addEventListener('click', () => {
-    if (body?.classList.contains('select-none')) {
-      body!.classList.remove('select-none');
-      btn.textContent = '드래그 기능 제거';
+//   body?.insertBefore(btn, body.firstChild);
+//   btn.addEventListener('click', () => {
+//     if (body?.classList.contains('select-none')) {
+//       body!.classList.remove('select-none');
+//       btn.textContent = '드래그 기능 제거';
+//     } else {
+//       body!.classList.add('select-none');
+//       btn.textContent = '드래그 기능 추가';
+//     }
+//   });
+// }
+
+// function addCreateIconBtn() {
+//   const btn = document.createElement('button');
+//   btn.style.position = 'absolute';
+//   btn.style.top = '130px';
+//   btn.style.left = '10px';
+//   btn.style.border = '1px solid black';
+//   btn.style.paddingInline = '4px';
+//   btn.style.borderRadius = '8px';
+//   btn.style.backgroundColor = '#d9d9d9';
+//   btn.setAttribute('type', 'button');
+//   btn.textContent = '아이콘 추가';
+
+//   body?.insertBefore(btn, body.firstChild);
+//   btn.addEventListener('click', () => {
+//     iconCounter++;
+//     const tmpicon = iconBar.createIcon(0, iconCounter.toString());
+//     insertIcon(tmpicon);
+//     (tmpicon as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
+//   });
+// }
+
+// function addRemoveIconBtn() {
+//   const btn = document.createElement('button');
+//   btn.style.position = 'absolute';
+//   btn.style.top = '170px';
+//   btn.style.left = '10px';
+//   btn.style.border = '1px solid black';
+//   btn.style.paddingInline = '4px';
+//   btn.style.borderRadius = '8px';
+//   btn.style.backgroundColor = '#d9d9d9';
+//   btn.setAttribute('type', 'button');
+//   btn.textContent = '아이콘 삭제';
+
+//   body?.insertBefore(btn, body.firstChild);
+//   btn.addEventListener('click', () => {
+//     if (iconCounter > 0) {
+//       iconBar.removeIcon(iconCounter.toString());
+//       iconCounter--;
+//     }
+//   });
+// }
+
+const postIt = document.getElementById('clickablePostIt') as HTMLDivElement | null;
+
+if (postIt) {
+  const stepsGroup: string[][] = [
+    ['1. 기본 마크업 및 스타일링 구현', '2. 맥패널과 호환되게 마크업 및 스타일링 구현', '3. 게임시작 버튼 클릭 시 게임이 시작되도록 구현', '4. 키보드 WASD 또는 방향키로 플레이어를 조종할 수 있도록 구현', '5. 화살(게임오버 요소)에 플레이어가 닿으면 게임오버가 되도록 구현', '6. 화살(게임오버 요소)가 화면 밖으로 나가면 득점, 이후 난이도가 증가되는 함수 구현', '7. 게임 오버 시 최종점수가 출력되고 다시 시작 버튼이 출력되게 구현', '8. 다시 시작 버튼 클릭 시 게임이 재 실행되도록 구현'],
+    ['1. 기본 마크업 및 스타일링 구현', '2. 맥패널과 호환되게 마크업 및 스타일링 구현', '3. 관련 assets 추가', '4. START 버튼 클릭 시 대화창으로 이동되도록 구현, 이후 대화창에서 Next 버튼 클릭 시 게임화면으로 이동되도록 구현', '5. 게임화면 진입 시 시간감소 함수 실행, 화면 우측에 프로그래스 바로 확인 가능하도록 구현', '6. 점수를 확인 할 수 있는 html 요소 구현', '7. 두디(실점 요소)를 클릭 시 점수 -100, 두카(득점 요소)를 클릭 시 점수 +100을 계산 하는 함수 구현', '8. 시간종료 후 최종 점수, 리플레이, 홈 버튼 구현', '9. 리플레이 버튼 클릭 시 게임이 재 실행되도록 구현', '10. 홈 버튼 클릭 시 시작화면으로 이동되도록 구현'],
+    ['1. 기본 마크업 및 스타일링 구현', '2. 맥패널과 호환되게 마크업 및 스타일링 구현', '3. 관련 assets 추가', '4. 뽑기권 획득 버튼 클릭 시 뽑기권이 늘어나는 기능 구현', '5. 로컬스토리지를 활용해 뽑기권 값이 유지되도록 구현', '6. 컬렉션 보기 버튼 클릭 시 컬렉션 모달창 출력 기능구현', '7. 컬렉션은 로컬스토리지를 활용하여 저장되게 구현', '8. 랜덤뽑기 버튼 클릭 시 카드가 5장 출력 되도록 구현', '9. 카드 5장 출력 시 초기 이미지는 카드 뒷면, 클릭 시 카드의 앞면이 나오도록 구현', '10. 특정카드가 나올 시 audio와 함께 출력'],
+  ];
+
+  const POSTIT_INITIAL_WIDTH = 150;
+  const POSTIT_INITIAL_HEIGHT = 150;
+
+  let currentGroupIndex = 0;
+  let currentStepIndex = 0;
+  let isEnlarged = false;
+
+  const setContent = (html: string) => {
+    postIt.innerHTML = html;
+  };
+
+  const enlargePostIt = () => {
+    const parent = postIt.parentElement;
+    if (!parent) return;
+
+    const newWidth = parent.clientWidth * 0.9;
+    const newHeight = parent.clientHeight * 0.9;
+
+    postIt.style.width = `${newWidth}px`;
+    postIt.style.height = `${newHeight}px`;
+    postIt.style.position = 'absolute';
+    postIt.style.left = `${(parent.clientWidth - newWidth) / 2}px`;
+    postIt.style.top = `${(parent.clientHeight - newHeight) / 2}px`;
+    postIt.style.zIndex = '20';
+
+    isEnlarged = true;
+  };
+
+  const shrinkPostIt = () => {
+    postIt.style.width = `${POSTIT_INITIAL_WIDTH}px`;
+    postIt.style.height = `${POSTIT_INITIAL_HEIGHT}px`;
+    postIt.style.position = '';
+    postIt.style.left = '';
+    postIt.style.top = '';
+    postIt.style.zIndex = '';
+    isEnlarged = false;
+
+    currentGroupIndex = 0;
+    currentStepIndex = 0;
+    setContent('<p class="m-0">기능</p>');
+  };
+
+  const showNextStep = () => {
+    if (!isEnlarged) {
+      enlargePostIt();
+      if (currentStepIndex === 0 && currentGroupIndex < stepsGroup.length) {
+        setContent(`<p class="m-0 text-gray-500 text-center">(스페이스바를 계속 누르세요)</p>`);
+        return;
+      }
+    }
+
+    if (currentGroupIndex >= stepsGroup.length) {
+      setContent('<p class="text-center">모든 그룹 완료! (클릭: 축소 / Space: 처음부터)</p>');
+      currentGroupIndex = 0;
+      currentStepIndex = 0;
+      return;
+    }
+
+    const currentGroup = stepsGroup[currentGroupIndex];
+    if (currentStepIndex < currentGroup.length) {
+      const stepHtml = currentGroup
+        .slice(0, currentStepIndex + 1)
+        .map(text => `<p class="m-0 py-[2px]">${text}</p>`)
+        .join('');
+      setContent(stepHtml);
+      currentStepIndex++;
     } else {
-      body!.classList.add('select-none');
-      btn.textContent = '드래그 기능 추가';
+      currentGroupIndex++;
+      currentStepIndex = 0;
+
+      if (currentGroupIndex === 1) {
+        setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 두더지 잡기 (Space) ---</p>`);
+      } else if (currentGroupIndex === 2) {
+        setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 카드 뽑기 (Space) ---</p>`);
+      } else {
+        setContent('<p class="text-center">모든 그룹 완료! (클릭: 축소 / Space: 처음부터)</p>');
+        currentGroupIndex = 0;
+      }
+    }
+  };
+
+  postIt.addEventListener('click', () => {
+    if (!isEnlarged) {
+      enlargePostIt();
+      setContent(`<p class="m-0 text-gray-500 text-center">(화살 피하기 게임)</p>`);
+    } else {
+      shrinkPostIt();
     }
   });
-}
 
-function addCreateIconBtn() {
-  const btn = document.createElement('button');
-  btn.style.position = 'absolute';
-  btn.style.top = '130px';
-  btn.style.left = '10px';
-  btn.style.border = '1px solid black';
-  btn.style.paddingInline = '4px';
-  btn.style.borderRadius = '8px';
-  btn.style.backgroundColor = '#d9d9d9';
-  btn.setAttribute('type', 'button');
-  btn.textContent = '아이콘 추가';
-
-  body?.insertBefore(btn, body.firstChild);
-  btn.addEventListener('click', () => {
-    iconCounter++;
-    const tmpicon = iconBar.createIcon(0, iconCounter.toString());
-    insertIcon(tmpicon);
-    (tmpicon as HTMLElement).style.backgroundColor = icon_color_arr[(iconCounter - 1) % icon_color_arr.length];
-  });
-}
-
-function addRemoveIconBtn() {
-  const btn = document.createElement('button');
-  btn.style.position = 'absolute';
-  btn.style.top = '170px';
-  btn.style.left = '10px';
-  btn.style.border = '1px solid black';
-  btn.style.paddingInline = '4px';
-  btn.style.borderRadius = '8px';
-  btn.style.backgroundColor = '#d9d9d9';
-  btn.setAttribute('type', 'button');
-  btn.textContent = '아이콘 삭제';
-
-  body?.insertBefore(btn, body.firstChild);
-  btn.addEventListener('click', () => {
-    if (iconCounter > 0) {
-      iconBar.removeIcon(iconCounter.toString());
-      iconCounter--;
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      showNextStep();
     }
   });
 }
