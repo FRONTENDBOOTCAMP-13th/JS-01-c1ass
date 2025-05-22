@@ -25,6 +25,7 @@ toggleButton?.addEventListener('click', () => {
   toggleButton.classList.remove('wiggle');
   void toggleButton.offsetWidth; // ← reflow 강제 발생 (핵심!)
   toggleButton.classList.add('wiggle');
+  switchSound();
 
   if (!current) {
     const forced = isSystemDark() ? 'light' : 'dark';
@@ -55,3 +56,15 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
     applyTheme(null);
   }
 });
+
+const sound: HTMLAudioElement = new Audio('/asserts/mac/effect_switch.mp3');
+sound.preload = 'auto';
+sound.volume = 0.5;
+
+function switchSound(): void {
+  sound.pause();
+  sound.currentTime = 0;
+  sound.play().catch(err => {
+    console.error('🔈 효과음 재생 실패:', err);
+  });
+}
