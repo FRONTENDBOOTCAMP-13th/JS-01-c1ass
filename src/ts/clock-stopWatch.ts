@@ -4,27 +4,27 @@ export function makeStopwatch(): HTMLDivElement {
   if (existing) return existing as HTMLDivElement;
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'stopwatch-wrapper flex flex-col items-center text-center justify-center p-4 space-y-5 my-auto';
+  wrapper.className = 'stopwatch-wrapper flex flex-col items-center text-center justify-center space-y-5';
 
   const timeDisplay = document.createElement('div');
-  timeDisplay.className = 'flex flex-row items-center justify-center gap-0.5 text-6xl font-bold sm:mt-10';
+  timeDisplay.className = 'flex flex-row items-center justify-center text-6xl font-semibold mt-5';
   const timeHours = document.createElement('p');
-  timeHours.className = 'inline-block w-[95px] text-center';
+  timeHours.className = 'inline-block w-[93px] text-center';
   timeHours.textContent = '00';
   const colon = document.createElement('p');
   colon.textContent = ':';
   const timeMinutes = document.createElement('p');
-  timeMinutes.className = 'inline-block w-[95px] text-center';
+  timeMinutes.className = 'inline-block w-[93px] text-center';
   timeMinutes.textContent = '00';
   const colon2 = document.createElement('p');
   colon2.textContent = ':';
   const timeSeconds = document.createElement('p');
-  timeSeconds.className = 'inline-block w-[95px] text-center';
+  timeSeconds.className = 'inline-block w-[93px] text-center';
   timeSeconds.textContent = '00';
   const dot = document.createElement('p');
   dot.textContent = '.';
   const timeCenti = document.createElement('p');
-  timeCenti.className = 'inline-block w-[95px] text-center';
+  timeCenti.className = 'inline-block w-[93px] text-center';
   timeCenti.textContent = '00';
 
   timeDisplay.appendChild(timeHours);
@@ -53,16 +53,16 @@ export function makeStopwatch(): HTMLDivElement {
   }
 
   const startBtn = document.createElement('button');
-  startBtn.textContent = '▶ 시작';
-  startBtn.className = 'px-3 py-1 rounded bg-green-400/60 hover:bg-green-500/60 text-white';
+  startBtn.textContent = '시작';
+  startBtn.className = 'inline-block w-[60px] py-1 rounded bg-white/60 hover:bg-black/60 text-black hover:text-white';
 
   const resetBtn = document.createElement('button');
   resetBtn.textContent = '초기화';
-  resetBtn.className = 'px-3 py-1 rounded bg-red-400/60 hover:bg-red-500/60 text-white';
+  resetBtn.className = 'inline-block w-[60px] py-1 rounded bg-red-400/60 hover:bg-red-500/60 text-white';
 
   const recordBtn = document.createElement('button');
-  recordBtn.textContent = '📍 기록';
-  recordBtn.className = 'px-3 py-1 rounded bg-blue-400/60 hover:bg-blue-500/60 text-white';
+  recordBtn.textContent = '기록';
+  recordBtn.className = 'inline-block w-[60px] py-1 rounded bg-blue-400/60 hover:bg-blue-500/60 text-white';
 
   resetBtn.style.display = 'none';
   recordBtn.style.display = 'none';
@@ -72,12 +72,12 @@ export function makeStopwatch(): HTMLDivElement {
   btnGroup.append(startBtn, recordBtn, resetBtn);
 
   const recordList = document.createElement('ul');
-  recordList.className = 'mt-6 mx-20 text-xl font-medium text-gray-500 divide-y divide-white border-t border-white overflow-y-auto max-h-[122px] px-4';
+  recordList.className = 'mt-6 mx-30 text-xl font-medium text-gray-500 divide-y divide-white border-t border-white overflow-y-auto h-[122px]';
 
   startBtn.addEventListener('click', () => {
     if (!isRunning) {
       isRunning = true;
-      startBtn.textContent = '⏸ 멈춤';
+      startBtn.textContent = '정지';
       startBtn.classList.replace('bg-green-400/60', 'bg-yellow-400/60');
       startBtn.classList.replace('hover:bg-green-500/60', 'hover:bg-yellow-500/60');
 
@@ -93,7 +93,7 @@ export function makeStopwatch(): HTMLDivElement {
     } else {
       // ⏸ 멈춤 → ▶ 시작
       isRunning = false;
-      startBtn.textContent = '▶ 시작';
+      startBtn.textContent = '시작';
       startBtn.classList.replace('bg-yellow-400/60', 'bg-green-400/60');
       startBtn.classList.replace('hover:bg-yellow-500/60', 'hover:bg-green-500/60');
       if (intervalId) clearInterval(intervalId);
@@ -112,7 +112,7 @@ export function makeStopwatch(): HTMLDivElement {
     updateDisplay(0);
 
     // 리셋 후엔 완전 초기 상태로
-    startBtn.textContent = '▶ 시작';
+    startBtn.textContent = '시작';
     startBtn.classList.replace('bg-yellow-400/60', 'bg-green-400/60');
     startBtn.classList.replace('hover:bg-yellow-500/60', 'hover:bg-green-500/60');
 

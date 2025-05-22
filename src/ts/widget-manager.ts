@@ -72,7 +72,7 @@ clockWidget?.addEventListener('click', () => {
   clockProgram.classList.add('dark:bg-[#000000]');
 
   const clock_container_div = document.createElement('div');
-  clock_container_div.classList.add('clock-container');
+  clock_container_div.className = 'clock-container dark:bg-[#4A4C4E]';
   const stopwatch_label = document.createElement('label');
   stopwatch_label.className = 'stopwatch-label pt-3';
   const stopwatch_radio = document.createElement('input');
@@ -98,7 +98,7 @@ clockWidget?.addEventListener('click', () => {
   timer_label.appendChild(timer_text);
 
   const clock_panel = document.createElement('div');
-  clock_panel.classList.add('clock-panel');
+  clock_panel.className = 'clock-panel flex flex-col justify-center h-full';
   clock_panel.appendChild(makeStopwatch());
   clock_container_div.appendChild(clock_panel);
 
