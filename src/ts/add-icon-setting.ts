@@ -12,6 +12,7 @@ function addIconInnerProgram(): HTMLDivElement {
   const icon_name_input = document.createElement('input');
   icon_name_input.type = 'text';
   icon_name_input.id = 'icon-name-input';
+  icon_name_input.setAttribute('autocomplete', 'off');
   icon_name_input.classList.add('add-icon-input');
   const add_icon_input_container2 = document.createElement('div');
   add_icon_input_container2.classList.add('add-icon-input-container');
@@ -20,6 +21,7 @@ function addIconInnerProgram(): HTMLDivElement {
   const icon_url_input = document.createElement('input');
   icon_url_input.type = 'text';
   icon_url_input.id = 'icon-url-input';
+  icon_url_input.setAttribute('autocomplete', 'off');
   icon_url_input.classList.add('add-icon-input');
   const add_icon_btn_container = document.createElement('div');
   add_icon_btn_container.classList.add('add-icon-btn-container');
