@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
         helloText.style.opacity = '1';
         isHelloVisible = true;
 
+        powerOn();
         // 오버레이 페이드 아웃
         setTimeout(() => {
           screenOverlay.style.opacity = '0';
@@ -30,6 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 1800);
       }
     } else {
+      powerOff();
       screenOverlay.classList.remove('hidden');
       requestAnimationFrame(() => {
         screenOverlay.style.opacity = '1';
@@ -38,3 +40,21 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+const powerOnSound = new Audio('/asserts/mac/startUp.mp3');
+powerOnSound.volume = 0.1;
+
+const powerOffSound = new Audio('/asserts/mac/powerOff.mp3');
+powerOffSound.volume = 0.1;
+
+function powerOn() {
+  powerOnSound.pause();
+  powerOnSound.currentTime = 0;
+  powerOnSound.play();
+}
+
+function powerOff() {
+  powerOffSound.pause();
+  powerOffSound.currentTime = 0;
+  powerOffSound.play();
+}
