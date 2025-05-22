@@ -303,7 +303,6 @@ function createMemoPanel(key?: number) {
   container?.appendChild(tmppanel);
 
   const memoEl = container!.querySelector('.mac-panel[data-id="memo-widget"] .mac-panel-program') as HTMLElement;
-  console.log(memoEl);
   memoEl.classList.add('allow-scroll');
   memoEl.classList.add('dark:bg-[#000000]');
   const memoHd = container!.querySelector(`.mac-panel[data-id="memo-widget"] .mac-panel-header`) as HTMLElement;
