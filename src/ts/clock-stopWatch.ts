@@ -54,7 +54,7 @@ export function makeStopwatch(): HTMLDivElement {
 
   const startBtn = document.createElement('button');
   startBtn.textContent = '시작';
-  startBtn.className = 'inline-block w-[60px] py-1 rounded bg-white/60 hover:bg-black/60 text-black hover:text-white';
+  startBtn.className = 'inline-block w-[60px] py-1 rounded bg-white/60 hover:bg-gray-500/60 text-black hover:text-white';
 
   const resetBtn = document.createElement('button');
   resetBtn.textContent = '초기화';
@@ -68,18 +68,20 @@ export function makeStopwatch(): HTMLDivElement {
   recordBtn.style.display = 'none';
 
   const btnGroup = document.createElement('div');
-  btnGroup.className = 'flex gap-8 justify-center';
+  btnGroup.className = 'flex gap-6 justify-center';
   btnGroup.append(startBtn, recordBtn, resetBtn);
 
   const recordList = document.createElement('ul');
-  recordList.className = 'mt-6 mx-30 text-xl font-medium text-gray-500 divide-y divide-white border-t border-white overflow-y-auto h-[122px]';
+  recordList.className = 'mt-6 mx-30 text-xl font-medium text-gray-500 dark:text-white divide-y divide-white border-t border-white overflow-y-auto h-[122px]';
 
   startBtn.addEventListener('click', () => {
     if (!isRunning) {
       isRunning = true;
       startBtn.textContent = '정지';
-      startBtn.classList.replace('bg-green-400/60', 'bg-yellow-400/60');
-      startBtn.classList.replace('hover:bg-green-500/60', 'hover:bg-yellow-500/60');
+      startBtn.classList.replace('bg-white/60', 'bg-black/60');
+      startBtn.classList.replace('hover:bg-black/60', 'hover:bg-white/60');
+      startBtn.classList.replace('text-black', 'text-white');
+      startBtn.classList.replace('hover:text-white', 'hover:text-black');
 
       // run 중엔 기록 버튼만 보이기
       recordBtn.style.display = '';
@@ -94,8 +96,10 @@ export function makeStopwatch(): HTMLDivElement {
       // ⏸ 멈춤 → ▶ 시작
       isRunning = false;
       startBtn.textContent = '시작';
-      startBtn.classList.replace('bg-yellow-400/60', 'bg-green-400/60');
-      startBtn.classList.replace('hover:bg-yellow-500/60', 'hover:bg-green-500/60');
+      startBtn.classList.replace('bg-black/60', 'bg-white/60');
+      startBtn.classList.replace('hover:bg-white/60', 'hover:bg-black/60');
+      startBtn.classList.replace('text-white', 'text-black');
+      startBtn.classList.replace('hover:text-black', 'hover:text-white');
       if (intervalId) clearInterval(intervalId);
 
       // 멈춘 후엔 초기화 버튼만 보이기
@@ -113,9 +117,10 @@ export function makeStopwatch(): HTMLDivElement {
 
     // 리셋 후엔 완전 초기 상태로
     startBtn.textContent = '시작';
-    startBtn.classList.replace('bg-yellow-400/60', 'bg-green-400/60');
-    startBtn.classList.replace('hover:bg-yellow-500/60', 'hover:bg-green-500/60');
-
+    startBtn.classList.replace('bg-black/60', 'bg-white/60');
+    startBtn.classList.replace('hover:bg-white/60', 'hover:bg-black/60');
+    startBtn.classList.replace('text-white', 'text-black');
+    startBtn.classList.replace('hover:text-black', 'hover:text-white');
     recordBtn.style.display = 'none';
     resetBtn.style.display = 'none';
     recordList.innerHTML = '';
