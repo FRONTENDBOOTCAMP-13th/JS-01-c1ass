@@ -224,7 +224,7 @@
         }
       }
       .mac-panel-program {
-        @apply p-4 bg-gray-100 rounded-b-2xl h-[calc(100%_-_32px)];
+        @apply p-4 bg-gray-100 rounded-b-2xl h-[calc(100%_-_32px)] overflow-y-auto;
         .mac-panel-cover {
           @apply absolute w-full h-[calc(100%_-_32px)] left-0 bottom-0;
         }
