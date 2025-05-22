@@ -132,9 +132,120 @@ clockWidget?.addEventListener('click', () => {
     }
   });
 
+
   function makeTimer(): HTMLDivElement {
-    // timer 기능을 담고 있는 div를 반환하면 패널로 들어감
-    return document.createElement('div');
+    const container = document.createElement('div');
+    container.className = 'w-[640px] h-[318px] bg-[#1f1f1f] rounded-md flex flex-col justify-center items-center gap-6 text-white shadow-xl relative';
+
+    const display = document.createElement('div');
+    display.className = 'text-[48px] text-white';
+    display.textContent = '00:00:00';
+
+    const inputGroup = document.createElement('div');
+    inputGroup.className = 'flex gap-4';
+
+    const createInput = (placeholder: string) => {
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.min = '0';
+      input.placeholder = placeholder;
+      input.className = 'w-[70px] bg-gray-100 text-black text-center py-1 px-2 rounded border border-gray-400 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400';
+      return input;
+    };
+
+    const hourInput = createInput('시');
+    const minInput = createInput('분');
+    const secInput = createInput('초');
+    inputGroup.append(hourInput, minInput, secInput);
+
+    const buttonGroup = document.createElement('div');
+    buttonGroup.className = 'flex gap-4 justify-center w-full';
+
+    const createButton = (text: string, bgColor: string, hoverColor: string) => {
+      const btn = document.createElement('button');
+      btn.textContent = text;
+      btn.className = `${bgColor} ${hoverColor} text-black py-2 rounded w-[100px]`;
+      return btn;
+    };
+
+    const startBtn = createButton('start', 'bg-green-400', 'hover:bg-green-500');
+    const stopBtn = createButton('stop', 'bg-red-300', 'hover:bg-red-400');
+    const resetBtn = createButton('reset', 'bg-gray-400', 'hover:bg-gray-500');
+
+    buttonGroup.append(startBtn, stopBtn, resetBtn);
+
+    const endMessage = document.createElement('div');
+    endMessage.textContent = '타이머 종료';
+    endMessage.className = 'absolute top-2 left-1/2 -translate-x-1/2 text-white text-2xl hidden';
+
+    let interval: number | undefined;
+    let remaining = 0;
+    let blinkInterval: number | undefined;
+
+    const updateDisplay = () => {
+      const h = String(Math.floor(remaining / 3600)).padStart(2, '0');
+      const m = String(Math.floor((remaining % 3600) / 60)).padStart(2, '0');
+      const s = String(remaining % 60).padStart(2, '0');
+      display.textContent = `${h}:${m}:${s}`;
+    };
+
+    const stopBlink = () => {
+      if (blinkInterval) {
+        clearInterval(blinkInterval);
+        blinkInterval = undefined;
+        endMessage.style.opacity = '1';
+      }
+    };
+
+    startBtn.onclick = () => {
+      const h = parseInt(hourInput.value) || 0;
+      const m = parseInt(minInput.value) || 0;
+      const s = parseInt(secInput.value) || 0;
+      remaining = h * 3600 + m * 60 + s;
+
+      if (remaining <= 0) return;
+
+      clearInterval(interval);
+      stopBlink();
+      updateDisplay();
+      endMessage.classList.add('hidden');
+
+      interval = window.setInterval(() => {
+        remaining--;
+        updateDisplay();
+        if (remaining <= 0) {
+          clearInterval(interval);
+          endMessage.classList.remove('hidden');
+
+          blinkInterval = window.setInterval(() => {
+            endMessage.style.opacity = endMessage.style.opacity === '1' ? '0' : '1';
+          }, 500);
+        }
+      }, 1000);
+    };
+
+    stopBtn.onclick = () => {
+      clearInterval(interval);
+      stopBlink();
+    };
+
+    resetBtn.onclick = () => {
+      clearInterval(interval);
+      stopBlink();
+      remaining = 0;
+      hourInput.value = '';
+      minInput.value = '';
+      secInput.value = '';
+      display.textContent = '00:00:00';
+      endMessage.classList.add('hidden');
+    };
+
+    container.appendChild(endMessage);
+    container.appendChild(display);
+    container.appendChild(inputGroup);
+    container.appendChild(buttonGroup);
+
+    return container;
   }
 });
 
