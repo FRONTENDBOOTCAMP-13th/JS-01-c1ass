@@ -255,15 +255,17 @@ if (postIt) {
     const parent = postIt.parentElement;
     if (!parent) return;
 
-    const newWidth = parent.clientWidth * 0.9;
-    const newHeight = parent.clientHeight * 0.9;
-
+    const newWidth = 350; // 확대 크기
+    const newHeight = 600;
     postIt.style.width = `${newWidth}px`;
     postIt.style.height = `${newHeight}px`;
-    postIt.style.position = 'absolute';
-    postIt.style.left = `${(parent.clientWidth - newWidth) / 2}px`;
-    postIt.style.top = `${(parent.clientHeight - newHeight) / 2}px`;
+    postIt.style.position = 'fixed';
+    postIt.style.right = '2%';
+    postIt.style.top = '70%';
+    postIt.style.left = '';
+    postIt.style.transform = 'translateY(-50%)';
     postIt.style.zIndex = '20';
+    postIt.style.transition = 'all 0.3s ease';
 
     isEnlarged = true;
   };
@@ -271,12 +273,14 @@ if (postIt) {
   const shrinkPostIt = () => {
     postIt.style.width = `${POSTIT_INITIAL_WIDTH}px`;
     postIt.style.height = `${POSTIT_INITIAL_HEIGHT}px`;
-    postIt.style.position = '';
     postIt.style.left = '';
-    postIt.style.top = '';
-    postIt.style.zIndex = '';
-    isEnlarged = false;
+    postIt.style.top = '57%';
+    postIt.style.right = '5%';
+    postIt.style.transform = 'translateY(-50%)';
+    postIt.style.position = 'fixed';
+    postIt.style.zIndex = '10';
 
+    isEnlarged = false;
     currentGroupIndex = 0;
     currentStepIndex = 0;
     setContent('<p class="m-0">기능</p>');
@@ -286,13 +290,13 @@ if (postIt) {
     if (!isEnlarged) {
       enlargePostIt();
       if (currentStepIndex === 0 && currentGroupIndex < stepsGroup.length) {
-        setContent(`<p class="m-0 text-gray-500 text-center">(스페이스바를 계속 누르세요)</p>`);
+        setContent(`<p class="m-0 text-gray-500 text-center">(F2를 계속 누르세요)</p>`);
         return;
       }
     }
 
     if (currentGroupIndex >= stepsGroup.length) {
-      setContent('<p class="text-center">모든 그룹 완료! (클릭: 축소 / Space: 처음부터)</p>');
+      setContent('<p class="text-center">모든 그룹 완료! (클릭: 축소 / F2: 처음부터)</p>');
       currentGroupIndex = 0;
       currentStepIndex = 0;
       return;
@@ -311,11 +315,11 @@ if (postIt) {
       currentStepIndex = 0;
 
       if (currentGroupIndex === 1) {
-        setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 두더지 잡기 (Space) ---</p>`);
+        setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 두더지 잡기 (F2) ---</p>`);
       } else if (currentGroupIndex === 2) {
-        setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 카드 뽑기 (Space) ---</p>`);
+        setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 카드 뽑기 (F2) ---</p>`);
       } else {
-        setContent('<p class="text-center">모든 그룹 완료! (클릭: 축소 / Space: 처음부터)</p>');
+        setContent('<p class="text-center">모든 그룹 완료! (클릭: 축소 / F2: 처음부터)</p>');
         currentGroupIndex = 0;
       }
     }
@@ -331,7 +335,7 @@ if (postIt) {
   });
 
   document.addEventListener('keydown', e => {
-    if (e.code === 'Space') {
+    if (e.code === 'F2') {
       e.preventDefault();
       showNextStep();
     }
