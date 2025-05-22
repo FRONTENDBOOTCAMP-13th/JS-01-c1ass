@@ -1,6 +1,7 @@
 import { iconBar } from './icon-bar.ts';
-import { programIDSet, programID } from '../programID.ts';
+import { programIDSet, programID, settingIDSet } from '../programID.ts';
 import { widgetManager } from './widget-manager.ts';
+import { addIconInnerProgram } from './add-icon-setting.ts';
 const container = document.querySelector('#mac-panel-container');
 
 interface MacPanelContainer {
@@ -46,8 +47,9 @@ const panelContainer: MacPanelContainer = {
     mac_panel_header_left.appendChild(minimize_mac_panel);
     mac_panel_header_left.appendChild(full_mac_panel);
 
-    if (!widgetManager.isWidget(id)) {
+    if (!widgetManager.isWidget(id) && !settingIDSet.has(id)) {
       const mac_panel_inner_program = document.createElement('iframe');
+      console.log(programID, '여기는 mac-panel-container');
       // mac_panel_inner_program.src = '/src/pages/card.html';
       if (programIDSet.has(id)) {
         for (let i = 0; i < programID.length; i++) {
@@ -62,6 +64,11 @@ const panelContainer: MacPanelContainer = {
       mac_panel_inner_program.classList.add('w-full', 'h-full');
       mac_panel_inner_program.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups allow-forms');
       mac_panel_program.appendChild(mac_panel_inner_program);
+    } else if (settingIDSet.has(id)) {
+      if (id === 'add-icon') {
+        const mac_panel_inner_program = addIconInnerProgram();
+        mac_panel_program.appendChild(mac_panel_inner_program);
+      }
     } else {
       const mac_panel_inner_program = widgetManager.switchWidgetToProgram(id);
       if (mac_panel_inner_program) {
