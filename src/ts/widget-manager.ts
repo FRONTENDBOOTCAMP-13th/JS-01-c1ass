@@ -174,6 +174,8 @@ clockWidget?.addEventListener('click', () => {
     const startBtn = createButton('시작', 'bg-green-400', 'hover:bg-green-500');
     const stopBtn = createButton('정지', 'bg-red-300', 'hover:bg-red-400');
     const resetBtn = createButton('초기화', 'bg-gray-400', 'hover:bg-gray-500');
+    const timerSound = new Audio('/asserts/mac/timer.mp3');
+    timerSound.volume = 0.2;
 
     buttonGroup.append(startBtn, stopBtn, resetBtn);
 
@@ -217,6 +219,7 @@ clockWidget?.addEventListener('click', () => {
         if (remaining <= 0) {
           clearInterval(interval);
           endMessage.classList.remove('hidden');
+          timerSound.play();
           blinkInterval = window.setInterval(() => {
             endMessage.style.opacity = endMessage.style.opacity === '1' ? '0' : '1';
           }, 500);
