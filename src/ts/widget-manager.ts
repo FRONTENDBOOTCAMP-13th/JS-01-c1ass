@@ -74,7 +74,7 @@ clockWidget?.addEventListener('click', () => {
   const clock_container_div = document.createElement('div');
   clock_container_div.classList.add('clock-container');
   const stopwatch_label = document.createElement('label');
-  stopwatch_label.className = 'stopwatch-label my-auto';
+  stopwatch_label.className = 'stopwatch-label pt-3';
   const stopwatch_radio = document.createElement('input');
   stopwatch_radio.classList.add('stopwatch-radio');
   stopwatch_radio.type = 'radio';
@@ -83,9 +83,9 @@ clockWidget?.addEventListener('click', () => {
   stopwatch_radio.checked = true;
   const stopwatch_text = document.createTextNode('스톱워치');
   const timer_label = document.createElement('label');
-  timer_label.classList.add('timer-label');
+  timer_label.className = 'timer-label pt-3';
   const timer_radio = document.createElement('input');
-  timer_radio.className = 'timer-radio my-auto';
+  timer_radio.classList.add('timer-radio');
   timer_radio.type = 'radio';
   timer_radio.name = 'clocktype';
   timer_radio.value = 'timer';
