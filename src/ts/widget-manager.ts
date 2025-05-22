@@ -132,24 +132,27 @@ clockWidget?.addEventListener('click', () => {
     }
   });
 
-
   function makeTimer(): HTMLDivElement {
     const container = document.createElement('div');
-    container.className = 'w-[640px] h-[318px] bg-[#1f1f1f] rounded-md flex flex-col justify-center items-center gap-6 text-white shadow-xl relative';
+    container.className = 'w-full h-full rounded-none flex flex-col justify-start items-center shadow-xl relative p-4 box-border';
+
+    const endMessage = document.createElement('div');
+    endMessage.textContent = '타이머 종료';
+    endMessage.className = 'absolute top-4 left-1/2 -translate-x-1/2 text-2xl hidden text-black dark:text-white';
 
     const display = document.createElement('div');
-    display.className = 'text-[48px] text-white';
+    display.className = 'text-[64px] text-center mt-12 text-black dark:text-white';
     display.textContent = '00:00:00';
 
     const inputGroup = document.createElement('div');
-    inputGroup.className = 'flex gap-4';
+    inputGroup.className = 'flex gap-4 justify-center mt-6';
 
     const createInput = (placeholder: string) => {
       const input = document.createElement('input');
       input.type = 'number';
       input.min = '0';
       input.placeholder = placeholder;
-      input.className = 'w-[70px] bg-gray-100 text-black text-center py-1 px-2 rounded border border-gray-400 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400';
+      input.className = 'w-[70px] bg-gray-300 text-black text-center py-1 px-2 rounded border border-gray-400 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400';
       return input;
     };
 
@@ -159,24 +162,20 @@ clockWidget?.addEventListener('click', () => {
     inputGroup.append(hourInput, minInput, secInput);
 
     const buttonGroup = document.createElement('div');
-    buttonGroup.className = 'flex gap-4 justify-center w-full';
+    buttonGroup.className = 'flex gap-6 justify-center mt-6';
 
     const createButton = (text: string, bgColor: string, hoverColor: string) => {
       const btn = document.createElement('button');
       btn.textContent = text;
-      btn.className = `${bgColor} ${hoverColor} text-black py-2 rounded w-[100px]`;
+      btn.className = `${bgColor} ${hoverColor} text-black py-2 px-4 rounded w-[80px] text-lg font-semibold`;
       return btn;
     };
 
-    const startBtn = createButton('start', 'bg-green-400', 'hover:bg-green-500');
-    const stopBtn = createButton('stop', 'bg-red-300', 'hover:bg-red-400');
-    const resetBtn = createButton('reset', 'bg-gray-400', 'hover:bg-gray-500');
+    const startBtn = createButton('시작', 'bg-green-400', 'hover:bg-green-500');
+    const stopBtn = createButton('정지', 'bg-red-300', 'hover:bg-red-400');
+    const resetBtn = createButton('초기화', 'bg-gray-400', 'hover:bg-gray-500');
 
     buttonGroup.append(startBtn, stopBtn, resetBtn);
-
-    const endMessage = document.createElement('div');
-    endMessage.textContent = '타이머 종료';
-    endMessage.className = 'absolute top-2 left-1/2 -translate-x-1/2 text-white text-2xl hidden';
 
     let interval: number | undefined;
     let remaining = 0;
@@ -198,10 +197,12 @@ clockWidget?.addEventListener('click', () => {
     };
 
     startBtn.onclick = () => {
-      const h = parseInt(hourInput.value) || 0;
-      const m = parseInt(minInput.value) || 0;
-      const s = parseInt(secInput.value) || 0;
-      remaining = h * 3600 + m * 60 + s;
+      if (remaining === 0) {
+        const h = parseInt(hourInput.value) || 0;
+        const m = parseInt(minInput.value) || 0;
+        const s = parseInt(secInput.value) || 0;
+        remaining = h * 3600 + m * 60 + s;
+      }
 
       if (remaining <= 0) return;
 
@@ -216,7 +217,6 @@ clockWidget?.addEventListener('click', () => {
         if (remaining <= 0) {
           clearInterval(interval);
           endMessage.classList.remove('hidden');
-
           blinkInterval = window.setInterval(() => {
             endMessage.style.opacity = endMessage.style.opacity === '1' ? '0' : '1';
           }, 500);
