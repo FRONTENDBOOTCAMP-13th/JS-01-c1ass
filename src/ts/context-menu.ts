@@ -89,11 +89,7 @@ macScreen.addEventListener('contextmenu', (e: MouseEvent) => {
       } else if (targetId === 'delete') {
         const targetIcon = document.querySelector(`li.icon[data-id="${idx}"]`) as HTMLElement | null;
         if (targetIcon) {
-          targetIcon.style.transition = 'transform 0.3s';
-          targetIcon.style.transform = 'scale(0, 1)';
-          setTimeout(() => {
-            iconBar.removeIcon(idx);
-          }, 300);
+          iconBar.removeIcon(idx);
         }
       }
       ctx_ul.remove();
