@@ -4,6 +4,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { widgetIDSet } from '../programID';
 import { panelContainer } from './mac-panel-container';
+import { makeStopwatch } from './clock-stopWatch';
 
 if (!localStorage.getItem('memo-title1')) localStorage.setItem('memo-title1', '메모제목1');
 if (!localStorage.getItem('memo-title2')) localStorage.setItem('memo-title2', '메모제목2');
@@ -71,9 +72,9 @@ clockWidget?.addEventListener('click', () => {
   clockProgram.classList.add('dark:bg-[#000000]');
 
   const clock_container_div = document.createElement('div');
-  clock_container_div.classList.add('clock-container');
+  clock_container_div.className = 'clock-container dark:bg-[#4A4C4E]';
   const stopwatch_label = document.createElement('label');
-  stopwatch_label.classList.add('stopwatch-label');
+  stopwatch_label.className = 'stopwatch-label pt-3';
   const stopwatch_radio = document.createElement('input');
   stopwatch_radio.classList.add('stopwatch-radio');
   stopwatch_radio.type = 'radio';
@@ -82,7 +83,7 @@ clockWidget?.addEventListener('click', () => {
   stopwatch_radio.checked = true;
   const stopwatch_text = document.createTextNode('스톱워치');
   const timer_label = document.createElement('label');
-  timer_label.classList.add('timer-label');
+  timer_label.className = 'timer-label pt-3';
   const timer_radio = document.createElement('input');
   timer_radio.classList.add('timer-radio');
   timer_radio.type = 'radio';
@@ -97,30 +98,154 @@ clockWidget?.addEventListener('click', () => {
   timer_label.appendChild(timer_text);
 
   const clock_panel = document.createElement('div');
-  clock_panel.classList.add('clock-panel');
+  clock_panel.className = 'clock-panel flex flex-col justify-center h-full';
   clock_panel.appendChild(makeStopwatch());
   clock_container_div.appendChild(clock_panel);
 
   clockProgram.appendChild(clock_container_div);
 
+  const stopwatchElement = makeStopwatch();
+  const timerElement = makeTimer();
+
+  // 초기 표시
+  if (stopwatch_radio.checked) {
+    stopwatchElement.style.display = 'block';
+    timerElement.style.display = 'none';
+    clock_panel.appendChild(stopwatchElement);
+  }
+
   stopwatch_radio.addEventListener('change', () => {
     if (stopwatch_radio.checked) {
-      clock_panel.appendChild(makeStopwatch());
-    }
-  });
-  timer_radio.addEventListener('change', () => {
-    if (timer_radio.checked) {
-      clock_panel.appendChild(makeTimer());
+      stopwatchElement.style.display = 'block';
+      timerElement.style.display = 'none';
+      clock_panel.innerHTML = '';
+      clock_panel.appendChild(stopwatchElement);
     }
   });
 
-  function makeStopwatch(): HTMLDivElement {
-    // stopwatch 기능을 담고 있는 div를 반환하면 패널로 들어감
-    return document.createElement('div');
-  }
+  timer_radio.addEventListener('change', () => {
+    if (timer_radio.checked) {
+      stopwatchElement.style.display = 'none';
+      timerElement.style.display = 'block';
+      clock_panel.innerHTML = '';
+      clock_panel.appendChild(timerElement);
+    }
+  });
+
+
   function makeTimer(): HTMLDivElement {
-    // timer 기능을 담고 있는 div를 반환하면 패널로 들어감
-    return document.createElement('div');
+    const container = document.createElement('div');
+    container.className = 'w-[640px] h-[318px] bg-[#1f1f1f] rounded-md flex flex-col justify-center items-center gap-6 text-white shadow-xl relative';
+
+    const display = document.createElement('div');
+    display.className = 'text-[48px] text-white';
+    display.textContent = '00:00:00';
+
+    const inputGroup = document.createElement('div');
+    inputGroup.className = 'flex gap-4';
+
+    const createInput = (placeholder: string) => {
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.min = '0';
+      input.placeholder = placeholder;
+      input.className = 'w-[70px] bg-gray-100 text-black text-center py-1 px-2 rounded border border-gray-400 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400';
+      return input;
+    };
+
+    const hourInput = createInput('시');
+    const minInput = createInput('분');
+    const secInput = createInput('초');
+    inputGroup.append(hourInput, minInput, secInput);
+
+    const buttonGroup = document.createElement('div');
+    buttonGroup.className = 'flex gap-4 justify-center w-full';
+
+    const createButton = (text: string, bgColor: string, hoverColor: string) => {
+      const btn = document.createElement('button');
+      btn.textContent = text;
+      btn.className = `${bgColor} ${hoverColor} text-black py-2 rounded w-[100px]`;
+      return btn;
+    };
+
+    const startBtn = createButton('start', 'bg-green-400', 'hover:bg-green-500');
+    const stopBtn = createButton('stop', 'bg-red-300', 'hover:bg-red-400');
+    const resetBtn = createButton('reset', 'bg-gray-400', 'hover:bg-gray-500');
+
+    buttonGroup.append(startBtn, stopBtn, resetBtn);
+
+    const endMessage = document.createElement('div');
+    endMessage.textContent = '타이머 종료';
+    endMessage.className = 'absolute top-2 left-1/2 -translate-x-1/2 text-white text-2xl hidden';
+
+    let interval: number | undefined;
+    let remaining = 0;
+    let blinkInterval: number | undefined;
+
+    const updateDisplay = () => {
+      const h = String(Math.floor(remaining / 3600)).padStart(2, '0');
+      const m = String(Math.floor((remaining % 3600) / 60)).padStart(2, '0');
+      const s = String(remaining % 60).padStart(2, '0');
+      display.textContent = `${h}:${m}:${s}`;
+    };
+
+    const stopBlink = () => {
+      if (blinkInterval) {
+        clearInterval(blinkInterval);
+        blinkInterval = undefined;
+        endMessage.style.opacity = '1';
+      }
+    };
+
+    startBtn.onclick = () => {
+      const h = parseInt(hourInput.value) || 0;
+      const m = parseInt(minInput.value) || 0;
+      const s = parseInt(secInput.value) || 0;
+      remaining = h * 3600 + m * 60 + s;
+
+      if (remaining <= 0) return;
+
+      clearInterval(interval);
+      stopBlink();
+      updateDisplay();
+      endMessage.classList.add('hidden');
+
+      interval = window.setInterval(() => {
+        remaining--;
+        updateDisplay();
+        if (remaining <= 0) {
+          clearInterval(interval);
+          endMessage.classList.remove('hidden');
+
+          blinkInterval = window.setInterval(() => {
+            endMessage.style.opacity = endMessage.style.opacity === '1' ? '0' : '1';
+          }, 500);
+        }
+      }, 1000);
+    };
+
+    stopBtn.onclick = () => {
+      clearInterval(interval);
+      stopBlink();
+    };
+
+    resetBtn.onclick = () => {
+      clearInterval(interval);
+      stopBlink();
+      remaining = 0;
+      hourInput.value = '';
+      minInput.value = '';
+      secInput.value = '';
+      display.textContent = '00:00:00';
+      endMessage.classList.add('hidden');
+    };
+
+    container.appendChild(endMessage);
+    container.appendChild(display);
+    container.appendChild(inputGroup);
+    container.appendChild(buttonGroup);
+
+    return container;
   }
 });
 
