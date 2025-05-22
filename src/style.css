@@ -4,6 +4,8 @@
   --font-sans: 'Pretendard Variable', 'sans-serif';
 }
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 /* doodi-game: 두더지 등장하는 애니메이션 */
 @keyframes moleBounce {
   0% {
@@ -165,6 +167,34 @@
   }
 }
 
+/* mac-widget: hover 속성 */
+.widget:hover {
+  transform: scale(1.05);
+  transition: transform 0.4s cubic-bezier(0, 0.65, 0.76, 1);
+}
+
+/* mac: button-mode-change 모드 전환 애니메이션 */
+@keyframes rotate-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(1deg);
+  }
+}
+
+.wiggle {
+  animation: rotate-wiggle 0.4s ease-in-out;
+  transform-origin: left bottom;
+}
+
 @layer components {
   /* 맥패널css */
   .mac-panel-overlay {
@@ -271,6 +301,76 @@
     @apply absolute min-w-[140px] text-black dark:text-white dark:border-0 bg-[rgba(174,174,174,0.85)] dark:bg-[rgba(109,109,109,0.85)] rounded-[7px];
     .context-menu-item {
       @apply min-h-[22px] m-1 px-[15px] align-middle hover:text-white hover:bg-[#5682E2] hover:rounded-[5px];
+    }
+  }
+
+  .memo-container {
+    @apply w-full h-full min-h-0 grid grid-cols-[135px_1fr] grid-rows-1;
+    .memo-sidebar-container {
+      @apply bg-[#F3F2F8] dark:bg-[#000000] border-r-1 border-[#8B8A90] h-full pb-10 min-h-0 relative;
+      .memo-sidebar {
+        @apply bg-[#F3F2F8] dark:bg-[#000000] flex flex-col gap-2 px-2 pl-0 pr-4 pt-3 h-full min-h-0;
+        .memo-sidebar-header {
+          @apply font-bold grid grid-cols-1 grid-rows-1 h-[25px];
+          .memo-sidebar-title {
+            @apply dark:text-white col-start-1 col-span-1 row-start-1 row-span-1 self-end;
+          }
+          .memo-add-btn {
+            @apply hover:translate-y-[2px] rounded-[1px] hover:shadow-[inset_0_10px_0_rgba(0.0.0.0.1)] w-[15px] h-[15px] col-span-1 col-start-1 row-start-1 row-span-1 justify-self-end bg-contain bg-no-repeat bg-center bg-[url(/public/asserts/mac/add-memo-icon.svg)];
+          }
+        }
+        .memo-searchbar {
+          @apply text-[#8B8A90] bg-[#E4E3E9] dark:bg-[#1C1C1E] p-1 text-[8px] rounded-[5px] w-full;
+        }
+        .memo-sidebar-ul {
+          @apply rounded-[5px] overflow-y-auto;
+          .memo-sidebar-li {
+            @apply bg-[#fefefe] dark:text-white dark:bg-[#1C1C1E] px-3 py-1 hover:bg-[#D9D9D9] dark:hover:bg-[#3A3A3C];
+            .memo-item-title {
+              @apply text-[12px] font-bold truncate;
+            }
+            .memo-item-content {
+              @apply text-[#8B8A90] text-[7px] truncate;
+            }
+          }
+        }
+      }
+      .memo-sidebar-footer {
+        @apply dark:text-white bg-[#f7f7f7] dark:bg-[#313133] text-[10px] text-center rounded-bl-[8px] w-full h-8 pb-4 absolute bottom-0;
+      }
+    }
+    .memo-main {
+      @apply grid grid-rows-[30px_1fr] dark:bg-[#000000] p-3 pb-0;
+      .memo-main-title {
+        @apply bg-gray-100 dark:bg-[#000000] dark:text-white outline-0 border-b-2 pl-2 font-bold;
+      }
+      .memo-main-content {
+        @apply p-2  bg-gray-100 dark:bg-[#000000] dark:text-white outline-0 resize-none;
+      }
+      .memo-save-btn-container {
+        @apply flex justify-end;
+        .memo-save-btn {
+          @apply text-[#E2BE4C] h-8 hover:text-black dark:hover:text-white;
+        }
+      }
+    }
+  }
+  .clock-container {
+    @apply grid grid-cols-2 grid-rows-[50px_1fr] w-full h-full bg-[#d9d9d9]  text-black dark:text-white;
+    .stopwatch-label {
+      @apply col-start-1 col-end-2 row-start-1 row-end-2 bg-gray-100 dark:bg-black hover:bg-white dark:hover:bg-[#555555] has-[input:checked]:bg-[#d9d9d9] dark:has-[input:checked]:text-black text-center;
+      .stopwatch-radio {
+        @apply appearance-none;
+      }
+    }
+    .timer-label {
+      @apply col-start-2 col-end-3 row-start-1 row-end-2 bg-gray-100 dark:bg-black hover:bg-white dark:hover:bg-[#555555] has-[input:checked]:bg-[#d9d9d9] dark:has-[input:checked]:text-black text-center;
+      .timer-radio {
+        @apply appearance-none;
+      }
+    }
+    .clock-panel {
+      @apply col-start-1 col-end-3 row-start-2 row-end-3;
     }
   }
 }

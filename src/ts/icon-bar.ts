@@ -6,6 +6,7 @@ interface Iconbar {
   setIconStatus(id: string, status: number): void;
   removeIcon(id: string): void;
   getIconStatus(id: string): number | undefined;
+  insertAddIconBtn(): void;
 }
 
 const iconBar: Iconbar = {
@@ -56,6 +57,21 @@ const iconBar: Iconbar = {
       return Number((iconElement as HTMLElement).dataset.status);
     }
     return undefined;
+  },
+  insertAddIconBtn(): void {
+    const iconLi = document.createElement('li');
+    iconLi.style.backgroundImage = `url('/asserts/mac/add-icon.svg')`;
+    iconLi.style.backgroundRepeat = 'no-repeat';
+    iconLi.style.backgroundPosition = 'center';
+    iconLi.classList.add('icon');
+    iconLi.addEventListener('click', () => {
+      console.log('click addiconbtn');
+    });
+    const iconCover = document.createElement('div');
+    iconCover.classList.add('icon-cover');
+    iconLi.appendChild(iconCover);
+
+    icon_bar?.appendChild(iconLi);
   },
 };
 
