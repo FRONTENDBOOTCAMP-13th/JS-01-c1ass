@@ -1,6 +1,11 @@
 ![Group 131](https://github.com/user-attachments/assets/b57c81be-88d8-4de4-82f0-4b9a784ae871)
 
 ---
+## 🔗 Links
+
+* 🎨 **[Figma 바로가기]([https://www.notion.so/1-c1ass-1ed73873401a80e3a15bdd4b5dd51aa9](https://www.figma.com/design/0eOjUl0RQVHyLiZx2asam8/c1ass?node-id=23-2&p=f&t=Gm7MrYDcKO5l7mzG-0))**
+* 🌐 **[배포 사이트 바로가기](https://c1ass.netlify.app/)**
+---
 
 # 🎯 1. Project Overview (프로젝트 개요)
 
@@ -137,14 +142,6 @@ body
 | 맥 패널      | ![맥패널](https://github.com/user-attachments/assets/71de2591-9fa2-4e2e-822d-6fad5b13515f)      |
 | 다크/라이트 전환 | ![다크-라이트변환](https://github.com/user-attachments/assets/c59609ec-c803-49f1-9ca0-4d89467b1813) |
 | 배경 변경     | ![배경바꾸기](https://github.com/user-attachments/assets/6f9e117f-7bf5-4c02-9d53-322e7e10bffd)    |
-
----
-
-## 🔗 Links
-
-* 📂 **[GitHub 저장소 바로가기](https://github.com/FRONTENDBOOTCAMP-13th/JS-01-c1ass)**
-* 📌 **[Notion 팀 페이지 바로가기](https://www.notion.so/1-c1ass-1ed73873401a80e3a15bdd4b5dd51aa9)**
-* 🌐 **[배포 사이트 바로가기](https://c1ass.netlify.app/)**
 
 ---
 🍎 Mec
