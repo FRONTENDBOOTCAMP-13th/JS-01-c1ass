@@ -1,6 +1,11 @@
 ![Group 131](https://github.com/user-attachments/assets/b57c81be-88d8-4de4-82f0-4b9a784ae871)
 
 ---
+## 🔗 Links
+
+* 🎨 **[Figma 바로가기](https://www.figma.com/design/0eOjUl0RQVHyLiZx2asam8/c1ass?node-id=23-2&p=f&t=Gm7MrYDcKO5l7mzG-0)**
+* 🌐 **[배포 사이트 바로가기](https://c1ass.netlify.app/)**
+---
 
 # 🎯 1. Project Overview (프로젝트 개요)
 
@@ -129,7 +134,7 @@ body
 
 ## Mec
 | 기능        | GIF                                                                                          |
-| --------- | -------------------------------------------------------------------------------------------- |
+| -------------- | -------------------------------------------------------------------------------------------- |
 | 전원 키기     | ![전원키기](https://github.com/user-attachments/assets/fb8c35f2-bc7d-4588-8012-9c1bdecabd08)     |
 | 메모장       | ![메모장](https://github.com/user-attachments/assets/39042dcd-11d3-4c3c-ab2d-ec8edc7f3da2)      |
 | 위젯 이동     | ![위젯이동](https://github.com/user-attachments/assets/6b89af5b-e942-41af-bb24-d5bc922b78e6)     |
@@ -138,14 +143,25 @@ body
 | 다크/라이트 전환 | ![다크-라이트변환](https://github.com/user-attachments/assets/c59609ec-c803-49f1-9ca0-4d89467b1813) |
 | 배경 변경     | ![배경바꾸기](https://github.com/user-attachments/assets/6f9e117f-7bf5-4c02-9d53-322e7e10bffd)    |
 
----
+## Doodi
+| 기능        | GIF                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| 두디     |   ![두디](https://github.com/user-attachments/assets/15e3e9a9-d7aa-4f2d-8b27-88fffb9324d3) |
 
-## 🔗 Links
+## Sockast
+| 기능        | GIF                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| 양말 관측소     |  ![양말](https://github.com/user-attachments/assets/2a8b10d9-8f69-4b6a-945f-27774dd7d03b)|
 
-* 📂 **[GitHub 저장소 바로가기](https://github.com/FRONTENDBOOTCAMP-13th/JS-01-c1ass)**
-* 📌 **[Notion 팀 페이지 바로가기](https://www.notion.so/1-c1ass-1ed73873401a80e3a15bdd4b5dd51aa9)**
-* 🌐 **[배포 사이트 바로가기](https://c1ass.netlify.app/)**
+## Card
+| 기능        | GIF                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| 카드     |  ![카드](https://github.com/user-attachments/assets/15c87611-4b95-4d2d-a26b-b6936af65c84) |
 
+## Arrow-dodge
+| 기능        | GIF                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| 화살 피하기     |  ![화살피하기](https://github.com/user-attachments/assets/8c306815-487c-4cba-8e68-4afd98938915) |
 ---
 🍎 Mec
 © 2025 LikeLion Team c1ass

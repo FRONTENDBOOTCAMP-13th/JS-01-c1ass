@@ -1,6 +1,6 @@
 const html = document.documentElement;
 const toggleButton = document.getElementById('theme-toggle') as HTMLButtonElement;
-const systemResetButton = document.getElementById('system-reset') as HTMLButtonElement;
+// const systemResetButton = document.getElementById('system-reset') as HTMLButtonElement;
 
 // 시스템 다크 모드 감지
 function isSystemDark(): boolean {
@@ -42,11 +42,11 @@ toggleButton?.addEventListener('click', () => {
 });
 
 // 시스템 모드로 복귀 버튼
-systemResetButton?.addEventListener('click', () => {
-  localStorage.removeItem('theme');
-  applyTheme(null);
-  // console.log('🧹 시스템 모드 강제 복귀 완료');
-});
+// systemResetButton?.addEventListener('click', () => {
+//   localStorage.removeItem('theme');
+//   applyTheme(null);
+//   // console.log('🧹 시스템 모드 강제 복귀 완료');
+// });
 
 // 시스템 설정 변경 시 자동 반영
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {

@@ -49,7 +49,6 @@ const panelContainer: MacPanelContainer = {
 
     if (!widgetManager.isWidget(id) && !settingIDSet.has(id)) {
       const mac_panel_inner_program = document.createElement('iframe');
-      console.log(programID, '여기는 mac-panel-container');
       // mac_panel_inner_program.src = '/src/pages/card.html';
       if (programIDSet.has(id)) {
         for (let i = 0; i < programID.length; i++) {

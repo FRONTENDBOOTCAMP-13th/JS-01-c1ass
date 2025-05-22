@@ -11,6 +11,7 @@ export default defineConfig({
         'doodi-game': 'src/pages/doodi-all.html',
         'arrow-dodge-game': 'src/pages/arrow-dodge-game.html',
         'socks-game': 'src/pages/socks-game.html',
+        presentation: 'src/pages/presentation.html',
 
         'calendar-widget': 'src/components/calendar-widget.html',
         'clock-widget': 'src/components/clock-widget.html',
