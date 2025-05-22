@@ -102,7 +102,7 @@ macScreen.addEventListener('contextmenu', (e: MouseEvent) => {
         // 패널 생성
         const mac_panel_overlay = document.createElement('li');
         mac_panel_overlay.classList.add('mac-panel', 'mac-panel-overlay');
-        // 유니크한 data-id 지정 (예: timestamp 기반)
+
         mac_panel_overlay.dataset.id = 'bgpanel-' + Date.now();
 
         const mac_panel_content = document.createElement('div');
@@ -150,7 +150,7 @@ macScreen.addEventListener('contextmenu', (e: MouseEvent) => {
         });
 
         const mac_panel_program = document.createElement('div');
-        mac_panel_program.classList.add('mac-panel-program');
+        mac_panel_program.classList.add('mac-panel-program', 'allow-scroll', 'w-full', 'h-full');
 
         const mac_panel_cover = document.createElement('div');
         mac_panel_cover.classList.add('mac-panel-cover');
