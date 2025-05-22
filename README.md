@@ -3,7 +3,7 @@
 ---
 ## 🔗 Links
 
-* 🎨 **[Figma 바로가기]([https://www.notion.so/1-c1ass-1ed73873401a80e3a15bdd4b5dd51aa9](https://www.figma.com/design/0eOjUl0RQVHyLiZx2asam8/c1ass?node-id=23-2&p=f&t=Gm7MrYDcKO5l7mzG-0))**
+* 🎨 **[Figma 바로가기](https://www.figma.com/design/0eOjUl0RQVHyLiZx2asam8/c1ass?node-id=23-2&p=f&t=Gm7MrYDcKO5l7mzG-0)**
 * 🌐 **[배포 사이트 바로가기](https://c1ass.netlify.app/)**
 ---
 
