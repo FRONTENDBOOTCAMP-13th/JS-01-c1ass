@@ -312,8 +312,11 @@ if (postIt) {
     } else {
       currentGroupIndex++;
       currentStepIndex = 0;
-      if (currentGroupIndex < stepsGroup.length) {
+
+      if (currentGroupIndex === 1) {
         setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 두더지 잡기 (Space) ---</p>`);
+      } else if (currentGroupIndex === 2) {
+        setContent(`<p class="m-0 py-2 text-center text-gray-600">--- 카드 뽑기 (Space) ---</p>`);
       } else {
         setContent('<p class="text-center">모든 그룹 완료! (클릭: 축소 / Space: 처음부터)</p>');
         currentGroupIndex = 0;
