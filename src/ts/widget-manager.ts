@@ -369,7 +369,7 @@ function createMemoPanel(key?: number) {
         memo_item_content.textContent = localStorage.getItem(`memo-item${idx}`);
         memo_sidebar_li.addEventListener('click', () => {
           memo_main_title.value = localStorage.getItem(`memo-title${idx}`) || '';
-          memo_main_content.textContent = localStorage.getItem(`memo-item${idx}`) || '';
+          memo_main_content.value = localStorage.getItem(`memo-item${idx}`) || '';
           memo_main.dataset.memoid = idx;
         });
       }
